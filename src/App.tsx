@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import { Navbar, Nav } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import { Standings } from "./screens/standings/Standings";
 
-function App() {
+export const App = () => {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/standings" element={<Standings />}></Route>
+    )
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <div className="nav-container">
+          <Navbar.Brand href="/">Best</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/calendar">Calendar</Nav.Link>
+            <Nav.Link href="/standings">Standings</Nav.Link>
+            <Nav.Link href="/drivers">Drivers</Nav.Link>
+            <Nav.Link href="/teams">Teams</Nav.Link>
+          </Nav>
+        </div>
+      </Navbar>
+      <div className="app-container">
+        <RouterProvider router={router} />
+      </div>
     </div>
   );
-}
-
-export default App;
+};
