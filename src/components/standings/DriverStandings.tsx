@@ -10,13 +10,11 @@ interface Props {
 
 export const DriverStandings = ({ season }: Props) => {
   const [standings, setStandings] = useState<DriverStandingsTable>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getDriverStandings(season).then((response) => {
       console.log(response.data.MRData);
       setStandings(response.data.MRData.StandingsTable);
-      setIsLoading(false);
     });
   }, [season]);
 

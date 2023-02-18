@@ -9,14 +9,13 @@ export const Standings = () => {
   const [season, setSeason] = useState<number>(currentYear);
 
   const options = [];
-  {
-    for (let year = 1950; year <= currentYear; year++) {
-      options.push(
-        <option value={year} key={year}>
-          {year}
-        </option>
-      );
-    }
+
+  for (let year = 1950; year <= currentYear; year++) {
+    options.push(
+      <option value={year} key={year}>
+        {year}
+      </option>
+    );
   }
 
   return (
