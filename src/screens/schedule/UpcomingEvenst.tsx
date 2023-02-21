@@ -2,27 +2,28 @@ import { useEffect, useState } from "react";
 import { Spinner} from "react-bootstrap";
 import { getCalendar } from "../../api/endpoints";
 import { RoundCard } from "../../components/schedule/RoundCard";
-import { SeasonSelector } from "../../components/SeasonSelector";
-import { RaceTable } from "../../domain/calendar";
+import { Race, RaceTable } from "../../domain/calendar";
 import "./Calendar.scss";
 
-export const Calendar = () => {
-  const currentYear = new Date().getFullYear();
-  const [season, setSeason] = useState<number>(currentYear);
-  const [calendar, setCalendar] = useState<RaceTable>();
+export const UpcomingEvents = () => {
+  const today = new Date()
+  const season = today.getFullYear();
+  const [calendar, setCalendar] = useState<Race[]>();
+
   useEffect(() => {
     getCalendar(season).then((response) => {
       console.log(response.data.MRData);
-      setCalendar(response.data.MRData.RaceTable);
+      const raceTable = response.data.MRData.RaceTable.Races.filter((race: Race) => new Date(race.date) > today)
+      setCalendar(raceTable);
+      console.log(raceTable)
     });
   }, [season]);
 
   return (
     <div>
-      <SeasonSelector setSeason={setSeason} season={season} />
       <div className="race-card-container">
         {!!calendar ? (
-          calendar.Races.map((race) => (
+          calendar.map((race) => (
             <RoundCard key={race.round} race={race} />
           ))
         ) : (
