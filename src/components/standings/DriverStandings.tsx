@@ -21,7 +21,7 @@ export const DriverStandings = ({ season }: Props) => {
   return (
     <div className="table-container">
       {!!standings ? (
-        <Table striped hover>
+        <Table striped hover bordered>
           <thead>
             <tr>
             <th>Position</th>

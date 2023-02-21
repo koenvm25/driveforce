@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseURL = 'https://ergast.com/api/f1/';
+export const baseURL = 'https://countryflagsapi.com/svg/';
 const apiClient = axios.create({
   baseURL: baseURL,
 });
@@ -22,5 +22,4 @@ apiClient.interceptors.response.use(
   }
 );
 
-const { get, post, put, delete: destroy } = apiClient;
-export { get, post, put, destroy };
+export const { get: getFlag } = apiClient;
