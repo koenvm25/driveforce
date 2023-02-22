@@ -11,7 +11,7 @@ import { Standings } from "./screens/standings/Standings";
 import { Dashboard } from "./screens/Dashboard";
 import { Calendar } from "./screens/schedule/Calendar";
 import { Race } from "./screens/schedule/Race";
-import { UpcomingEvents } from "./screens/schedule/UpcomingEvenst";
+import { UpcomingEvents } from "./screens/schedule/UpcomingEvents";
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -43,6 +43,7 @@ export const App = () => {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="/standings">Standings</Nav.Link>
+              <Nav.Link href="/results">Results</Nav.Link>
               <Nav.Link href="/drivers">Drivers</Nav.Link>
               <Nav.Link href="/teams">Teams</Nav.Link>
             </Nav>

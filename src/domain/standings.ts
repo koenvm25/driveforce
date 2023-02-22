@@ -37,7 +37,7 @@ type DriverStanding = {
   Constructors: Constructor[];
 }
 
-type Driver = {
+export type Driver = {
   driverId: string;
   permanentNumber: number;
   code: string;
@@ -48,7 +48,7 @@ type Driver = {
   nationality: string
 }
 
-type Constructor = {
+export type Constructor = {
   constructorId: string;
   url: string;
   name: string;

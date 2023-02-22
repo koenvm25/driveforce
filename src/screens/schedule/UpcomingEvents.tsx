@@ -9,13 +9,12 @@ export const UpcomingEvents = () => {
   const today = new Date()
   const season = today.getFullYear();
   const [calendar, setCalendar] = useState<Race[]>();
+  const [results, setResults] = useState<Race[]>();
 
   useEffect(() => {
     getCalendar(season).then((response) => {
-      console.log(response.data.MRData);
       const raceTable = response.data.MRData.RaceTable.Races.filter((race: Race) => new Date(race.date) > today)
       setCalendar(raceTable);
-      console.log(raceTable)
     });
   }, [season]);
 

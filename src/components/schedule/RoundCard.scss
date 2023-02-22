@@ -1,9 +1,34 @@
-.a {
-  // flex: 1;
+.card-container {
   max-width: 10cm;
   min-width: 7cm;
   margin-bottom: 10px;
-  // flex: 1 0 0;
-  // white-space: nowrap;
-  // max-width: fit-content;
+}
+
+.top-three-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+%top-three {
+  flex: 1;
+  margin: 5px;
+  padding: 2px;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+}
+
+.top-three-1 {
+  @extend %top-three;
+  background-color: gold;
+}
+.top-three-2 {
+  @extend %top-three;
+  background-color: silver;
+}
+.top-three-3 {
+  @extend %top-three;
+  background-color: #CD7F32;
 }

@@ -1,3 +1,5 @@
+import { Result } from "./result";
+
 export type RaceTable = {
   season: number;
   Races: Race[]
@@ -16,6 +18,7 @@ export type Race = {
   ThirdPractice?: Event;
   Qualifying?: Event;
   Sprint?: Event;
+  Results?: Result[];
 }
 
 type Event = {
