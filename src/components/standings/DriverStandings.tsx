@@ -12,6 +12,7 @@ export const DriverStandings = ({ season }: Props) => {
   const [standings, setStandings] = useState<DriverStandingsTable>();
 
   useEffect(() => {
+    setStandings(undefined)
     getDriverStandings(season).then((response) => {
       console.log(response.data.MRData);
       setStandings(response.data.MRData.StandingsTable);
@@ -45,6 +46,7 @@ export const DriverStandings = ({ season }: Props) => {
       ) : (
         <Spinner animation="grow" />
       )}
+      {/* <Spinner animation="grow" /> */}
     </div>
   );
 };

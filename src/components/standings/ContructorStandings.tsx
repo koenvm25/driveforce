@@ -12,6 +12,7 @@ export const ConstructorStandings = ({ season }: Props) => {
   const [standings, setStandings] = useState<ConstructorStandingsTable>();
 
   useEffect(() => {
+    setStandings(undefined)
     getConstructorStandings(season).then((response) => {
       console.log(response.data.MRData);
       setStandings(response.data.MRData.StandingsTable);
