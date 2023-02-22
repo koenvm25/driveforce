@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { getCalendar, getResults } from "../../api/endpoints";
 import { RoundCard } from "../../components/schedule/RoundCard";
 import { SeasonSelector } from "../../components/SeasonSelector";
@@ -19,21 +19,21 @@ export const Calendar = () => {
 
       getResults(season, 500).then((response) => {
         setResults(response.data.MRData.RaceTable.Races);
-        console.log(response.data.MRData.RaceTable.Races)
+        console.log(response.data.MRData.RaceTable.Races);
       });
-    })
+    });
   }, [season]);
 
   const updateSeason = (season: number) => {
     setCalendar(undefined);
     setResults(undefined);
-    setSeason(season)
-  }
+    setSeason(season);
+  };
 
   return (
-    <div>
+    <Container className="app-container">
       <SeasonSelector setSeason={updateSeason} season={season} />
-      <div className="race-card-container">
+      <div className="round-card-container">
         {!!calendar && !!results ? (
           calendar.map((race) => {
             const result = results.filter(
@@ -45,6 +45,6 @@ export const Calendar = () => {
           <Spinner animation="grow" />
         )}
       </div>
-    </div>
+    </Container>
   );
 };

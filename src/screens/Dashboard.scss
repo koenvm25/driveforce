@@ -1,0 +1,42 @@
+.upcoming-event {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  padding: 20px;
+  border-radius: 50px;
+  max-width: fit-content;
+}
+
+.upcoming-event-title {
+  margin-right: 10px;
+  color: black;
+  min-width: fit-content;
+  white-space: nowrap;
+}
+
+.upcoming-event-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.upcoming-event-container {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+h4 {
+  margin-top: 15px;
+  margin-bottom: -10px;
+}

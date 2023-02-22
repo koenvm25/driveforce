@@ -10,7 +10,7 @@ import {
 import { Standings } from "./screens/standings/Standings";
 import { Dashboard } from "./screens/Dashboard";
 import { Calendar } from "./screens/schedule/Calendar";
-import { Race } from "./screens/schedule/Race";
+import { WeekendSchedule } from "./screens/schedule/WeekendSchedule";
 import { UpcomingEvents } from "./screens/schedule/UpcomingEvents";
 
 export const App = () => {
@@ -20,7 +20,7 @@ export const App = () => {
         <Route path="/" element={<Dashboard />} />
         <Route path="/standings" element={<Standings />} />
         <Route path="/calendar" element={<Calendar />} />
-        <Route path="/calendar/:round" element={<Race />} />
+        <Route path="/calendar/:season/:round" element={<WeekendSchedule />} />
         <Route path="/calendar/upcoming-events" element={<UpcomingEvents />} />
       </>
     )
@@ -50,9 +50,7 @@ export const App = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className="app-container">
-        <RouterProvider router={router} />
-      </Container>
+      <RouterProvider router={router} />
     </div>
   );
 };

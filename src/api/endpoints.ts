@@ -6,7 +6,7 @@ export const getConstructorStandings = (season: number) => get(`${season}/constr
 
 // Schedule
 export const getCalendar = (season: number) => get(`${season}.json`)
-export const getRace = (season: number, round: number) => get(`${season}/${round}.json`)
+export const getRace = (season: string, round: string) => get(`${season}/${round}.json`)
 
 // Results
 export const getResults = (season: number, limit?: number) => get(`${season}/Results.json?limit=${limit}`)
