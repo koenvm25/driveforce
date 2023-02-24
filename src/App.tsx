@@ -6,15 +6,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./App.scss";
-import theme from "./assets/theme";
-import { NavBar } from "./components/NavBar/NavBar";
-import { Dashboard } from "./screens/Dashboard";
-import { Calendar } from "./screens/schedule/Calendar";
-import { UpcomingEvents } from "./screens/schedule/UpcomingEvents";
-import { WeekendSchedule } from "./screens/schedule/WeekendSchedule";
-import { Standings } from "./screens/standings/Standings";
-
-const pages = ["Calendar", "standings", "Results", "Drivers", "Teams"];
+import theme from "./Assets/theme";
+import { NavBar } from "./Components/NavBar/NavBar";
+import { Dashboard } from "./Pages/Dashboard";
+import { PenaltyPoints } from "./Pages/PenaltyPoints/PenaltyPoints";
+import { Results } from "./Pages/Results/Results";
+import { Calendar } from "./Pages/Schedule/Calendar";
+import { UpcomingEvents } from "./Pages/Schedule/UpcomingEvents";
+import { WeekendSchedule } from "./Pages/Schedule/WeekendSchedule";
+import { Standings } from "./Pages/Standings/Standings";
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -25,6 +25,8 @@ export const App = () => {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/calendar/:season/:round" element={<WeekendSchedule />} />
         <Route path="/calendar/upcoming-events" element={<UpcomingEvents />} />
+        <Route path="/results" element={<Results />} />
+        <Route path="/penalty-points" element={<PenaltyPoints />} />
       </>
     )
   );

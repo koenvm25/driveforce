@@ -10,8 +10,8 @@ import {
   Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getDriverStandings } from "../../api/endpoints";
-import { DriverStandingsTable } from "../../domain/standings";
+import { getDriverStandings } from "../../Api/endpoints";
+import { DriverStandingsTable } from "../../Domain/standings";
 import "./Standings.scss";
 
 interface Props {
@@ -40,7 +40,7 @@ export const DriverStandings = ({ season }: Props) => {
                 <TableCell>Driver</TableCell>
                 <TableCell>Team</TableCell>
                 <TableCell>Points</TableCell>
-                <TableCell>Wins</TableCell>
+                <TableCell sx={{ display: { xxs: 'none', sm: 'table-cell' }}}>Wins</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -52,14 +52,14 @@ export const DriverStandings = ({ season }: Props) => {
                   </TableCell>
                   <TableCell>{driver.Constructors[0]?.name}</TableCell>
                   <TableCell>{driver.points}</TableCell>
-                  <TableCell>{driver.wins}</TableCell>
+                  <TableCell sx={{ display: { xxs: 'none', sm: 'table-cell' }}}>{driver.wins}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       ) : (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: "100%" }}>
           <LinearProgress />
         </Box>
       )}

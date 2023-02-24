@@ -1,8 +1,8 @@
-import { Race } from "../../domain/calendar";
-import { convertToPeriodString } from "../../domain/dateTimeHelpers";
-import { Result } from "../../domain/result";
-import { TopThree } from "../results/TopThree";
-import { getCountyCode } from "../../domain/country";
+import { Race } from "../../Domain/calendar";
+import { convertToPeriodString } from "../../Utils/dateTimeHelpers";
+import { Result } from "../../Domain/result";
+import { TopThree } from "../Results/TopThree";
+import { getCountyCode } from "../../Domain/country";
 import "./RoundCard.scss";
 import { Card, CardContent, CardMedia } from "@mui/material";
 

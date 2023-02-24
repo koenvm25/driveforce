@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import "./NavBar.scss";
 import { NavDrawer } from "./NavDrawer";
-import Logo from "../../assets/logo.svg";
+import Logo from "../../Assets/logo.svg";
 
 export const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -29,21 +29,14 @@ export const NavBar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <AppBar position="static" className="nav-bar">
-      <Toolbar>
-        {/* <Typography
-          variant="h4"
-          className="nav-logo"
-          onClick={() => (window.location.href = "/")}
-        >
-          DriveForce
-        </Typography> */}
+    <AppBar position="static">
+      <Toolbar className="nav-bar">
         <img
           src={Logo}
           alt="DriveForce Logo"
           width={200}
           onClick={() => (window.location.href = "/")}
-          className='nav-logo'
+          className="nav-logo"
         />
         {isMobile ? (
           <NavDrawer />
@@ -107,6 +100,14 @@ export const NavBar = () => {
               href="/teams"
             >
               Teams
+            </Button>
+            <Button
+              style={{ color: "#fff" }}
+              className="nav-btn"
+              size="large"
+              href="/penalty-points"
+            >
+              Penalty points
             </Button>
           </div>
         )}

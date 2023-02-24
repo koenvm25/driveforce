@@ -10,8 +10,8 @@ import {
   TableRow,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getConstructorStandings } from "../../api/endpoints";
-import { ConstructorStandingsTable } from "../../domain/standings";
+import { getConstructorStandings } from "../../Api/endpoints";
+import { ConstructorStandingsTable } from "../../Domain/standings";
 import "./Standings.scss";
 
 interface Props {

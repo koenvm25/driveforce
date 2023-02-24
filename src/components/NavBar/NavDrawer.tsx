@@ -15,15 +15,16 @@ import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import TimerIcon from "@mui/icons-material/Timer";
 import SportsMotorsportsIcon from "@mui/icons-material/SportsMotorsports";
 import GroupsIcon from "@mui/icons-material/Groups";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { useState } from "react";
 
 export const NavDrawer = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [openCollapsable, setOpenCollapsable] = useState(true);
+  const [openCollapsable, setOpenCollapsable] = useState(false);
 
   return (
     <>
-      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)} anchor='top'>
         <List>
           <ListItemButton onClick={() => setOpenCollapsable(!openCollapsable)}>
             <ListItemIcon>
@@ -93,6 +94,16 @@ export const NavDrawer = () => {
               <GroupsIcon htmlColor="#000" />
             </ListItemIcon>
             <ListItemText primary="Teams" />
+          </ListItemButton>
+          <ListItemButton
+            href="/penalty-points"
+            className="nav-btn"
+            onClick={() => setOpenDrawer(false)}
+          >
+            <ListItemIcon>
+              <ErrorOutlineIcon htmlColor="#000" />
+            </ListItemIcon>
+            <ListItemText primary="Penalty points" />
           </ListItemButton>
         </List>
       </Drawer>

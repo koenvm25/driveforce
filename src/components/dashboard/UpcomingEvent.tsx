@@ -1,18 +1,15 @@
-import { events, Race } from "../../domain/calendar";
-import { getNextEvent } from "../../domain/dateTimeHelpers";
-import { capitilizeFirstLetter } from "../../domain/stringHelpers";
+import { events, Race } from "../../Domain/calendar";
+import { getNextEvent } from "../../Utils/dateTimeHelpers";
+import { capitalizeFirstLetter } from "../../Utils/stringHelpers";
 import FlipCountDown from "@rumess/react-flip-countdown";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "../../Hooks/useWindowDimensions";
 import { Box, LinearProgress } from "@mui/material";
-
-const now = new Date();
-const season = now.getFullYear();
 
 interface Props {
   race?: Race;
 }
 
-export const UpcomingEvent = ({ race: race }: Props) => {
+export const UpcomingEvent = ({ race }: Props) => {
   const { width } = useWindowDimensions();
 
   const nextEvent = race ? getNextEvent(race) : undefined;
@@ -26,14 +23,14 @@ export const UpcomingEvent = ({ race: race }: Props) => {
               <>
                 <h3 className="upcoming-event-title">Next event:</h3>
                 <h3 className="upcoming-event-title">
-                  {capitilizeFirstLetter(events[nextEvent?.name])}
+                  {capitalizeFirstLetter(events[nextEvent?.name])}
                 </h3>
               </>
             ) : (
               <>
                 <h2 className="upcoming-event-title">Next event:</h2>
                 <h2 className="upcoming-event-title">
-                  {capitilizeFirstLetter(events[nextEvent?.name])}
+                  {capitalizeFirstLetter(events[nextEvent?.name])}
                 </h2>
               </>
             )}
