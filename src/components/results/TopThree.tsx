@@ -1,4 +1,4 @@
-import { Result } from "../../domain/result";
+import { Result } from "../../Domain/result";
 
 interface Props {
   results: Result[];

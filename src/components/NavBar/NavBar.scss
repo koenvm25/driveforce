@@ -1,10 +1,10 @@
 .nav-bar {
-  background-color: #d90429;
-  color: #d90429;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .nav-logo {
-  // flex-grow: 1;
   cursor: pointer;
 }
 

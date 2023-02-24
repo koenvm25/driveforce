@@ -1,10 +1,10 @@
-import { Race } from "../../domain/calendar";
-import { convertToPeriodString } from "../../domain/dateTimeHelpers";
-import { Result } from "../../domain/result";
-import { TopThree } from "../results/TopThree";
-import { getCountyCode } from "../../domain/country";
+import { Race } from "../../Domain/calendar";
+import { Result } from "../../Domain/result";
+import { TopThree } from "../Results/TopThree";
+import { getCountyCode } from "../../Domain/country";
 import "./RoundCard.scss";
 import { Card, CardContent, CardMedia } from "@mui/material";
+import { convertToPeriodString } from "../../Utils/dateTimeHelpers";
 
 interface Props {
   race: Race;
