@@ -1,10 +1,10 @@
-import { Card, Container } from "react-bootstrap";
 import { Race } from "../../domain/calendar";
 import { convertToPeriodString } from "../../domain/dateTimeHelpers";
 import { Result } from "../../domain/result";
 import { TopThree } from "../results/TopThree";
 import { getCountyCode } from "../../domain/country";
 import "./RoundCard.scss";
+import { Card, CardContent, CardMedia } from "@mui/material";
 
 interface Props {
   race: Race;
@@ -16,21 +16,18 @@ export const RoundCard = ({ race, results, onClick }: Props) => {
   const countryCode = getCountyCode(race.Circuit.Location.country);
 
   return (
-    <Container className="card-container">
-      <Card onClick={onClick}>
-        <Card.Img
-          variant="top"
-          src={`https://flagcdn.com/w320/${countryCode?.toLowerCase()}.png`}
-          height="200"
-          alt={race.Circuit.Location.country}
-        />
-        <Card.Body>
-          <Card.Title>{race.raceName}</Card.Title>
-          <Card.Text>{race.Circuit.circuitName}</Card.Text>
-          <Card.Text>{convertToPeriodString(new Date(race.date))}</Card.Text>
-          {!!results && <TopThree results={results} />}
-        </Card.Body>
-      </Card>
-    </Container>
+    <Card onClick={onClick} className="card-container">
+      <CardMedia
+        image={`https://flagcdn.com/w320/${countryCode?.toLowerCase()}.jpg`}
+        title={`${race.Circuit.Location.country} flag`}
+        sx={{ height: 200 }}
+      />
+      <CardContent>
+        <h5>{race.raceName}</h5>
+        <body>{race.Circuit.circuitName}</body>
+        <body>{convertToPeriodString(new Date(race.date))}</body>
+        {!!results && <TopThree results={results} />}
+      </CardContent>
+    </Card>
   );
 };

@@ -1,5 +1,5 @@
+import { Box, LinearProgress, Container } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getCalendar } from "../../api/endpoints";
 import { RoundCard } from "../../components/schedule/RoundCard";
@@ -23,7 +23,7 @@ export const UpcomingEvents = () => {
   }, [season]);
 
   return (
-    <Container className="app-container">
+    <Container className="app-container" maxWidth='xl'>
       <div className="round-card-container">
         {!!races ? (
           races.map((race) => (
@@ -34,7 +34,9 @@ export const UpcomingEvents = () => {
             />
           ))
         ) : (
-          <Spinner animation="grow" />
+          <Box sx={{ width: '100%' }}>
+            <LinearProgress />
+          </Box>
         )}
       </div>
     </Container>

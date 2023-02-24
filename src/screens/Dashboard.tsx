@@ -1,10 +1,8 @@
+import { Container } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import { getCalendar } from "../api/endpoints";
 import { UpcomingEvent } from "../components/dashboard/UpcomingEvent";
-import { DriverStandings } from "../components/standings/DriverStandings";
-import { Twitter } from "../components/Twitter";
 import { Race } from "../domain/calendar";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import "./Dashboard.scss";
@@ -24,14 +22,14 @@ export const Dashboard = () => {
       );
       setRaces(raceTable);
     });
-  }, [season]);
+  }, []);
 
   return (
-    <Container className="app-container">
+    <Container className="app-container" maxWidth='xl'>
       <div className="header-container">
         <div>
           <UpcomingEvent race={races && races[0]} />
-          <h4>Standings</h4>
+          <h4 className="title">Standings</h4>
           <Standings removeSeasonSelector />
         </div>
         <div

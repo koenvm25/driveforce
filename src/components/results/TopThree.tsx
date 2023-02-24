@@ -1,4 +1,3 @@
-import { Row } from "react-bootstrap";
 import { Result } from "../../domain/result";
 
 interface Props {

@@ -1,5 +1,5 @@
+import { Box, Container, Grid, LinearProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
 import { getCalendar, getResults } from "../../api/endpoints";
 import { RoundCard } from "../../components/schedule/RoundCard";
 import { SeasonSelector } from "../../components/SeasonSelector";
@@ -31,7 +31,7 @@ export const Calendar = () => {
   };
 
   return (
-    <Container className="app-container">
+    <Container maxWidth='xl'>
       <SeasonSelector setSeason={updateSeason} season={season} />
       <div className="round-card-container">
         {!!calendar && !!results ? (
@@ -42,7 +42,9 @@ export const Calendar = () => {
             return <RoundCard key={race.round} race={race} results={result} />;
           })
         ) : (
-          <Spinner animation="grow" />
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress />
+          </Box>
         )}
       </div>
     </Container>

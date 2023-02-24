@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
-import { getCalendar } from "../../api/endpoints";
 import { events, Race } from "../../domain/calendar";
 import { getNextEvent } from "../../domain/dateTimeHelpers";
 import { capitilizeFirstLetter } from "../../domain/stringHelpers";
 import FlipCountDown from "@rumess/react-flip-countdown";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { Box, LinearProgress } from "@mui/material";
 
 const now = new Date();
 const season = now.getFullYear();
@@ -54,7 +52,9 @@ export const UpcomingEvent = ({ race: race }: Props) => {
           />
         </div>
       ) : (
-        <Spinner animation="grow" />
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
       )}
     </div>
   );

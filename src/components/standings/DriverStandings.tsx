@@ -1,5 +1,15 @@
+import {
+  TableContainer,
+  Paper,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Table,
+  LinearProgress,
+  Box,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import { Spinner, Table } from "react-bootstrap";
 import { getDriverStandings } from "../../api/endpoints";
 import { DriverStandingsTable } from "../../domain/standings";
 import "./Standings.scss";
@@ -12,7 +22,7 @@ export const DriverStandings = ({ season }: Props) => {
   const [standings, setStandings] = useState<DriverStandingsTable>();
 
   useEffect(() => {
-    setStandings(undefined)
+    setStandings(undefined);
     getDriverStandings(season).then((response) => {
       console.log(response.data.MRData);
       setStandings(response.data.MRData.StandingsTable);
@@ -22,31 +32,37 @@ export const DriverStandings = ({ season }: Props) => {
   return (
     <div className="table-container">
       {!!standings ? (
-        <Table striped hover bordered>
-          <thead>
-            <tr>
-            <th>Position</th>
-            <th>Driver</th>
-            <th>Team</th>
-            <th>Points</th></tr>
-          </thead>
-          <tbody>
-            {standings.StandingsLists[0].DriverStandings.map((contestant) => (
-              <tr key={contestant.position}>
-                <td>{contestant.position}</td>
-                <td>
-                  {contestant.Driver.givenName} {contestant.Driver.familyName}
-                </td>
-                <td>{contestant.Constructors[0]?.name}</td>
-                <td>{contestant.points}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Position</TableCell>
+                <TableCell>Driver</TableCell>
+                <TableCell>Team</TableCell>
+                <TableCell>Points</TableCell>
+                <TableCell>Wins</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {standings.StandingsLists[0].DriverStandings.map((driver) => (
+                <TableRow key={driver.position}>
+                  <TableCell>{driver.position}</TableCell>
+                  <TableCell>
+                    {driver.Driver.givenName} {driver.Driver.familyName}
+                  </TableCell>
+                  <TableCell>{driver.Constructors[0]?.name}</TableCell>
+                  <TableCell>{driver.points}</TableCell>
+                  <TableCell>{driver.wins}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       ) : (
-        <Spinner animation="grow" />
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
       )}
-      {/* <Spinner animation="grow" /> */}
     </div>
   );
 };

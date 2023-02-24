@@ -1,0 +1,27 @@
+.nav-bar {
+  background-color: #d90429;
+  color: #d90429;
+}
+
+.nav-logo {
+  // flex-grow: 1;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+  padding: 5px;
+}
+
+.nav-btn {
+  background-color: transparent;
+  text-transform: unset !important;
+}

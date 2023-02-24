@@ -1,5 +1,5 @@
+import { Box, Container, LinearProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getRace } from "../../api/endpoints";
 import { UpcomingEvent } from "../../components/dashboard/UpcomingEvent";
@@ -21,7 +21,13 @@ export const WeekendSchedule = () => {
 
   return (
     <Container className="app-container">
-      {!!race ? <UpcomingEvent race={race} /> : <Spinner />}
+      {!!race ? (
+        <UpcomingEvent race={race} />
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+      )}
     </Container>
   );
 };
