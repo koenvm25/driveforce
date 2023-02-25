@@ -14,12 +14,10 @@ export const Calendar = () => {
 
   useEffect(() => {
     getCalendar(season).then((response) => {
-      console.log(response.data.MRData);
       setCalendar(response.data.MRData.RaceTable.Races);
 
       getResults(season, 500).then((response) => {
         setResults(response.data.MRData.RaceTable.Races);
-        console.log(response.data.MRData.RaceTable.Races);
       });
     });
   }, [season]);

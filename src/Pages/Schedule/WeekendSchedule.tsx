@@ -13,7 +13,6 @@ export const WeekendSchedule = () => {
     if (season && round) {
       getRace(season, round).then((response) => {
         const raceTable = response.data.MRData.RaceTable.Races;
-        console.log(raceTable);
         setRace(raceTable[0]);
       });
     }

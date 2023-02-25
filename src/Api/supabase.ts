@@ -4,8 +4,7 @@ export const getDriverPenaltyPoints = async (
   setDrivers: (drivers: DriverWithPenaltyPoints[]) => void
 ) => {
   const supabaseUrl = "https://ezcxlijkyxcygregizon.supabase.co";
-  const supabaseKey =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6Y3hsaWpreXhjeWdyZWdpem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzcxNjI0NTgsImV4cCI6MTk5MjczODQ1OH0.FpSdPYdSHuNV8Bah8wMWS_z4UaWyelnVxBojUu_9_I4";
+  const supabaseKey = process.env.REACT_APP_SUPABASE_KEY!;
   const supabase = createClient(supabaseUrl, supabaseKey);
   supabase
     .from("drivers")
@@ -29,7 +28,6 @@ export const getDriverPenaltyPoints = async (
       `
         )
         .then((pointsResponse) => {
-          console.log(pointsResponse.data);
           const drivers = mapToPoints(
             driversResponse.data as DriverDto[],
             pointsResponse.data as PointDto[]

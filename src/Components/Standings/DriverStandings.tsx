@@ -24,8 +24,6 @@ export const DriverStandings = ({ season }: Props) => {
   useEffect(() => {
     setStandings(undefined);
     getDriverStandings(season).then((response) => {
-      console.log(response.data.MRData);
-      setStandings(response.data.MRData.StandingsTable);
     });
   }, [season]);
 
