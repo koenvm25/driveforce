@@ -44,14 +44,14 @@ export const NavDrawer = () => {
                 className="nav-btn"
                 onClick={() => setOpenDrawer(false)}
               >
-                Full season
+                Current season
               </ListItemButton>
               <ListItemButton
-                href="/calendar/upcoming-events"
+                href="/calendar/previous-seasons"
                 className="nav-btn"
                 onClick={() => setOpenDrawer(false)}
               >
-                Upcoming events
+                Previous seasons
               </ListItemButton>
             </List>
           </Collapse>

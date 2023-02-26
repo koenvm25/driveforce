@@ -20,7 +20,7 @@ export const NavBar = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = (nav: string) => {
-    if (nav) {
+    if (typeof nav === "string") {
       window.location.href = nav;
     }
     setAnchorEl(null);
@@ -60,12 +60,12 @@ export const NavBar = () => {
               onClose={handleClose}
               TransitionComponent={Fade}
             >
-              <MenuItem
-                onClick={() => handleClose("/calendar")}
-              >
+              <MenuItem onClick={() => handleClose("/calendar")}>
                 Current season
               </MenuItem>
-              <MenuItem onClick={() => handleClose("/calendar/previous-seasons")}>
+              <MenuItem
+                onClick={() => handleClose("/calendar/previous-seasons")}
+              >
                 Privious seasons
               </MenuItem>
             </Menu>
