@@ -9,7 +9,7 @@ import "./Calendar.scss";
 const now = new Date();
 const season = now.getFullYear();
 
-export const UpcomingEvents = () => {
+export const CurrentSeason = () => {
   const navigate = useNavigate();
   const [races, setRaces] = useState<Race[]>();
 

@@ -6,9 +6,9 @@ import { SeasonSelector } from "../../Components/SeasonSelector";
 import { Race } from "../../Domain/calendar";
 import "./Calendar.scss";
 
-export const Calendar = () => {
-  const currentYear = new Date().getFullYear();
-  const [season, setSeason] = useState<number>(currentYear);
+export const PreviousSeasons = () => {
+  const previousYear = new Date().getFullYear() - 1;
+  const [season, setSeason] = useState<number>(previousYear);
   const [calendar, setCalendar] = useState<Race[]>();
   const [results, setResults] = useState<Race[]>();
 
@@ -30,7 +30,7 @@ export const Calendar = () => {
 
   return (
     <Container maxWidth='xl'>
-      <SeasonSelector setSeason={updateSeason} season={season} />
+      <SeasonSelector setSeason={updateSeason} season={season} removeCurrentYear />
       <div className="round-card-container">
         {!!calendar && !!results ? (
           calendar.map((race) => {

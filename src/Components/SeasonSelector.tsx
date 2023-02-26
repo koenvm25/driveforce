@@ -4,14 +4,21 @@ import "./SeasonSelector.scss";
 interface Props {
   setSeason: (season: number) => void;
   season?: number;
+  removeCurrentYear?: boolean;
 }
 
-export const SeasonSelector = ({ setSeason, season }: Props) => {
-  const currentYear = new Date().getFullYear();
+export const SeasonSelector = ({
+  setSeason,
+  season,
+  removeCurrentYear = false,
+}: Props) => {
+  const previousYear = removeCurrentYear
+    ? new Date().getFullYear() - 1
+    : new Date().getFullYear();
 
   const options = [];
 
-  for (let year = currentYear; year >= 1950; year--) {
+  for (let year = previousYear; year >= 1950; year--) {
     options.push(
       <MenuItem value={year} key={year}>
         {year}
@@ -23,7 +30,7 @@ export const SeasonSelector = ({ setSeason, season }: Props) => {
       Season:
       <Select
         className="options"
-        defaultValue={season ? season : currentYear}
+        defaultValue={season ? season : previousYear}
         onChange={(event) => setSeason(Number(event.target.value))}
         size="small"
       >

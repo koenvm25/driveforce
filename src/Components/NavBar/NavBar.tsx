@@ -60,13 +60,13 @@ export const NavBar = () => {
               onClose={handleClose}
               TransitionComponent={Fade}
             >
-              <MenuItem onClick={() => handleClose("/calendar")}>
-                Full seaons
-              </MenuItem>
               <MenuItem
-                onClick={() => handleClose("/calendar/upcoming-events")}
+                onClick={() => handleClose("/calendar")}
               >
-                Upcoming events
+                Current season
+              </MenuItem>
+              <MenuItem onClick={() => handleClose("/calendar/previous-seasons")}>
+                Privious seasons
               </MenuItem>
             </Menu>
             <Button

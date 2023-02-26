@@ -23,5 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 ApiClient.http
 /src/testing.js
-/src/.env
 .env
