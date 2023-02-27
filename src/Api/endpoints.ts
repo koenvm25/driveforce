@@ -9,4 +9,5 @@ export const getCalendar = (season: number) => get(`${season}.json`)
 export const getRace = (season: string, round: string) => get(`${season}/${round}.json`)
 
 // Results
-export const getResults = (season: number, limit?: number) => get(`${season}/Results.json?limit=${limit}`)
+export const getSeasonResults = (season: number, limit?: number) => get(`${season}/Results.json?limit=${limit}`)
+export const getRoundResult = (season: number, round: number) => get(`${season}/${round}/Results.json`)

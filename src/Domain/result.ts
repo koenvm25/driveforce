@@ -9,6 +9,7 @@ export type Result = {
   Constructor: Constructor;
   grid: number;
   laps: number;
+  status: string;
   Time: Time;
   FastestLap: FastestLap;
 }

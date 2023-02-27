@@ -10,8 +10,8 @@ const now = new Date();
 const season = now.getFullYear();
 
 export const CurrentSeason = () => {
-  const navigate = useNavigate();
   const [races, setRaces] = useState<Race[]>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCalendar(season).then((response) => {
@@ -20,7 +20,7 @@ export const CurrentSeason = () => {
       );
       setRaces(raceTable);
     });
-  }, [season]);
+  }, []);
 
   return (
     <Container className="app-container" maxWidth='xl'>

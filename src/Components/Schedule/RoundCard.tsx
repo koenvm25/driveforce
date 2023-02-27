@@ -23,7 +23,7 @@ export const RoundCard = ({ race, results, onClick }: Props) => {
         sx={{ height: 200 }}
       />
       <CardContent>
-        <h5>{race.raceName}</h5>
+        <h2>{race.raceName}</h2>
         <body>{race.Circuit.circuitName}</body>
         <body>{convertToPeriodString(new Date(race.date))}</body>
         {!!results && <TopThree results={results} />}

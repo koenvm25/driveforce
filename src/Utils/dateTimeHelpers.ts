@@ -15,6 +15,11 @@ export const convertDateAndTimeStringsToReadable = (
   return Intl.DateTimeFormat(locale, options).format(date);
 };
 
+export const isDateInFuture = (date: Date) => {
+  const now = new Date();
+  return date > now
+}
+
 export const convertToPeriodString = (endDate: Date): string => {
   const startDate = new Date(endDate);
   startDate.setDate(startDate.getDate() - 3);
@@ -40,7 +45,7 @@ export const getNextEvent = (nextRace: Race): Event => {
     const date = new Date(
       `${nextRace.FirstPractice.date}T${nextRace.FirstPractice.time}`
     );
-    if (date > now) {
+    if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.FirstPractice,
         name: 'FirstPractice'
@@ -52,7 +57,7 @@ export const getNextEvent = (nextRace: Race): Event => {
     const date = new Date(
       `${nextRace.SecondPractice.date}T${nextRace.SecondPractice.time}`
     );
-    if (date > now) {
+    if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.SecondPractice,
         name: 'SecondPractice'
@@ -64,7 +69,7 @@ export const getNextEvent = (nextRace: Race): Event => {
     const date = new Date(
       `${nextRace.ThirdPractice.date}T${nextRace.ThirdPractice.time}`
     );
-    if (date > now) {
+    if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.ThirdPractice,
         name: 'ThirdPractice'
@@ -76,7 +81,7 @@ export const getNextEvent = (nextRace: Race): Event => {
     const date = new Date(
       `${nextRace.Qualifying.date}T${nextRace.Qualifying.time}`
     );
-    if (date > now) {
+    if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.Qualifying,
         name: 'Qualifying'
@@ -86,7 +91,7 @@ export const getNextEvent = (nextRace: Race): Event => {
   }
   if (nextRace.Sprint) {
     const date = new Date(`${nextRace.Sprint.date}T${nextRace.Sprint.time}`);
-    if (date > now) {
+    if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.Sprint,
         name: 'Sprint'
@@ -101,3 +106,13 @@ export const getNextEvent = (nextRace: Race): Event => {
   }
   return event;
 };
+
+export const isDateMoreThanMonthInFuture = (date: Date) => {
+  // console.log(date)
+  const now = new Date();
+  if (date.getMonth() - now.getMonth() > 1) {
+    return true
+  }
+  now.setMonth(date.getMonth())
+  return date > now;
+}

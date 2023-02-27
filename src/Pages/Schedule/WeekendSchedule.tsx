@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getRace } from "../../Api/endpoints";
 import { UpcomingEvent } from "../../Components/Dashboard/UpcomingEvent";
 import { Race } from "../../Domain/calendar";
+import { isDateInFuture } from "../../Utils/dateTimeHelpers";
 
 export const WeekendSchedule = () => {
   const { season, round } = useParams();
@@ -16,12 +17,18 @@ export const WeekendSchedule = () => {
         setRace(raceTable[0]);
       });
     }
-  }, [season]);
+  }, [season, round]);
 
   return (
     <Container className="app-container">
       {!!race ? (
-        <UpcomingEvent race={race} />
+        <>
+          {isDateInFuture(new Date()) ? (
+            <UpcomingEvent race={race} />
+          ) : (
+            <div>not in future</div>
+          )}
+        </>
       ) : (
         <Box sx={{ width: "100%" }}>
           <LinearProgress />
