@@ -53,7 +53,7 @@ export const Standings = ({ removeSeasonSelector = false }: Props) => {
   }
 
   return (
-    <Container>
+    <Container sx={{flexGrow: 10, paddingBottom: '10px'}}>
       {!removeSeasonSelector && <SeasonSelector setSeason={setSeason} season={season} />}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs

@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, Paper } from "@mui/material";
 import { useState, useEffect } from "react";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import { getCalendar } from "../Api/endpoints";
@@ -25,18 +25,20 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <Container className="app-container" maxWidth='xl'>
-      <div className="header-container">
-        <div>
-          <UpcomingEvent race={races && races[0]}/>
-          <h4 className="title">Standings</h4>
-          <Standings removeSeasonSelector />
+    <Container className="app-container" maxWidth="xl">
+      <div className="dashboard-container">
+        <div className="dashboard-upcoming-container" >
+          <UpcomingEvent race={races && races[0]} />
+          <Paper>
+            <h4 className="standings-title">Standings</h4>
+            <Standings removeSeasonSelector />
+          </Paper>
         </div>
         <div
           style={
             width > 550
               ? { height: 1500, width: 500 }
-              : { height: 500, width: width - 20 }
+              : { height: 500, width: width - 30 }
           }
         >
           <TwitterTimelineEmbed

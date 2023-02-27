@@ -1,42 +1,59 @@
 .upcoming-event {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: red;
   padding: 20px;
   border-radius: 50px;
-  max-width: fit-content;
+  // max-width: fit-content;
+  width: fit-content;
+}
+
+.upcoming-event-container {
+  align-items: center;
+  justify-content: center;
+  display: flex
+}
+
+.upcoming-event-race-name {
+  margin: 0px;
+  margin-bottom: 5px;
 }
 
 .upcoming-event-title {
   margin-right: 10px;
   color: black;
-  min-width: fit-content;
   white-space: nowrap;
 }
 
 .upcoming-event-title-container {
-  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-.upcoming-event-container {
+.upcoming-event-next-event {
   flex: 1;
   justify-content: center;
   align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
-.header-container {
+.dashboard-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+}
+
+.dashboard-upcoming-container {
+  flex-grow: 1;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .standings-title {
-  margin-top: 15px;
-  margin-bottom: -1px;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin-bottom: -5px;
 }
