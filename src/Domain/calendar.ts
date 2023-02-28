@@ -37,7 +37,7 @@ type Circuit = {
 type Location = {
   lat: number;
   long: number;
-  lacality: string;
+  locality: string;
   country: string;
 };
 
