@@ -66,16 +66,6 @@ export const NavDrawer = () => {
             <ListItemText primary="Standings" />
           </ListItemButton>
           <ListItemButton
-            href="/results"
-            className="nav-btn"
-            onClick={() => setOpenDrawer(false)}
-          >
-            <ListItemIcon>
-              <TimerIcon htmlColor="#000" />
-            </ListItemIcon>
-            <ListItemText primary="Results" />
-          </ListItemButton>
-          <ListItemButton
             href="/drivers"
             className="nav-btn"
             onClick={() => setOpenDrawer(false)}

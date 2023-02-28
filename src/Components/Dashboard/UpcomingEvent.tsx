@@ -13,9 +13,6 @@ export const UpcomingEvent = ({ race }: Props) => {
   const { width } = useWindowDimensions();
 
   const nextEvent = race ? getNextEvent(race) : undefined;
-  if (nextEvent) {
-    console.log(isDateMoreThanMonthInFuture(new Date(`${nextEvent.date}T${nextEvent.time}`)))
-  }
 
   return (
     <div className="upcoming-event-container">

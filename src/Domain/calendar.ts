@@ -1,4 +1,4 @@
-import { Result } from "./result";
+import { QualifyingResult, Result } from "./result";
 
 export type RaceTable = {
   season: number;
@@ -19,6 +19,8 @@ export type Race = {
   Qualifying?: Event;
   Sprint?: Event;
   Results?: Result[];
+  QualifyingResults: QualifyingResult[];
+  SprintResults: Result[];
 };
 
 export type Event = {

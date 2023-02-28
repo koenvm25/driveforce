@@ -9,12 +9,13 @@ import "./App.scss";
 import { NavBar } from "./Components/NavBar/NavBar";
 import { Dashboard } from "./Pages/Dashboard";
 import { PenaltyPoints } from "./Pages/PenaltyPoints/PenaltyPoints";
-import { Results } from "./Pages/Results/Results";
 import { PreviousSeasons } from "./Pages/Schedule/PreviousSeasons";
 import { CurrentSeason } from "./Pages/Schedule/CurrentSeason";
 import { Weekend } from "./Pages/Weekend/Weekend";
 import { Standings } from "./Pages/Standings/Standings";
 import theme from "./Assets/theme";
+import { Drivers } from "./Pages/Contentants/Drivers";
+import { Teams } from "./Pages/Contentants/Teams";
 
 export const App = () => {
   const router = createBrowserRouter(
@@ -25,8 +26,9 @@ export const App = () => {
         <Route path="/calendar/previous-seasons" element={<PreviousSeasons />} />
         <Route path="/calendar/:season/:round" element={<Weekend />} />
         <Route path="/calendar" element={<CurrentSeason />} />
-        <Route path="/results" element={<Results />} />
         <Route path="/penalty-points" element={<PenaltyPoints />} />
+        <Route path="/drivers" element={<Drivers />} />
+        <Route path="/teams" element={<Teams />} />
       </>
     )
   );

@@ -4,6 +4,7 @@ import { ConstructorStandings } from "../../Components/Standings/ContructorStand
 import { SeasonSelector } from "../../Components/SeasonSelector";
 import { Box, Tabs, Tab } from "@mui/material";
 import { Container } from "@mui/system";
+import { TabPanel } from "../../Components/TabPanel";
 
 const currentYear = new Date().getFullYear();
 
@@ -26,35 +27,11 @@ export const Standings = ({ removeSeasonSelector = false }: Props) => {
     };
   };
 
-  interface TabPanelProps {
-    children?: ReactNode;
-    index: number;
-    value: number;
-  }
-
-  const TabPanel = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
-    
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box>
-            {children}
-          </Box>
-        )}
-      </div>
-    );
-  }
-
   return (
-    <Container sx={{flexGrow: 10, paddingBottom: '10px'}}>
-      {!removeSeasonSelector && <SeasonSelector setSeason={setSeason} season={season} />}
+    <Container sx={{ flexGrow: 10, paddingBottom: "10px" }}>
+      {!removeSeasonSelector && (
+        <SeasonSelector setSeason={setSeason} season={season} />
+      )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}

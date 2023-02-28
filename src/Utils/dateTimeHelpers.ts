@@ -20,6 +20,11 @@ export const isDateInFuture = (date: Date) => {
   return date > now
 }
 
+export const isDateHistory = (date: Date) => {
+  const now = new Date();
+  return date < now
+}
+
 export const convertToPeriodString = (endDate: Date): string => {
   const startDate = new Date(endDate);
   startDate.setDate(startDate.getDate() - 3);
@@ -108,7 +113,6 @@ export const getNextEvent = (nextRace: Race): Event => {
 };
 
 export const isDateMoreThanMonthInFuture = (date: Date) => {
-  // console.log(date)
   const now = new Date();
   if (date.getMonth() - now.getMonth() > 1) {
     return true

@@ -78,14 +78,6 @@ export const NavBar = () => {
               Standings
             </Button>
             <Button
-              href="/results"
-              style={{ color: "#fff" }}
-              className="nav-btn"
-              size="large"
-            >
-              Results
-            </Button>
-            <Button
               href="/drivers"
               style={{ color: "#fff" }}
               className="nav-btn"

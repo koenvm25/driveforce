@@ -4,14 +4,14 @@ export type Result = {
   number: number;
   position: number;
   positionText: string;
-  poinst: number;
+  points: number;
   Driver: Driver;
   Constructor: Constructor;
   grid: number;
   laps: number;
   status: string;
-  Time: Time;
-  FastestLap: FastestLap;
+  Time?: Time;
+  FastestLap?: FastestLap;
 }
 
 type Time = {
@@ -20,10 +20,10 @@ type Time = {
 }
 
 type FastestLap = {
-  rank: number;
+  rank?: number;
   lap: number;
-  Time: Time;
-  AverageSpeed: Speed;
+  Time?: Time;
+  AverageSpeed?: Speed;
 }
 
 type Speed = {
