@@ -1,7 +1,7 @@
 import { Box, LinearProgress, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCalendar } from "../../Api/endpoints";
+import { getCalendar, getSeasonResults } from "../../Api/endpoints";
 import { RoundCard } from "../../Components/Schedule/RoundCard";
 import { Race } from "../../Domain/calendar";
 import "./Calendar.scss";
@@ -11,28 +11,36 @@ const season = now.getFullYear();
 
 export const CurrentSeason = () => {
   const [races, setRaces] = useState<Race[]>();
+  const [results, setResults] = useState<Race[]>();
   const navigate = useNavigate();
 
   useEffect(() => {
     getCalendar(season).then((response) => {
-      const raceTable = response.data.MRData.RaceTable.Races.filter(
-        (race: Race) => new Date(race.date) > now
-      );
-      setRaces(raceTable);
+      setRaces(response.data.MRData.RaceTable.Races);
+
+      getSeasonResults(season, 500).then((response) => {
+        setResults(response.data.MRData.RaceTable.Races);
+      });
     });
   }, []);
 
   return (
     <Container className="app-container" maxWidth='xl'>
       <div className="round-card-container">
-        {!!races ? (
-          races.map((race) => (
-            <RoundCard
-              key={race.round}
-              race={race}
-              onClick={() => navigate(`/calendar/${season}/${race.round}`)}
-            />
-          ))
+        {!!races && !!results ? (
+          races.map((race) => {
+            const result = results.filter(
+              (raceItem) => raceItem.round === race.round
+            )[0]?.Results;
+            return (
+              <RoundCard
+                key={race.round}
+                race={race}
+                results={result}
+                onClick={() => navigate(`/calendar/${season}/${race.round}`)}
+              />
+            );
+          })
         ) : (
           <Box sx={{ width: '100%' }}>
             <LinearProgress />
