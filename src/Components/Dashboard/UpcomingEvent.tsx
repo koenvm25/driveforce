@@ -6,7 +6,7 @@ import {
 import { capitalizeFirstLetter } from "../../Utils/stringHelpers";
 import FlipCountDown from "@rumess/react-flip-countdown";
 import useWindowDimensions from "../../Hooks/useWindowDimensions";
-import { Box, LinearProgress } from "@mui/material";
+import { Box, Divider, LinearProgress } from "@mui/material";
 
 interface Props {
   race?: Race;
@@ -47,6 +47,7 @@ export const UpcomingEvent = ({ race }: Props) => {
                 </>
               )}
             </div>
+            <Divider orientation="vertical" flexItem style={{borderLeftWidth: '2px', marginRight: '3px'}}/>
             <FlipCountDown
               endAt={`${nextEvent.date} ${nextEvent.time}`}
               hideYear
