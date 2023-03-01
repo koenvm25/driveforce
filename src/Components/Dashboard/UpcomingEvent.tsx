@@ -55,6 +55,7 @@ export const UpcomingEvent = ({ race }: Props) => {
                   new Date(`${nextEvent.date}T${nextEvent.time}`)
                 )
               }
+              hideSecond
               endAtZero
               dayTitle="Days"
               hourTitle="Hours"
