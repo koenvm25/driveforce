@@ -46,7 +46,7 @@ export const WeekendSchedule = ({ race }: Props) => {
             <TableCell>{race.Circuit.Location.locality}</TableCell>
             <TableCell>{race.Circuit.Location.country}</TableCell>
             <TableCell>
-              <a href={race.Circuit.url} target="_blank">
+              <a href={race.Circuit.url} target="_blank" rel="noreferrer">
                 Report
               </a>
             </TableCell>

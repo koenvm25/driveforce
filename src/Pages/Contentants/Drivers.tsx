@@ -63,7 +63,7 @@ export const Drivers = () => {
                   </TableCell>
                   <TableCell>{driver.code}</TableCell>
                   <TableCell>
-                    <a href={driver.url} target="_blank">
+                    <a href={driver.url} target="_blank" rel="noreferrer">
                       Information
                     </a>
                   </TableCell>

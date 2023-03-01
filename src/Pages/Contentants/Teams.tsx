@@ -11,15 +11,9 @@ import {
   TableRow,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getDrivers, getTeams } from "../../Api/endpoints";
+import { getTeams } from "../../Api/endpoints";
 import { SeasonSelector } from "../../Components/SeasonSelector";
-import { Constructor, Driver } from "../../Domain/standings";
-
-const dateOptions: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-};
+import { Constructor } from "../../Domain/standings";
 
 export const Teams = () => {
   const [teams, setTeams] = useState<Constructor[]>();
@@ -50,7 +44,7 @@ export const Teams = () => {
                   <TableCell>{team.name}</TableCell>
                   <TableCell>{team.nationality}</TableCell>
                   <TableCell>
-                    <a href={team.url} target="_blank">
+                    <a href={team.url} target="_blank" rel="noreferrer">
                       Information
                     </a>
                   </TableCell>
