@@ -17,13 +17,13 @@ export const convertDateAndTimeStringsToReadable = (
 
 export const isDateInFuture = (date: Date) => {
   const now = new Date();
-  return date > now
-}
+  return date > now;
+};
 
 export const isDateHistory = (date: Date) => {
   const now = new Date();
-  return date < now
-}
+  return date < now;
+};
 
 export const convertToPeriodString = (endDate: Date): string => {
   const startDate = new Date(endDate);
@@ -53,8 +53,8 @@ export const getNextEvent = (nextRace: Race): Event => {
     if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.FirstPractice,
-        name: 'FirstPractice'
-      }
+        name: "FirstPractice",
+      };
       return event;
     }
   }
@@ -65,8 +65,8 @@ export const getNextEvent = (nextRace: Race): Event => {
     if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.SecondPractice,
-        name: 'SecondPractice'
-      }
+        name: "SecondPractice",
+      };
       return event;
     }
   }
@@ -77,8 +77,8 @@ export const getNextEvent = (nextRace: Race): Event => {
     if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.ThirdPractice,
-        name: 'ThirdPractice'
-      }
+        name: "ThirdPractice",
+      };
       return event;
     }
   }
@@ -89,8 +89,8 @@ export const getNextEvent = (nextRace: Race): Event => {
     if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.Qualifying,
-        name: 'Qualifying'
-      }
+        name: "Qualifying",
+      };
       return event;
     }
   }
@@ -99,24 +99,27 @@ export const getNextEvent = (nextRace: Race): Event => {
     if (isDateInFuture(date)) {
       const event: Event = {
         ...nextRace.Sprint,
-        name: 'Sprint'
-      }
+        name: "Sprint",
+      };
       return event;
     }
   }
   const event: Event = {
     date: nextRace.date,
     time: nextRace.time,
-    name: 'Race'
-  }
+    name: "Race",
+  };
   return event;
 };
 
 export const isDateMoreThanMonthInFuture = (date: Date) => {
-  const now = new Date();
-  if (date.getMonth() - now.getMonth() > 1) {
-    return true
-  }
-  now.setMonth(date.getMonth())
-  return date > now;
+  return monthDiff(new Date(), date) >= 1;
+};
+
+function monthDiff(d1: Date, d2: Date) {
+  var months;
+  months = (d2.getFullYear() - d1.getFullYear()) * 12;
+  months -= d1.getMonth();
+  months += d2.getMonth();
+  return months <= 0 ? 0 : months;
 }

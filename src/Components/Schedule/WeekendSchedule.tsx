@@ -1,4 +1,5 @@
 import {
+  Divider,
   Paper,
   Table,
   TableBody,
@@ -52,6 +53,7 @@ export const WeekendSchedule = ({ race }: Props) => {
           </TableRow>
         </TableBody>
       </Table>
+      <Divider sx={{ marginTop: "5px" }} />
       <Table>
         <TableHead>
           <TableRow>

@@ -1,5 +1,8 @@
 import { events, Race } from "../../Domain/calendar";
-import { getNextEvent, isDateMoreThanMonthInFuture } from "../../Utils/dateTimeHelpers";
+import {
+  getNextEvent,
+  isDateMoreThanMonthInFuture,
+} from "../../Utils/dateTimeHelpers";
 import { capitalizeFirstLetter } from "../../Utils/stringHelpers";
 import FlipCountDown from "@rumess/react-flip-countdown";
 import useWindowDimensions from "../../Hooks/useWindowDimensions";
@@ -14,6 +17,13 @@ export const UpcomingEvent = ({ race }: Props) => {
 
   const nextEvent = race ? getNextEvent(race) : undefined;
 
+  if (nextEvent) {
+    console.log(
+      isDateMoreThanMonthInFuture(
+        new Date(`${nextEvent.date}T${nextEvent.time}`)
+      )
+    );
+  }
   return (
     <div className="upcoming-event-container">
       {race && nextEvent?.name ? (
@@ -40,7 +50,11 @@ export const UpcomingEvent = ({ race }: Props) => {
             <FlipCountDown
               endAt={`${nextEvent.date} ${nextEvent.time}`}
               hideYear
-              hideMonth={!isDateMoreThanMonthInFuture(new Date(`${nextEvent.date}T${nextEvent.time}`))}
+              hideMonth={
+                !isDateMoreThanMonthInFuture(
+                  new Date(`${nextEvent.date}T${nextEvent.time}`)
+                )
+              }
               endAtZero
               dayTitle="Days"
               hourTitle="Hours"
