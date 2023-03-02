@@ -80,21 +80,41 @@ export const WeekendSchedule = ({ race }: Props) => {
               </TableCell>
             </TableRow>
           )}
-          {!!race.SecondPractice && (
+          {!!race.SecondPractice && !!race.Qualifying  && (
             <TableRow>
-              <TableCell>Second practice</TableCell>
-              <TableCell>
-                {getEventDate(
-                  race.SecondPractice.date,
-                  race.SecondPractice.time
-                ).toLocaleDateString(undefined, dateOptions)}
-              </TableCell>
-              <TableCell>
-                {getEventDate(
-                  race.SecondPractice.date,
-                  race.SecondPractice.time
-                ).toLocaleTimeString(undefined, timeOptions)}
-              </TableCell>
+              {!race.Sprint? (
+                <>
+                  <TableCell>Second practice</TableCell>
+                  <TableCell>
+                    {getEventDate(
+                      race.SecondPractice.date,
+                      race.SecondPractice.time
+                    ).toLocaleDateString(undefined, dateOptions)}
+                  </TableCell>
+                  <TableCell>
+                    {getEventDate(
+                      race.SecondPractice.date,
+                      race.SecondPractice.time
+                    ).toLocaleTimeString(undefined, timeOptions)}
+                  </TableCell>
+                </>
+              ) : (
+                <>
+                    <TableCell>Qualifying</TableCell>
+                    <TableCell>
+                      {getEventDate(
+                        race.Qualifying.date,
+                        race.Qualifying.time
+                      ).toLocaleDateString(undefined, dateOptions)}
+                    </TableCell>
+                    <TableCell>
+                      {getEventDate(
+                        race.Qualifying.date,
+                        race.Qualifying.time
+                      ).toLocaleTimeString(undefined, timeOptions)}
+                    </TableCell>
+                </>
+              )}
             </TableRow>
           )}
           {!!race.ThirdPractice && (
@@ -114,21 +134,43 @@ export const WeekendSchedule = ({ race }: Props) => {
               </TableCell>
             </TableRow>
           )}
-          {!!race.Qualifying && (
+          {!!race.Qualifying && race.SecondPractice && (
             <TableRow>
-              <TableCell>Qualifying</TableCell>
-              <TableCell>
-                {getEventDate(
-                  race.Qualifying.date,
-                  race.Qualifying.time
-                ).toLocaleDateString(undefined, dateOptions)}
-              </TableCell>
-              <TableCell>
-                {getEventDate(
-                  race.Qualifying.date,
-                  race.Qualifying.time
-                ).toLocaleTimeString(undefined, timeOptions)}
-              </TableCell>
+              {race.Sprint? (
+                <>
+                  <TableCell>Second practice</TableCell>
+                  <TableCell>
+                    {getEventDate(
+                      race.SecondPractice.date,
+                      race.SecondPractice.time
+                    ).toLocaleDateString(undefined, dateOptions)}
+                  </TableCell>
+                  <TableCell>
+                    {getEventDate(
+                      race.SecondPractice.date,
+                      race.SecondPractice.time
+                    ).toLocaleTimeString(undefined, timeOptions)}
+                  </TableCell>
+                </>
+              ) : (
+                <>
+                  <TableRow>
+                    <TableCell>Qualifying</TableCell>
+                    <TableCell>
+                      {getEventDate(
+                        race.Qualifying.date,
+                        race.Qualifying.time
+                      ).toLocaleDateString(undefined, dateOptions)}
+                    </TableCell>
+                    <TableCell>
+                      {getEventDate(
+                        race.Qualifying.date,
+                        race.Qualifying.time
+                      ).toLocaleTimeString(undefined, timeOptions)}
+                    </TableCell>
+                  </TableRow>
+                </>
+              )}
             </TableRow>
           )}
           {!!race.Sprint && (
