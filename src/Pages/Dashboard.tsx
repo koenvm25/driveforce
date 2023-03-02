@@ -4,6 +4,7 @@ import { TwitterTimelineEmbed } from "react-twitter-embed";
 import { getCalendar } from "../Api/endpoints";
 import { UpcomingEvent } from "../Components/Dashboard/UpcomingEvent";
 import { Race } from "../Domain/calendar";
+import useDocumentTitle from "../Hooks/useDocumentTitle";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import "./Dashboard.scss";
 import { Standings } from "./Standings/Standings";
@@ -14,6 +15,7 @@ const season = now.getFullYear();
 export const Dashboard = () => {
   const [races, setRaces] = useState<Race[]>();
   const { width } = useWindowDimensions();
+  useDocumentTitle('dashboard')
 
   useEffect(() => {
     getCalendar(season).then((response) => {
@@ -31,7 +33,7 @@ export const Dashboard = () => {
           <UpcomingEvent race={races && races[0]} />
           <Paper>
             <h4 className="standings-title">Standings</h4>
-            <Standings removeSeasonSelector />
+            <Standings removeSeasonSelector removeTitle />
           </Paper>
         </div>
         <div

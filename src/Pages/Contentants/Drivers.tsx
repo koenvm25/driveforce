@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { getDrivers } from "../../Api/endpoints";
 import { SeasonSelector } from "../../Components/SeasonSelector";
 import { Driver } from "../../Domain/standings";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const dateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
@@ -24,6 +25,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 export const Drivers = () => {
   const [drivers, setDrivers] = useState<Driver[]>();
   const [season, setSeason] = useState(new Date().getFullYear());
+  useDocumentTitle('Drivers');
 
   useEffect(() => {
     getDrivers(season).then((response) => {

@@ -23,7 +23,7 @@ export const App = () => {
       <>
         <Route path="/" element={<Dashboard />} />
         <Route path="/standings" element={<Standings />} />
-        <Route path="/calendar/previous-seasons" element={<PreviousSeasons />} />
+        <Route path="/calendar/season-history" element={<PreviousSeasons />} />
         <Route path="/calendar/:season/:round" element={<Weekend />} />
         <Route path="/calendar" element={<CurrentSeason />} />
         <Route path="/penalty-points" element={<PenaltyPoints />} />

@@ -5,16 +5,22 @@ import { SeasonSelector } from "../../Components/SeasonSelector";
 import { Box, Tabs, Tab } from "@mui/material";
 import { Container } from "@mui/system";
 import { TabPanel } from "../../Components/TabPanel";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const currentYear = new Date().getFullYear();
 
 interface Props {
   removeSeasonSelector?: boolean;
+  removeTitle?: boolean;
 }
 
-export const Standings = ({ removeSeasonSelector = false }: Props) => {
+export const Standings = ({
+  removeSeasonSelector = false,
+  removeTitle = false,
+}: Props) => {
   const [value, setValue] = useState(0);
   const [season, setSeason] = useState<number>(currentYear);
+  useDocumentTitle(removeTitle ? "" : "Standings");
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);

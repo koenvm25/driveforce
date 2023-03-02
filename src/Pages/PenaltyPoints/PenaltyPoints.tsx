@@ -17,13 +17,13 @@ import {
   Point,
 } from "../../Api/supabase";
 import { PenaltyPoint } from "../../Components/PenaltyPoints/PenaltyPoint";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 export const PenaltyPoints = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
   const [drivers, setDrivers] = useState<DriverWithPenaltyPoints[]>();
-  // const [filteredDrivers, setFilteredDrivers] =
-  //   useState<DriverWithPenaltyPoints[]>();
   const [filterDrivers, setFilterDrivers] = useState(false);
+  useDocumentTitle('Penalty points')
 
   useEffect(() => {
     getDriverPenaltyPoints(setDrivers);

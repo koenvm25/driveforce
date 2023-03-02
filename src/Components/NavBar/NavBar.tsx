@@ -64,9 +64,9 @@ export const NavBar = () => {
                 Current season
               </MenuItem>
               <MenuItem
-                onClick={() => handleClose("/calendar/previous-seasons")}
+                onClick={() => handleClose("/calendar/season-history")}
               >
-                Privious seasons
+                Season history
               </MenuItem>
             </Menu>
             <Button

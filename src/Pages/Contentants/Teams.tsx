@@ -14,10 +14,12 @@ import { useEffect, useState } from "react";
 import { getTeams } from "../../Api/endpoints";
 import { SeasonSelector } from "../../Components/SeasonSelector";
 import { Constructor } from "../../Domain/standings";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 export const Teams = () => {
   const [teams, setTeams] = useState<Constructor[]>();
   const [season, setSeason] = useState(new Date().getFullYear());
+  useDocumentTitle('Teams')
 
   useEffect(() => {
     getTeams(season).then((response) => {

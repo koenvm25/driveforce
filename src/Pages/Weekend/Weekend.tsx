@@ -6,11 +6,13 @@ import { UpcomingEvent } from "../../Components/Dashboard/UpcomingEvent";
 import { Results } from "../../Components/Results/Results";
 import { WeekendSchedule } from "../../Components/Schedule/WeekendSchedule";
 import { Race } from "../../Domain/calendar";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 import { isDateHistory, isDateInFuture } from "../../Utils/dateTimeHelpers";
 
 export const Weekend = () => {
   const { season, round } = useParams();
   const [race, setRace] = useState<Race>();
+  useDocumentTitle(race ? race.raceName : 'Race')
 
   useEffect(() => {
     if (season && round) {

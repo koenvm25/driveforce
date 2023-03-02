@@ -5,6 +5,7 @@ import { getCalendar, getSeasonResults } from "../../Api/endpoints";
 import { RoundCard } from "../../Components/Schedule/RoundCard";
 import { SeasonSelector } from "../../Components/SeasonSelector";
 import { Race } from "../../Domain/calendar";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 import "./Calendar.scss";
 
 const previousYear = new Date().getFullYear() - 1;
@@ -14,6 +15,7 @@ export const PreviousSeasons = () => {
   const [calendar, setCalendar] = useState<Race[]>();
   const [results, setResults] = useState<Race[]>();
   const navigate = useNavigate();
+  useDocumentTitle('Season history')
 
   useEffect(() => {
     getCalendar(season).then((response) => {

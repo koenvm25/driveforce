@@ -47,11 +47,11 @@ export const NavDrawer = () => {
                 Current season
               </ListItemButton>
               <ListItemButton
-                href="/calendar/previous-seasons"
+                href="/calendar/season-history"
                 className="nav-btn"
                 onClick={() => setOpenDrawer(false)}
               >
-                Previous seasons
+                Season history
               </ListItemButton>
             </List>
           </Collapse>
