@@ -154,21 +154,19 @@ export const WeekendSchedule = ({ race }: Props) => {
                 </>
               ) : (
                 <>
-                  <TableRow>
-                    <TableCell>Qualifying</TableCell>
-                    <TableCell>
-                      {getEventDate(
-                        race.Qualifying.date,
-                        race.Qualifying.time
-                      ).toLocaleDateString(undefined, dateOptions)}
-                    </TableCell>
-                    <TableCell>
-                      {getEventDate(
-                        race.Qualifying.date,
-                        race.Qualifying.time
-                      ).toLocaleTimeString(undefined, timeOptions)}
-                    </TableCell>
-                  </TableRow>
+                  <TableCell>Qualifying</TableCell>
+                  <TableCell>
+                    {getEventDate(
+                      race.Qualifying.date,
+                      race.Qualifying.time
+                    ).toLocaleDateString(undefined, dateOptions)}
+                  </TableCell>
+                  <TableCell>
+                    {getEventDate(
+                      race.Qualifying.date,
+                      race.Qualifying.time
+                    ).toLocaleTimeString(undefined, timeOptions)}
+                  </TableCell>
                 </>
               )}
             </TableRow>
