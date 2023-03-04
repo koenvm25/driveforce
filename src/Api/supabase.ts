@@ -9,6 +9,7 @@ export const getDriverPenaltyPoints = async (
   supabase
     .from("drivers")
     .select("*")
+    .eq("active", true)
     .then((driversResponse) => {
       supabase
         .from("points")
