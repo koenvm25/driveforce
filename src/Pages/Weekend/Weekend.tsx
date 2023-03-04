@@ -12,7 +12,7 @@ import { isDateHistory, isDateInFuture } from "../../Utils/dateTimeHelpers";
 export const Weekend = () => {
   const { season, round } = useParams();
   const [race, setRace] = useState<Race>();
-  useDocumentTitle(race ? race.raceName : 'Race')
+  useDocumentTitle(race ? race.raceName : "Race");
 
   useEffect(() => {
     if (season && round) {
@@ -27,17 +27,17 @@ export const Weekend = () => {
     <Container className="app-container">
       {!!race ? (
         <>
-          {(isDateHistory(
-            new Date(`${race.Qualifying?.date}T${race.Qualifying?.time}`)
-          ) ||
-            isDateHistory(new Date(`${race.date}T${race.time}`))) && (
-            <Results race={race} />
-          )}
           {isDateInFuture(new Date(`${race.date}T${race.time}`)) && (
             <>
               <UpcomingEvent race={race} />
               <WeekendSchedule race={race} />
             </>
+          )}
+          {(isDateHistory(
+            new Date(`${race.Qualifying?.date}T${race.Qualifying?.time}`)
+          ) ||
+            isDateHistory(new Date(`${race.date}T${race.time}`))) && (
+            <Results race={race} />
           )}
         </>
       ) : (
