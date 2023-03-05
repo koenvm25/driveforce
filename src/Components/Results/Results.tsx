@@ -13,6 +13,14 @@ interface Props {
 export const Results = ({ race }: Props) => {
   const [value, setValue] = useState(0);
 
+  const isRaceHistory = isDateHistory(new Date(`${race.date}T${race.time}`));
+  const isSprintHistory = isDateHistory(
+    new Date(`${race.Sprint?.date}T${race.Sprint?.time}`)
+  );
+  const isQualifyingHistory = isDateHistory(
+    new Date(`${race.Qualifying?.date}T${race.Qualifying?.time}`)
+  );
+
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -33,24 +41,18 @@ export const Results = ({ race }: Props) => {
           aria-label="basic tabs example"
           indicatorColor="secondary"
         >
-          {isDateHistory(
-            new Date(`${race.Qualifying?.date}T${race.Qualifying?.time}`)
-          ) && <Tab label="Qualifying" {...a11yProps(0)} />}
-          {isDateHistory(
-            new Date(`${race.Sprint?.date}T${race.Sprint?.time}`)
-          ) && <Tab label="Sprint" {...a11yProps(1)} />}
-          {isDateHistory(new Date(`${race.date}T${race.time}`)) && (
-            <Tab label="Race" {...a11yProps(2)} />
-          )}
+          {isRaceHistory && <Tab label="Race" {...a11yProps(0)} />}
+          {isSprintHistory && <Tab label="Sprint" {...a11yProps(1)} />}
+          {isQualifyingHistory && <Tab label="Qualifying" {...a11yProps(2)} />}
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={isSprintHistory ? isRaceHistory ? 2 : 1 : isRaceHistory ? 1 : 0}>
         <QualifyingResults season={race.season} round={race.round} />
       </TabPanel>
-      <TabPanel value={value} index={!race.Sprint ? 2 : 1}>
+      <TabPanel value={value} index={isRaceHistory ? 1 : 0}>
         <RaceResults season={race.season} round={race.round} isSprint />
       </TabPanel>
-      <TabPanel value={value} index={!race.Sprint ? 1 : 2}>
+      <TabPanel value={value} index={0}>
         <RaceResults season={race.season} round={race.round} />
       </TabPanel>
     </Container>
