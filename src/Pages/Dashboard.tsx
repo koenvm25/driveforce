@@ -7,7 +7,7 @@ import { Race } from "../Domain/calendar";
 import useDocumentTitle from "../Hooks/useDocumentTitle";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import "./Dashboard.scss";
-import { Standings } from "./Standings/Standings";
+import { Standings } from "../Components/Standings/Standings";
 
 const now = new Date();
 const season = now.getFullYear();
@@ -15,7 +15,7 @@ const season = now.getFullYear();
 export const Dashboard = () => {
   const [races, setRaces] = useState<Race[]>();
   const { width } = useWindowDimensions();
-  useDocumentTitle('dashboard')
+  useDocumentTitle("dashboard");
 
   useEffect(() => {
     getCalendar(season).then((response) => {
@@ -29,12 +29,9 @@ export const Dashboard = () => {
   return (
     <Container className="app-container" maxWidth="xl">
       <div className="dashboard-container">
-        <div className="dashboard-upcoming-container" >
+        <div className="dashboard-upcoming-container">
           <UpcomingEvent race={races ? races[0] : undefined} />
-          <Paper>
-            <h4 className="standings-title">Standings</h4>
-            <Standings removeSeasonSelector removeTitle />
-          </Paper>
+          <Standings removeSeasonSelector removeTitle />
         </div>
         <div
           style={
