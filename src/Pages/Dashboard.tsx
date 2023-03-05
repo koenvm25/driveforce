@@ -20,7 +20,7 @@ export const Dashboard = () => {
   useEffect(() => {
     getCalendar(season).then((response) => {
       const raceTable = response.data.MRData.RaceTable.Races.filter(
-        (race: Race) => new Date(race.date) > now
+        (race: Race) => new Date(`${race.date}T${race.time}`) > now
       );
       setRaces(raceTable);
     });
@@ -30,7 +30,7 @@ export const Dashboard = () => {
     <Container className="app-container" maxWidth="xl">
       <div className="dashboard-container">
         <div className="dashboard-upcoming-container" >
-          <UpcomingEvent race={races && races[0]} />
+          <UpcomingEvent race={races ? races[0] : undefined} />
           <Paper>
             <h4 className="standings-title">Standings</h4>
             <Standings removeSeasonSelector removeTitle />
