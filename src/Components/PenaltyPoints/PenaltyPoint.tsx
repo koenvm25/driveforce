@@ -29,7 +29,7 @@ export const PenaltyPoint = ({ points }: Props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {points.map((point) => (
+            {points.sort((a, b) => a.expiresAt.getTime() - b.expiresAt.getTime()).map((point) => (
               <TableRow key={point.id}>
                 <TableCell>{point.race}</TableCell>
                 <TableCell sx={{ display: { xxs: "none", xs: "none", sm: "table-cell" } }}>
