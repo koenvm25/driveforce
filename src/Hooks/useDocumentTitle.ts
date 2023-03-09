@@ -1,19 +1,24 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect } from "react";
 
-const titlePrefix = 'DriveForce | '
+const titlePrefix = "DriveForce";
 
 function useDocumentTitle(title: string, prevailOnUnmount = false) {
   const defaultTitle = useRef(document.title);
 
   useEffect(() => {
-    document.title = titlePrefix + title;
+    if (title) {
+      document.title = titlePrefix + " | " + title;
+    }
   }, [title]);
 
-  useEffect(() => () => {
-    if (!prevailOnUnmount) {
-      document.title = defaultTitle.current;
-    }
-  }, [])
+  useEffect(
+    () => () => {
+      if (!prevailOnUnmount) {
+        document.title = defaultTitle.current;
+      }
+    },
+    [prevailOnUnmount]
+  );
 }
 
-export default useDocumentTitle
+export default useDocumentTitle;

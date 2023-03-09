@@ -58,7 +58,7 @@ export const RaceResults = ({ season, round, isSprint = false }: Props) => {
             )
           );
         });
-  }, [season, round]);
+  }, [season, round, isSprint]);
 
   return (
     <TableContainer>
