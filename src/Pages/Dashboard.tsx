@@ -1,4 +1,4 @@
-import { Container, Paper } from "@mui/material";
+import { Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import { getCalendar } from "../Api/endpoints";
@@ -8,6 +8,7 @@ import useDocumentTitle from "../Hooks/useDocumentTitle";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import "./Dashboard.scss";
 import { Standings } from "../Components/Standings/Standings";
+import { useNavigate } from "react-router-dom";
 
 const now = new Date();
 const season = now.getFullYear();
@@ -15,6 +16,7 @@ const season = now.getFullYear();
 export const Dashboard = () => {
   const [races, setRaces] = useState<Race[]>();
   const { width } = useWindowDimensions();
+  const navigate = useNavigate();
   useDocumentTitle("dashboard");
 
   useEffect(() => {
@@ -30,7 +32,12 @@ export const Dashboard = () => {
     <Container className="app-container" maxWidth="xl">
       <div className="dashboard-container">
         <div className="dashboard-upcoming-container">
-          <UpcomingEvent race={races ? races[0] : undefined} />
+          {!!races && (
+            <UpcomingEvent
+              race={races[0]}
+              onClick={() => navigate(`/calendar/${season}/${races[0].round}`)}
+            />
+          )}
           <Standings removeSeasonSelector removeTitle />
         </div>
         <div

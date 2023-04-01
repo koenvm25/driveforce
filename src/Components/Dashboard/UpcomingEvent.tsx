@@ -4,15 +4,16 @@ import {
   isDateMoreThanMonthInFuture,
 } from "../../Utils/dateTimeHelpers";
 import { capitalizeFirstLetter } from "../../Utils/stringHelpers";
-import FlipCountDown from "@rumess/react-flip-countdown";
 import useWindowDimensions from "../../Hooks/useWindowDimensions";
 import { Box, Divider, LinearProgress } from "@mui/material";
+import { CountdownTimer } from "../Countdown/CountdownTimer";
 
 interface Props {
   race?: Race;
+  onClick?: () => void;
 }
 
-export const UpcomingEvent = ({ race }: Props) => {
+export const UpcomingEvent = ({ race, onClick }: Props) => {
   const { width } = useWindowDimensions();
 
   const nextEvent = race ? getNextEvent(race) : undefined;
@@ -27,7 +28,11 @@ export const UpcomingEvent = ({ race }: Props) => {
   return (
     <div className="upcoming-event-container">
       {race && nextEvent?.name ? (
-        <div className="upcoming-event">
+        <div
+          className="upcoming-event"
+          onClick={onClick}
+          style={onClick && { cursor: "pointer" }}
+        >
           <h2 className="upcoming-event-race-name">{race?.raceName}</h2>
           <div className="upcoming-event-next-event">
             <div className="upcoming-event-title-container">
@@ -47,23 +52,13 @@ export const UpcomingEvent = ({ race }: Props) => {
                 </>
               )}
             </div>
-            <Divider orientation="vertical" flexItem style={{borderLeftWidth: '2px', marginRight: '3px'}}/>
-            <FlipCountDown
-              endAt={`${nextEvent.date} ${nextEvent.time}`}
-              hideYear
-              hideMonth={
-                !isDateMoreThanMonthInFuture(
-                  new Date(`${nextEvent.date}T${nextEvent.time}`)
-                )
-              }
-              hideSecond
-              endAtZero
-              dayTitle="Days"
-              hourTitle="Hours"
-              minuteTitle="Minutes"
-              secondTitle="Seconds"
-              theme="light"
-              size={width < 768 ? "small" : "medium"}
+            <Divider
+              orientation="vertical"
+              flexItem
+              style={{ borderLeftWidth: "2px", marginRight: "3px" }}
+            />
+            <CountdownTimer
+              targetDate={new Date(`${nextEvent.date}T${nextEvent.time}`)}
             />
           </div>
         </div>
