@@ -1,3 +1,11 @@
+import CalendarIcon from "@mui/icons-material/CalendarMonth";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import GroupsIcon from "@mui/icons-material/Groups";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import MenuIcon from "@mui/icons-material/Menu";
+import SportsMotorsportsIcon from "@mui/icons-material/SportsMotorsports";
 import {
   Collapse,
   Drawer,
@@ -7,15 +15,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import CalendarIcon from "@mui/icons-material/CalendarMonth";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import LeaderboardIcon from "@mui/icons-material/Leaderboard";
-import TimerIcon from "@mui/icons-material/Timer";
-import SportsMotorsportsIcon from "@mui/icons-material/SportsMotorsports";
-import GroupsIcon from "@mui/icons-material/Groups";
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { useState } from "react";
 
 export const NavDrawer = () => {
@@ -24,7 +23,11 @@ export const NavDrawer = () => {
 
   return (
     <>
-      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)} anchor='top'>
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        anchor="top"
+      >
         <List>
           <ListItemButton onClick={() => setOpenCollapsable(!openCollapsable)}>
             <ListItemIcon>

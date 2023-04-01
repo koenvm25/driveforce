@@ -1,5 +1,5 @@
 import { Box, Container, Tab, Tabs } from "@mui/material";
-import { ReactNode, SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Race } from "../../Domain/calendar";
 import { isDateHistory } from "../../Utils/dateTimeHelpers";
 import { TabPanel } from "../TabPanel";
@@ -46,7 +46,12 @@ export const Results = ({ race }: Props) => {
           {isQualifyingHistory && <Tab label="Qualifying" {...a11yProps(2)} />}
         </Tabs>
       </Box>
-      <TabPanel value={value} index={isSprintHistory ? isRaceHistory ? 2 : 1 : isRaceHistory ? 1 : 0}>
+      <TabPanel
+        value={value}
+        index={
+          isSprintHistory ? (isRaceHistory ? 2 : 1) : isRaceHistory ? 1 : 0
+        }
+      >
         <QualifyingResults season={race.season} round={race.round} />
       </TabPanel>
       <TabPanel value={value} index={isRaceHistory ? 1 : 0}>

@@ -45,7 +45,6 @@ export const convertToPeriodString = (endDate: Date): string => {
 };
 
 export const getNextEvent = (nextRace: Race): Event => {
-  const now = new Date();
   if (nextRace.FirstPractice) {
     const date = new Date(
       `${nextRace.FirstPractice.date}T${nextRace.FirstPractice.time}`

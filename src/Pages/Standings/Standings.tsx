@@ -1,9 +1,9 @@
-import { ReactNode, SyntheticEvent, useState } from "react";
-import { DriverStandings } from "../../Components/Standings/DriverStandings";
-import { ConstructorStandings } from "../../Components/Standings/ContructorStandings";
-import { SeasonSelector } from "../../Components/SeasonSelector";
-import { Box, Tabs, Tab } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import { Container } from "@mui/system";
+import { SyntheticEvent, useState } from "react";
+import { SeasonSelector } from "../../Components/SeasonSelector";
+import { ConstructorStandings } from "../../Components/Standings/ContructorStandings";
+import { DriverStandings } from "../../Components/Standings/DriverStandings";
 import { TabPanel } from "../../Components/TabPanel";
 import useDocumentTitle from "../../Hooks/useDocumentTitle";
 

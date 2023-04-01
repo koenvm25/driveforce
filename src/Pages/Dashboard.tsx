@@ -1,23 +1,23 @@
 import { Container } from "@mui/material";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TwitterTimelineEmbed } from "react-twitter-embed";
 import { getCalendar } from "../Api/endpoints";
 import { UpcomingEvent } from "../Components/Dashboard/UpcomingEvent";
+import { Standings } from "../Components/Standings/Standings";
 import { Race } from "../Domain/calendar";
 import useDocumentTitle from "../Hooks/useDocumentTitle";
 import useWindowDimensions from "../Hooks/useWindowDimensions";
 import "./Dashboard.scss";
-import { Standings } from "../Components/Standings/Standings";
-import { useNavigate } from "react-router-dom";
 
 const now = new Date();
 const season = now.getFullYear();
 
 export const Dashboard = () => {
   const [races, setRaces] = useState<Race[]>();
-  const { width } = useWindowDimensions();
   const navigate = useNavigate();
   useDocumentTitle("dashboard");
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     getCalendar(season).then((response) => {
@@ -43,14 +43,14 @@ export const Dashboard = () => {
         <div
           style={
             width > 550
-              ? { height: 1500, width: 500 }
+              ? { height: "100%", width: 500 }
               : { height: 500, width: width - 30 }
           }
         >
           <TwitterTimelineEmbed
             options={
               width > 550
-                ? { height: 1500, width: 500 }
+                ? { height: height - 110, width: 500 }
                 : { height: 500, width: width - 20 }
             }
             sourceType="url"
