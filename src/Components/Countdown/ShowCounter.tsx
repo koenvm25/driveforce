@@ -18,7 +18,7 @@ export const ShowCounter = ({ days, hours, minutes, seconds }: Props) => {
           width > 550 ? "countdown-container" : "countdown-container-small"
         }
       >
-        {width > 550 && (
+        {(days > 0 || width > 550) && (
           <>
             <DateTimeDisplay value={days} type={"Days"} />
             <p>:</p>
