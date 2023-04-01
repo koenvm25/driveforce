@@ -1,8 +1,5 @@
 import { events, Race } from "../../Domain/calendar";
-import {
-  getNextEvent,
-  isDateMoreThanMonthInFuture,
-} from "../../Utils/dateTimeHelpers";
+import { getNextEvent } from "../../Utils/dateTimeHelpers";
 import { capitalizeFirstLetter } from "../../Utils/stringHelpers";
 import useWindowDimensions from "../../Hooks/useWindowDimensions";
 import { Box, Divider, LinearProgress } from "@mui/material";
@@ -18,13 +15,6 @@ export const UpcomingEvent = ({ race, onClick }: Props) => {
 
   const nextEvent = race ? getNextEvent(race) : undefined;
 
-  if (nextEvent) {
-    console.log(
-      isDateMoreThanMonthInFuture(
-        new Date(`${nextEvent.date}T${nextEvent.time}`)
-      )
-    );
-  }
   return (
     <div className="upcoming-event-container">
       {race && nextEvent?.name ? (

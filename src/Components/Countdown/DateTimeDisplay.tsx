@@ -1,4 +1,5 @@
 import React from "react";
+import useWindowDimensions from "../../Hooks/useWindowDimensions";
 
 interface Props {
   value: number;
@@ -6,8 +7,10 @@ interface Props {
 }
 
 const DateTimeDisplay = ({ value, type }: Props) => {
+  const {width} = useWindowDimensions();
+
   return (
-    <div className="countdown">
+    <div className={width > 550 ? "countdown" : "countdown-small"}>
       <p>{value}</p>
       <span>{type}</span>
     </div>

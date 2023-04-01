@@ -1,3 +1,4 @@
+import useWindowDimensions from "../../Hooks/useWindowDimensions";
 import DateTimeDisplay from "./DateTimeDisplay";
 
 interface Props {
@@ -8,11 +9,21 @@ interface Props {
 }
 
 export const ShowCounter = ({ days, hours, minutes, seconds }: Props) => {
+  const { width } = useWindowDimensions();
+
   return (
     <div className="show-counter">
-      <div className="countdown-container">
-        <DateTimeDisplay value={days} type={"Days"} />
-        <p>:</p>
+      <div
+        className={
+          width > 550 ? "countdown-container" : "countdown-container-small"
+        }
+      >
+        {width > 550 && (
+          <>
+            <DateTimeDisplay value={days} type={"Days"} />
+            <p>:</p>
+          </>
+        )}
         <DateTimeDisplay value={hours} type={"Hours"} />
         <p>:</p>
         <DateTimeDisplay value={minutes} type={"Mins"} />
