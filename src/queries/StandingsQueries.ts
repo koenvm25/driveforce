@@ -1,10 +1,10 @@
-import { getConstructorStandings, getDriverStandings } from "@/api/endpoints";
 import { ConstructorStandings } from "@/types/dto/ConstructorStandingsDto";
 import { DriverStandings } from "@/types/dto/DriverStandingsDto";
 import { ApiResult } from "@/types/dto/ErgastDto";
 import { toMillis } from "@/helpers/dateTimeHelpers";
 import { AxiosResponse } from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getConstructorStandings, getDriverStandings } from "../test/endpoints";
 
 export const useDriversStandingsQuery = (season: string) => {
   return useQuery<AxiosResponse<ApiResult<DriverStandings>>>({
