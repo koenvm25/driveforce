@@ -1,44 +1,66 @@
-import { ThemeProvider } from "@mui/material";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
-import "./App.scss";
-import { NavBar } from "./Components/NavBar/NavBar";
-import { Dashboard } from "./Pages/Dashboard";
-import { PenaltyPoints } from "./Pages/PenaltyPoints/PenaltyPoints";
-import { PreviousSeasons } from "./Pages/Schedule/PreviousSeasons";
-import { CurrentSeason } from "./Pages/Schedule/CurrentSeason";
-import { Weekend } from "./Pages/Weekend/Weekend";
-import { Standings } from "./Pages/Standings/Standings";
-import theme from "./Assets/theme";
-import { Drivers } from "./Pages/Contentants/Drivers";
-import { Teams } from "./Pages/Contentants/Teams";
+import "@mantine/core/styles.css";
 
-export const App = () => {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/standings" element={<Standings />} />
-        <Route path="/calendar/season-history" element={<PreviousSeasons />} />
-        <Route path="/calendar/:season/:round" element={<Weekend />} />
-        <Route path="/calendar" element={<CurrentSeason />} />
-        <Route path="/penalty-points" element={<PenaltyPoints />} />
-        <Route path="/drivers" element={<Drivers />} />
-        <Route path="/teams" element={<Teams />} />
-      </>
-    )
-  );
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { Button, MantineProvider, createTheme } from "@mantine/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout/Layout";
+import { Standings } from "./screens/Standings/Standings";
+
+library.add(fas);
+
+const theme = createTheme({
+  colors: {
+    "ocean-blue": [
+      "#7AD1DD",
+      "#5FCCDB",
+      "#44CADC",
+      "#2AC9DE",
+      "#1AC2D9",
+      "#11B7CD",
+      "#09ADC3",
+      "#0E99AC",
+      "#128797",
+      "#147885",
+    ],
+    "bright-pink": [
+      "#F0BBDD",
+      "#ED9BCF",
+      "#EC7CC3",
+      "#ED5DB8",
+      "#F13EAF",
+      "#F71FA7",
+      "#FF00A1",
+      "#E00890",
+      "#C50E82",
+      "#AD1374",
+    ],
+  },
+});
+
+function App() {
+  const queryClient = new QueryClient();
 
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <NavBar />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </div>
+    <MantineProvider defaultColorScheme="light" theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Button>Dashboard</Button>} />
+              <Route path="/calendar" element={<Button>Calendar</Button>} />
+              <Route path="/standings" element={<Standings />} />
+              <Route
+                path="/penalty-points"
+                element={<Button>Penalty points</Button>}
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </MantineProvider>
   );
-};
+}
+
+export default App;
