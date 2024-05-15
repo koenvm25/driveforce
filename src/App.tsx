@@ -43,7 +43,7 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
-    <MantineProvider defaultColorScheme="light" theme={theme}>
+    <MantineProvider defaultColorScheme="auto" theme={theme}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>

@@ -4,7 +4,7 @@ import { ApiResult } from "@/types/dto/ErgastDto";
 import { toMillis } from "@/helpers/dateTimeHelpers";
 import { AxiosResponse } from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { getConstructorStandings, getDriverStandings } from "../test/endpoints";
+import { getConstructorStandings, getDriverStandings } from "../api/endpoints";
 
 export const useDriversStandingsQuery = (season: string) => {
   return useQuery<AxiosResponse<ApiResult<DriverStandings>>>({
