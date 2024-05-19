@@ -2,13 +2,14 @@ import "@mantine/core/styles.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
 import { Button, MantineProvider, createTheme } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { Standings } from "./screens/Standings/Standings";
 
-library.add(fas);
+library.add(fas, far);
 
 const theme = createTheme({
   colors: {

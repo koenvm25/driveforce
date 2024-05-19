@@ -21,14 +21,7 @@ export function Standings() {
 
   return (
     <Tabs defaultValue="drivers" classNames={classes}>
-      <Box
-        style={{
-          flexDirection: "row",
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-        }}
-      >
+      <Box className={classes.tabContainer}>
         <Tabs.List>
           <Tabs.Tab value="drivers">Drivers</Tabs.Tab>
           <Tabs.Tab value="constructors">Constructors</Tabs.Tab>

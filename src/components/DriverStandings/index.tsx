@@ -30,9 +30,11 @@ export const DriverStandings: React.FC<Props> = ({ season }) => {
         <Table.Tr>
           <Table.Th>Position</Table.Th>
           <Table.Th>Name</Table.Th>
-          <Table.Th className="hidden md:table-cell">Nationality</Table.Th>
+          <Table.Th visibleFrom="sm">Nationality</Table.Th>
           <Table.Th>Points</Table.Th>
-          <Table.Th className="hidden sm:table-cell">Team</Table.Th>
+          <Table.Th visibleFrom="xs" className="hidden sm:table-cell">
+            Team
+          </Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
@@ -42,11 +44,11 @@ export const DriverStandings: React.FC<Props> = ({ season }) => {
             <Table.Td>
               {driver.Driver.givenName} {driver.Driver.familyName}
             </Table.Td>
-            <Table.Td className="hidden md:table-cell">
+            <Table.Td visibleFrom="sm" className="hidden md:table-cell">
               {driver.Driver.nationality}
             </Table.Td>
             <Table.Td>{driver.points}</Table.Td>
-            <Table.Td className="hidden sm:table-cell">
+            <Table.Td visibleFrom="xs" className="hidden sm:table-cell">
               {driver.Constructors[0].name}
             </Table.Td>
           </Table.Tr>

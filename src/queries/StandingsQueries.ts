@@ -12,6 +12,7 @@ export const useDriversStandingsQuery = (season: string) => {
     queryFn: async () => getDriverStandings(season),
     gcTime: toMillis({ minute: 90 }),
     staleTime: toMillis({ minute: 60 }),
+    retry: false,
   });
 };
 
