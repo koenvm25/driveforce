@@ -1,0 +1,53 @@
+.root {
+  flex: 1;
+  padding-right: 5%;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+
+  @media (min-width: 48em) {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+}
+
+.selector {
+  display: flex;
+  align-items: center;
+}
+
+.podium {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.one {
+  flex: 1;
+  margin: 5px;
+  padding: 2px;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+  background-color: gold;
+}
+.two {
+  flex: 1;
+  margin: 5px;
+  padding: 2px;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+  background-color: silver;
+}
+.three {
+  flex: 1;
+  margin: 5px;
+  padding: 2px;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+  background-color: #cd7f32;
+}

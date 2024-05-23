@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { Standings } from "./screens/Standings/Standings";
+import { Calender } from "./screens/Calender/Calendar";
 
 library.add(fas, far);
 
@@ -50,7 +51,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Button>Dashboard</Button>} />
-              <Route path="/calendar" element={<Button>Calendar</Button>} />
+              <Route path="/calendar" element={<Calender />} />
               <Route path="/standings" element={<Standings />} />
               <Route
                 path="/penalty-points"

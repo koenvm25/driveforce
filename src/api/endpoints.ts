@@ -12,7 +12,7 @@ export const getConstructorStandings = (season: string) =>
   get(`/${season}/constructorStandings.json`);
 
 // Schedule
-export const getCalendar = (season: number): ErgastResponse<RaceSchedule> =>
+export const getCalendar = (season: string): ErgastResponse<RaceSchedule> =>
   get(`${season}.json`);
 export const getRace = (season: string, round: string) =>
   get(`/${season}/${round}.json`);
@@ -23,7 +23,7 @@ export const getCurrentCalendar = (): ErgastResponse<RaceSchedule> =>
 export const getCurrentSeasonResults = (): ErgastResponse<RaceResultsDto> =>
   get(`/current/results.json?limit=1000`);
 export const getSeasonResults = (
-  season: number,
+  season: string,
   limit: number = 1000
 ): ErgastResponse<RaceResultsDto> =>
   get(`/${season}/results.json?limit=${limit}`);
