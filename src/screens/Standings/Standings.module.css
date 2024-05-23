@@ -2,6 +2,9 @@
   flex: 1;
   padding-right: 5%;
   padding-left: 5%;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
 
   @media (min-width: 48em) {
     padding-right: 10%;

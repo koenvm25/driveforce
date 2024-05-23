@@ -1,10 +1,18 @@
 import { getCountyCode } from "@/domain/Country";
-import classes from "./Calender.module.css";
 import { useSeasonScheduleQuery } from "@/queries/RaceScheduleQueries";
 import { useSeasonResultsQuery } from "@/queries/ResultQueries";
-import { Box, Card, Grid, Select, Image, Text, Loader } from "@mantine/core";
+import {
+  Box,
+  Card,
+  Image,
+  Loader,
+  Select,
+  SimpleGrid,
+  Text,
+} from "@mantine/core";
 import { DateTime } from "luxon";
 import React, { useState } from "react";
+import classes from "./Calender.module.css";
 
 export const Calender: React.FC = () => {
   const [season, setSeason] = useState<string>(String(DateTime.now().year));
@@ -32,20 +40,21 @@ export const Calender: React.FC = () => {
       </Box>
       {isLoadingRaceTable && <Loader />}
       {raceTable && !isLoadingRaceTable && (
-        <Grid>
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, lg: 3 }}
+          spacing={{ base: 10, sm: "xl" }}
+          verticalSpacing={{ base: "md", sm: "xl" }}
+        >
           {raceTable.races.map((race) => {
             const countryCode = getCountyCode(race.circuit.location.country);
             return (
-              <Grid.Col
-                key={race.round}
-                span={{ base: 12, lg: 4, xs: 6 }}
-                h="auto"
-              >
+              <Box key={race.round} h="auto">
                 <Card shadow="sm" padding="md">
                   <Card.Section>
                     <Image
                       src={`https://flagcdn.com/${countryCode?.toLowerCase()}.svg`}
-                      h={250}
+                      h={200}
+                      fit="contain"
                       alt={`flag of ${race.circuit.location.country}`}
                     />
                   </Card.Section>
@@ -81,10 +90,10 @@ export const Calender: React.FC = () => {
                       })}
                   </Box>
                 </Card>
-              </Grid.Col>
+              </Box>
             );
           })}
-        </Grid>
+        </SimpleGrid>
       )}
     </Box>
   );
