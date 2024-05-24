@@ -49,7 +49,7 @@ export const Calender: React.FC = () => {
             const countryCode = getCountyCode(race.circuit.location.country);
             return (
               <Box key={race.round} h="auto">
-                <Card shadow="sm" padding="md">
+                <Card shadow="md" padding="md">
                   <Card.Section>
                     <Image
                       src={`https://flagcdn.com/${countryCode?.toLowerCase()}.svg`}

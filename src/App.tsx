@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { Standings } from "./screens/Standings/Standings";
 import { Calender } from "./screens/Calender/Calendar";
+import { Dashboard } from "./screens/Dashboard/Dashboard";
 
 library.add(fas, far);
 
@@ -50,7 +51,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Button>Dashboard</Button>} />
+              <Route index element={<Dashboard />} />
               <Route path="/calendar" element={<Calender />} />
               <Route path="/standings" element={<Standings />} />
               <Route
