@@ -1,0 +1,29 @@
+.container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  @media (min-width: 48em) {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+.race {
+  display: flex;
+  flex-direction: column;
+}
+
+.nextEvent {
+  border-radius: 1rem;
+  background-color: var(--mantine-color-bright-pink-9);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

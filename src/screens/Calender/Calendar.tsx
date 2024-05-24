@@ -13,8 +13,10 @@ import {
 import { DateTime } from "luxon";
 import React, { useState } from "react";
 import classes from "./Calender.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const Calender: React.FC = () => {
+  const navigate = useNavigate();
   const [season, setSeason] = useState<string>(String(DateTime.now().year));
 
   const { data: raceTable, isLoading: isLoadingRaceTable } =
@@ -48,7 +50,11 @@ export const Calender: React.FC = () => {
           {raceTable.races.map((race) => {
             const countryCode = getCountyCode(race.circuit.location.country);
             return (
-              <Box key={race.round} h="auto">
+              <Box
+                key={race.round}
+                h="auto"
+                onClick={() => navigate(`/calendar/${race.season}/${race.round}`)}
+              >
                 <Card shadow="md" padding="md">
                   <Card.Section>
                     <Image

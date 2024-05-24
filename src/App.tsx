@@ -1,4 +1,5 @@
 import "@mantine/core/styles.css";
+import 'mantine-datatable/styles.css';
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -10,10 +11,12 @@ import { Layout } from "./components/Layout/Layout";
 import { Standings } from "./screens/Standings/Standings";
 import { Calender } from "./screens/Calender/Calendar";
 import { Dashboard } from "./screens/Dashboard/Dashboard";
+import { Round } from "./screens/Calender/Round/Round";
 
 library.add(fas, far);
 
 const theme = createTheme({
+  primaryColor: 'ocean-blue',
   colors: {
     "ocean-blue": [
       "#7AD1DD",
@@ -53,6 +56,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Dashboard />} />
               <Route path="/calendar" element={<Calender />} />
+              <Route path="/calendar/:season/:round" element={<Round />} />
               <Route path="/standings" element={<Standings />} />
               <Route
                 path="/penalty-points"
