@@ -67,7 +67,12 @@ export function Header() {
               {links.map((link) => (
                 <Menu.Item
                   rightSection={
-                    link.icon ? <FontAwesomeIcon icon={link.icon} /> : undefined
+                    link.icon ? (
+                      <FontAwesomeIcon
+                        icon={link.icon}
+                        style={{ width: "rem(14)", height: "rem(14)" }}
+                      />
+                    ) : undefined
                   }
                 >
                   <Link {...link} />
@@ -80,12 +85,17 @@ export function Header() {
                 onClick={toggleColorScheme}
                 rightSection={
                   colorScheme === "dark" ? (
-                    <FontAwesomeIcon icon={["fas", "sun"]} />
+                    <FontAwesomeIcon
+                      icon={["fas", "sun"]}
+                      style={{ width: "rem(14)", height: "rem(14)" }}
+                    />
                   ) : (
-                    <FontAwesomeIcon icon={["fas", "moon"]} />
+                    <FontAwesomeIcon
+                      icon={["fas", "moon"]}
+                      style={{ width: "rem(14)", height: "rem(14)" }}
+                    />
                   )
                 }
-                style={{ alignItems: "flex-end", display: "flex", flex: 1 }}
               >
                 {colorScheme === "dark" ? "Light Mode" : "Dark Mode"}
               </Menu.Item>

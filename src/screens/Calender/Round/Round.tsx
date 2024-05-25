@@ -77,7 +77,13 @@ const EventDisplay: React.FC<{ event: Event }> = ({ event }) => {
         <Title order={2}>{event.dateTime.day}</Title>
         <Title order={4}>{event.dateTime.monthShort?.toUpperCase()}</Title>
       </Box>
-      <Divider orientation="vertical" mr="xl" ml="xl" size="md" />
+      <Divider
+        orientation="vertical"
+        mr="lg"
+        ml="lg"
+        size="md"
+        color="light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-9))"
+      />
       <Box className={classes.event}>
         <Title order={1}>{event.name}</Title>
         <Text size="xl">{event.dateTime.toFormat("HH:mm")}</Text>
