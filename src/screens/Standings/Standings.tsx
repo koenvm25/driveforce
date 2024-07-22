@@ -20,7 +20,7 @@ export function Standings() {
   });
 
   return (
-    <Tabs defaultValue="drivers" classNames={classes}>
+    <Tabs variant="pills" defaultValue="drivers" classNames={classes}>
       <Box className={classes.tabContainer}>
         <Tabs.List>
           <Tabs.Tab value="drivers">Drivers</Tabs.Tab>
