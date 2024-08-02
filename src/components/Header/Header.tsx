@@ -10,10 +10,19 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./Header.module.css";
+import { NavLink } from "react-router-dom";
 
 const links: { link: string; label: string; icon?: IconProp }[] = [
-  { link: "/calendar", label: "Calendar", icon: ["far", "calendar"] },
-  { link: "/standings", label: "Standings", icon: ["fas", "ranking-star"] },
+  {
+    link: `/calendar/${new Date().getFullYear()}`,
+    label: "Calendar",
+    icon: ["far", "calendar"],
+  },
+  {
+    link: `/standings${new Date().getFullYear()}`,
+    label: "Standings",
+    icon: ["fas", "ranking-star"],
+  },
   { link: "/penalty-points", label: "Penalty points" },
 ];
 
@@ -22,14 +31,14 @@ export function Header() {
   const [opened, { toggle }] = useDisclosure(false);
 
   const Link: React.FC<{ label: string; link: string }> = ({ label, link }) => (
-    <a
-      key={label}
-      href={link}
+    <NavLink
+      key={link}
+      to={link}
       className={classes.link}
       data-active={link === window.location.pathname || undefined}
     >
       {label}
-    </a>
+    </NavLink>
   );
 
   return (
@@ -74,6 +83,7 @@ export function Header() {
                       />
                     ) : undefined
                   }
+                  key={link.link}
                 >
                   <Link {...link} />
                 </Menu.Item>

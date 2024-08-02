@@ -1,4 +1,4 @@
-import { getDuration } from "@/helpers/dateTimeHelpers";
+import { getDuration } from "@/utils/dateTimeHelpers";
 import { DateTime, Duration } from "luxon";
 import { useEffect, useState } from "react";
 

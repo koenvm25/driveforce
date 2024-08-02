@@ -1,5 +1,5 @@
 import { NextEventBanner } from "@/components/NextEvent/NextEventBanner";
-import { getNextEvent } from "@/helpers/scheduleHelpers";
+import { getNextEvent } from "@/utils/scheduleHelpers";
 import { useCurrentSeasonScheduleQuery } from "@/queries/RaceScheduleQueries";
 import { useMemo } from "react";
 

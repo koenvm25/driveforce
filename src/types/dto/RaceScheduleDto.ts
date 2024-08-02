@@ -19,11 +19,11 @@ export interface RacesEntity {
   Circuit: Circuit;
   date: string;
   time: string;
-  FirstPractice: Event;
-  SecondPractice: Event;
-  ThirdPractice?: Event;
-  Qualifying: Event;
-  Sprint?: Event;
+  FirstPractice?: EventDto;
+  SecondPractice?: EventDto;
+  ThirdPractice?: EventDto;
+  Qualifying?: EventDto;
+  Sprint?: EventDto;
 }
 export interface Circuit {
   circuitId: string;
@@ -37,7 +37,7 @@ export interface Location {
   locality: string;
   country: string;
 }
-export interface Event {
+export interface EventDto {
   date: string;
   time: string;
 }

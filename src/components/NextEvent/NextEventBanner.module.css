@@ -20,7 +20,7 @@
 
 .nextEvent {
   border-radius: 1rem;
-  background-color: light-dark(var(--mantine-color-bright-pink-5), var(--mantine-color-bright-pink-9));
+  background-color: light-dark(var(--mantine-color-pink-5), var(--mantine-color-pink-9));
   padding: 1rem;
   display: flex;
   flex-direction: column;

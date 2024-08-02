@@ -14,8 +14,10 @@ export const getConstructorStandings = (season: string) =>
 // Schedule
 export const getCalendar = (season: string): ErgastResponse<RaceSchedule> =>
   get(`${season}.json`);
-export const getRace = (season: string, round: string) =>
-  get(`/${season}/${round}.json`);
+export const getRace = (
+  season: string,
+  round: string
+): ErgastResponse<RaceSchedule> => get(`/${season}/${round}.json`);
 export const getCurrentCalendar = (): ErgastResponse<RaceSchedule> =>
   get("/current.json");
 

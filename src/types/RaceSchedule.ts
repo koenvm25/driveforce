@@ -1,5 +1,5 @@
-import {DateTime} from 'luxon';
-import {Circuit} from './Circuit';
+import { DateTime } from "luxon";
+import { Circuit } from "./Circuit";
 
 export interface RaceTable {
   season: string;
@@ -17,19 +17,19 @@ export interface Race {
 
 interface Events {
   isSprintWeekend: false;
-  firstPractice: Event;
-  secondPractice: Event;
-  thirdPractice: Event;
-  qualifying: Event;
+  firstPractice?: Event;
+  secondPractice?: Event;
+  thirdPractice?: Event;
+  qualifying?: Event;
   race: Event;
 }
 
 interface SprintEvents {
   isSprintWeekend: true;
-  firstPractice: Event;
-  qualifying: Event;
-  sprintShootout: Event;
-  sprint: Event;
+  firstPractice?: Event;
+  qualifying?: Event;
+  sprintShootout?: Event;
+  sprint?: Event;
   race: Event;
 }
 

@@ -1,7 +1,7 @@
 import { mapToRaceTable } from "@/domain/RaceScheduleMapper";
-import { toMillis } from "@/helpers/dateTimeHelpers";
+import { toMillis } from "@/utils/dateTimeHelpers";
 import { RaceTable } from "@/types/RaceSchedule";
-import { getCalendar, getCurrentCalendar, getRace } from "../api/endpoints";
+import { getCalendar, getCurrentCalendar, getRace } from "../utils/api/endpoints";
 import { useQuery } from "@tanstack/react-query";
 
 export const useSeasonScheduleQuery = (season: string) => {

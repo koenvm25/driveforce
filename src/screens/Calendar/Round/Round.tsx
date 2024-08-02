@@ -1,33 +1,25 @@
-import classes from "./Round.module.css";
 import { NextEventBanner } from "@/components/NextEvent/NextEventBanner";
 import { QualifyingResult } from "@/components/Qualifying";
 import { RaceResult } from "@/components/RaceResult";
 import { SprintResult } from "@/components/SprintResult";
-import { getNextEvent, isEventInTheFuture } from "@/helpers/scheduleHelpers";
-import { useRoundScheduleQuery } from "@/queries/RaceScheduleQueries";
-import { Event } from "@/types/RaceSchedule";
-import { Box, Text, Divider, Loader, Tabs, Title } from "@mantine/core";
+import { Event, RaceTable } from "@/types/RaceSchedule";
+import { getNextEvent, isEventInTheFuture } from "@/utils/scheduleHelpers";
+import { Box, Divider, Tabs, Text, Title } from "@mantine/core";
 import { useMemo } from "react";
-import { useParams } from "react-router-dom";
-
-type Params = {
-  season: string;
-  round: string;
-};
+import { useLoaderData } from "react-router-dom";
+import classes from "./Round.module.css";
 
 export const Round: React.FC = () => {
-  const { season, round } = useParams<keyof Params>() as Params;
-  const roundSchedule = useRoundScheduleQuery(season, round);
-  const race = useMemo(() => roundSchedule.data?.races[0], [roundSchedule]);
+  const roundSchedule = useLoaderData() as RaceTable | undefined;
+  const race = useMemo(() => roundSchedule?.races[0], [roundSchedule]);
   const resultsAreActive = race
-    ? isEventInTheFuture(race.events.qualifying)
+    ? isEventInTheFuture(race.events.race)
     : undefined;
 
-  const nextEvent = getNextEvent(roundSchedule.data?.races);
+  const nextEvent = getNextEvent(roundSchedule?.races);
 
   return (
     <Box flex={1}>
-      {roundSchedule.isLoading && <Loader />}
       {race && (
         <Box flex={1}>
           {nextEvent && <NextEventBanner nextEvent={nextEvent} />}
@@ -70,7 +62,8 @@ export const Round: React.FC = () => {
   );
 };
 
-const EventDisplay: React.FC<{ event: Event }> = ({ event }) => {
+const EventDisplay: React.FC<{ event: Event | undefined }> = ({ event }) => {
+  if (!event) return undefined;
   return (
     <Box className={classes.eventContainer}>
       <Box className={classes.date}>

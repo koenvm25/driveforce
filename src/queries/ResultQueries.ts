@@ -1,23 +1,22 @@
 import {
+  mapToQualifyingResult,
+  mapToRaceResult,
+  mapToSprintResult,
+} from "@/domain/ResultsMapper";
+import { RaceResult } from "@/types/Results";
+import { ErgastResponse } from "@/types/dto/ErgastDto";
+import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
+import {
   getQualifyingResults,
   getRaceResults,
   getSeasonResults,
   getSprintResults,
-} from "@/api/endpoints";
-import {
-  mapToRaceResult,
-  mapToSprintResult,
-  mapToQualifyingResult,
-} from "@/domain/ResultsMapper";
-import { toMillis } from "@/helpers/dateTimeHelpers";
-import { RaceResult } from "@/types/Results";
-import { ApiResult } from "@/types/dto/ErgastDto";
-import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
+} from "@/utils/api/endpoints";
+import { toMillis } from "@/utils/dateTimeHelpers";
 import { useQuery } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 
 export const useSeasonResultsQuery = (season: string) => {
-  return useQuery<AxiosResponse<ApiResult<RaceResultsDto>>>({
+  return useQuery<ErgastResponse<RaceResultsDto>>({
     queryKey: ["seasonResults", season],
     queryFn: async () => getSeasonResults(season),
     gcTime: toMillis({ minutes: 90 }),

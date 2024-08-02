@@ -1,8 +1,14 @@
-import {Race, RaceTable} from '@/types/RaceSchedule';
-import {RaceSchedule, RacesEntity} from '@/types/dto/RaceScheduleDto';
-import {DateTime} from 'luxon';
+import { Event, Race, RaceTable } from "@/types/RaceSchedule";
+import {
+  EventDto,
+  RaceSchedule,
+  RacesEntity,
+} from "@/types/dto/RaceScheduleDto";
+import { DateTime } from "luxon";
 
-export const mapToRaceTable = (raceScheduleDto: RaceSchedule | undefined): RaceTable | undefined => {
+export const mapToRaceTable = (
+  raceScheduleDto: RaceSchedule | undefined
+): RaceTable | undefined => {
   if (!raceScheduleDto) return undefined;
   const races: Race[] = raceScheduleDto.RaceTable.Races.map((race) => {
     return {
@@ -31,62 +37,46 @@ export const mapToRaceTable = (raceScheduleDto: RaceSchedule | undefined): RaceT
   };
 };
 
-const mapToEvents = (raceEntity: RacesEntity): Race['events'] => {
+const mapToEvents = (raceEntity: RacesEntity): Race["events"] => {
   return !!raceEntity.Sprint && !raceEntity.ThirdPractice
     ? {
         isSprintWeekend: true,
-        firstPractice: {
-          name: 'First practice',
-          dateTime: DateTime.fromISO(
-            raceEntity.FirstPractice.date + 'T' + raceEntity.FirstPractice.time,
-          ),
-        },
-        qualifying: {
-          name: 'Qualifying',
-          dateTime: DateTime.fromISO(raceEntity.Qualifying.date + 'T' + raceEntity.Qualifying.time),
-        },
-        sprintShootout: {
-          name: 'Sprint shootout',
-          dateTime: DateTime.fromISO(
-            raceEntity.SecondPractice.date + 'T' + raceEntity.SecondPractice.time,
-          ),
-        },
-        sprint: {
-          name: 'Sprint',
-          dateTime: DateTime.fromISO(raceEntity.Sprint.date + 'T' + raceEntity.Sprint.time),
-        },
+        firstPractice: mapToEvent(raceEntity.FirstPractice, "First Practice"),
+        qualifying: mapToEvent(raceEntity.Qualifying, "Qualifying"),
+        sprintShootout: mapToEvent(
+          raceEntity.SecondPractice,
+          "Sprint Shootout"
+        ),
+        sprint: mapToEvent(raceEntity.Sprint, "Sprint"),
         race: {
-          name: 'Race',
-          dateTime: DateTime.fromISO(raceEntity.date + 'T' + raceEntity.time),
+          name: "Race",
+          dateTime: DateTime.fromISO(raceEntity.date + "T" + raceEntity.time),
         },
       }
     : {
         isSprintWeekend: false,
-        firstPractice: {
-          name: 'First practice',
-          dateTime: DateTime.fromISO(
-            raceEntity.FirstPractice.date + 'T' + raceEntity.FirstPractice.time,
-          ),
-        },
-        secondPractice: {
-          name: 'Second practice',
-          dateTime: DateTime.fromISO(
-            raceEntity.SecondPractice.date + 'T' + raceEntity.SecondPractice.time,
-          ),
-        },
-        thirdPractice: {
-          name: 'Third practice',
-          dateTime: DateTime.fromISO(
-            raceEntity.ThirdPractice?.date + 'T' + raceEntity.ThirdPractice?.time,
-          ),
-        },
-        qualifying: {
-          name: 'Qualifying',
-          dateTime: DateTime.fromISO(raceEntity.Qualifying.date + 'T' + raceEntity.Qualifying.time),
-        },
+        firstPractice: mapToEvent(raceEntity.FirstPractice, "First Practice"),
+        secondPractice: mapToEvent(
+          raceEntity.SecondPractice,
+          "Second Practice"
+        ),
+        thirdPractice: mapToEvent(raceEntity.ThirdPractice, "Third Practice"),
+        qualifying: mapToEvent(raceEntity.Qualifying, "Qualifying"),
         race: {
-          name: 'Race',
-          dateTime: DateTime.fromISO(raceEntity.date + 'T' + raceEntity.time),
+          name: "Race",
+          dateTime: DateTime.fromISO(raceEntity.date + "T" + raceEntity.time),
         },
       };
+};
+
+const mapToEvent = (
+  event: EventDto | undefined,
+  name: string
+): Event | undefined => {
+  if (!event) return;
+
+  return {
+    name,
+    dateTime: DateTime.fromISO(event.date + "T" + event.time),
+  };
 };
