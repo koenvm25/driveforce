@@ -19,7 +19,7 @@ const links: { link: string; label: string; icon?: IconProp }[] = [
     icon: ["far", "calendar"],
   },
   {
-    link: `/standings${new Date().getFullYear()}`,
+    link: `/standings/${new Date().getFullYear()}`,
     label: "Standings",
     icon: ["fas", "ranking-star"],
   },
