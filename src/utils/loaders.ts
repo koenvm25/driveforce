@@ -13,8 +13,6 @@ export async function seasonLoader(season: string): Promise<ISeasonLoader> {
     getSeasonResults(season),
   ]);
 
-  await sleeper(3000);
-
   return {
     results: results.data.MRData,
     calendar: mapToRaceTable(calendar.data.MRData),
@@ -29,6 +27,6 @@ export async function roundLoader(
   return mapToRaceTable(race.data.MRData);
 }
 
-function sleeper(ms: number) {
+export function sleeper(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
