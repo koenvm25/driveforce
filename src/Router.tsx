@@ -27,7 +27,7 @@ export const Router: React.FC = () => {
           loader: ({ params }) => roundLoader(params.season!, params.round!),
         },
         {
-          path: "standing/:season",
+          path: "standings/:season",
           element: <Standings />,
         },
         {
