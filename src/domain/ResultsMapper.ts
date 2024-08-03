@@ -30,7 +30,7 @@ export const mapToRaceResult = (
           points: result.points,
           grid: result.grid,
           laps: result.laps,
-          time: result.Time?.time ? result.Time.time : undefined,
+          time: result.Time?.time ? result.Time.time : result.status,
           driver: {
             id: result.Driver.driverId,
             permanentNumber: result.Driver.permanentNumber,

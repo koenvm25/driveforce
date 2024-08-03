@@ -1,21 +1,12 @@
-import { useQualifyingResultQuery } from "@/queries/ResultQueries";
-import { Loader } from "@mantine/core";
+import { IRoundLoader } from "@/utils/loaders";
 import { useViewportSize } from "@mantine/hooks";
 import { DataTable } from "mantine-datatable";
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
-interface Props {
-  season: string;
-  round: string;
-}
-
-export const QualifyingResult: React.FC<Props> = ({ season, round }) => {
+export const QualifyingResult: React.FC = () => {
   const { width } = useViewportSize();
-  const result = useQualifyingResultQuery(season, round);
-
-  if (result.isLoading || !result.data) {
-    return <Loader />;
-  }
+  const { qualifyingResult } = useLoaderData() as IRoundLoader;
 
   return (
     <DataTable
@@ -42,7 +33,7 @@ export const QualifyingResult: React.FC<Props> = ({ season, round }) => {
           render: (result) => result.q3 || "-",
         },
       ]}
-      records={result.data.qualifying}
+      records={qualifyingResult?.qualifying}
     />
   );
 };

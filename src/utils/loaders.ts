@@ -1,7 +1,21 @@
 import { mapToRaceTable } from "@/domain/RaceScheduleMapper";
-import { getCalendar, getRace, getSeasonResults } from "./api/endpoints";
+import {
+  getCalendar,
+  getQualifyingResults,
+  getRace,
+  getRaceResults,
+  getSeasonResults,
+  getSprintResults,
+} from "./api/endpoints";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
-import { RaceTable } from "@/types/RaceSchedule";
+import { Race, RaceTable } from "@/types/RaceSchedule";
+import { isEventInTheFuture } from "./scheduleHelpers";
+import {
+  mapToQualifyingResult,
+  mapToRaceResult,
+  mapToSprintResult,
+} from "@/domain/ResultsMapper";
+import { RaceResult } from "@/types/Results";
 
 export interface ISeasonLoader {
   results: RaceResultsDto | undefined;
@@ -19,12 +33,33 @@ export async function seasonLoader(season: string): Promise<ISeasonLoader> {
   };
 }
 
-export async function roundLoader(
-  season: string,
-  round: string
-): Promise<RaceTable | undefined> {
-  const race = await getRace(season, round);
-  return mapToRaceTable(race.data.MRData);
+export interface IRoundLoader {
+  race: Race | undefined;
+  raceResult: RaceResult | undefined;
+  sprintResult: RaceResult | undefined;
+  qualifyingResult: RaceResult | undefined;
+}
+export async function roundLoader(season: string, round: string) {
+  const race = mapToRaceTable((await getRace(season, round)).data.MRData)
+    ?.races[0];
+  const [raceResultsDto, sprintResultsDto, qualifyingResultDto] =
+    await Promise.all([
+      isEventInTheFuture(race?.events.race)
+        ? getRaceResults(season, round)
+        : undefined,
+      race?.events.isSprintWeekend && isEventInTheFuture(race?.events.sprint)
+        ? getSprintResults(season, round)
+        : undefined,
+      isEventInTheFuture(race?.events.qualifying)
+        ? getQualifyingResults(season, round)
+        : undefined,
+    ]);
+  const raceResult = mapToRaceResult(raceResultsDto?.data.MRData);
+  const sprintResult = mapToSprintResult(sprintResultsDto?.data.MRData);
+  const qualifyingResult = mapToQualifyingResult(
+    qualifyingResultDto?.data.MRData
+  );
+  return { race, raceResult, sprintResult, qualifyingResult };
 }
 
 export function sleeper(ms: number) {

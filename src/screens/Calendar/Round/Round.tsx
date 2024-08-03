@@ -2,27 +2,33 @@ import { NextEventBanner } from "@/components/NextEvent/NextEventBanner";
 import { QualifyingResult } from "@/components/Qualifying";
 import { RaceResult } from "@/components/RaceResult";
 import { SprintResult } from "@/components/SprintResult";
-import { Event, RaceTable } from "@/types/RaceSchedule";
+import { Event } from "@/types/RaceSchedule";
 import { getNextEvent, isEventInTheFuture } from "@/utils/scheduleHelpers";
 import { Box, Divider, Tabs, Text, Title } from "@mantine/core";
-import { useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 import classes from "./Round.module.css";
+import { IRoundLoader } from "@/utils/loaders";
 
 export const Round: React.FC = () => {
-  const roundSchedule = useLoaderData() as RaceTable | undefined;
-  const race = useMemo(() => roundSchedule?.races[0], [roundSchedule]);
+  const { race } = useLoaderData() as IRoundLoader;
   const resultsAreActive = race
     ? isEventInTheFuture(race.events.race)
     : undefined;
 
-  const nextEvent = getNextEvent(roundSchedule?.races);
+  const nextEvent = race ? getNextEvent([race]) : undefined;
 
   return (
     <Box flex={1}>
       {race && (
         <Box flex={1}>
-          {nextEvent && <NextEventBanner nextEvent={nextEvent} />}
+          {nextEvent ? (
+            <NextEventBanner nextEvent={nextEvent} />
+          ) : (
+            <Box ml="calc(10% + 2rem)">
+              <Title>{race.name}</Title>
+              <Title order={3}>{race.circuit.name}</Title>
+            </Box>
+          )}
           <Tabs className={classes.tabsContainer} defaultValue="schedule">
             <Tabs.List>
               <Tabs.Tab value="schedule">Schedule</Tabs.Tab>
@@ -50,10 +56,7 @@ export const Round: React.FC = () => {
               )}
             </Tabs.Panel>
             <Tabs.Panel value="results" w="100%">
-              <Results
-                isSprintWeekend={race.events.isSprintWeekend}
-                {...race}
-              />
+              <Results />
             </Tabs.Panel>
           </Tabs>
         </Box>
@@ -85,11 +88,9 @@ const EventDisplay: React.FC<{ event: Event | undefined }> = ({ event }) => {
   );
 };
 
-const Results: React.FC<{
-  isSprintWeekend: boolean;
-  season: string;
-  round: string;
-}> = ({ isSprintWeekend, season, round }) => {
+const Results: React.FC = () => {
+  const { raceResult, sprintResult, qualifyingResult } =
+    useLoaderData() as IRoundLoader;
   return (
     <Tabs
       defaultValue="race"
@@ -97,18 +98,18 @@ const Results: React.FC<{
       className={classes.resultContainer}
     >
       <Tabs.List>
-        <Tabs.Tab value="race">Race</Tabs.Tab>
-        {isSprintWeekend && <Tabs.Tab value="sprint">Sprint</Tabs.Tab>}
-        <Tabs.Tab value="qualifying">Qualifying</Tabs.Tab>
+        {raceResult && <Tabs.Tab value="race">Race</Tabs.Tab>}
+        {sprintResult && <Tabs.Tab value="sprint">Sprint</Tabs.Tab>}
+        {qualifyingResult && <Tabs.Tab value="qualifying">Qualifying</Tabs.Tab>}
       </Tabs.List>
       <Tabs.Panel value="race" w="100%">
-        <RaceResult season={season} round={round} />
+        <RaceResult />
       </Tabs.Panel>
       <Tabs.Panel value="sprint" w="100%">
-        <SprintResult season={season} round={round} />
+        <SprintResult />
       </Tabs.Panel>
       <Tabs.Panel value="qualifying" w="100%">
-        <QualifyingResult season={season} round={round} />
+        <QualifyingResult />
       </Tabs.Panel>
     </Tabs>
   );

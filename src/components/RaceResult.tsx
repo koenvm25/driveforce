@@ -1,21 +1,12 @@
-import { useRaceResultQuery } from "@/queries/ResultQueries";
-import { Loader } from "@mantine/core";
+import { IRoundLoader } from "@/utils/loaders";
 import { useViewportSize } from "@mantine/hooks";
 import { DataTable } from "mantine-datatable";
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
-interface Props {
-  season: string;
-  round: string;
-}
-
-export const RaceResult: React.FC<Props> = ({ season, round }) => {
+export const RaceResult: React.FC = () => {
   const { width } = useViewportSize();
-  const result = useRaceResultQuery(season, round);
-
-  if (result.isLoading || !result.data) {
-    return <Loader />;
-  }
+  const { raceResult } = useLoaderData() as IRoundLoader;
 
   return (
     <DataTable
@@ -33,7 +24,7 @@ export const RaceResult: React.FC<Props> = ({ season, round }) => {
         },
         { accessor: "points", title: "Points" },
       ]}
-      records={result.data.race}
+      records={raceResult?.race}
     />
   );
 };

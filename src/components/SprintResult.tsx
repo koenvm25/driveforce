@@ -1,21 +1,12 @@
-import { useSprintResultQuery } from "@/queries/ResultQueries";
-import { Loader } from "@mantine/core";
+import { IRoundLoader } from "@/utils/loaders";
 import { useViewportSize } from "@mantine/hooks";
 import { DataTable } from "mantine-datatable";
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
-interface Props {
-  season: string;
-  round: string;
-}
-
-export const SprintResult: React.FC<Props> = ({ season, round }) => {
+export const SprintResult: React.FC = () => {
   const { width } = useViewportSize();
-  const result = useSprintResultQuery(season, round);
-
-  if (result.isLoading || !result.data) {
-    return <Loader />;
-  }
+  const { sprintResult } = useLoaderData() as IRoundLoader;
 
   return (
     <DataTable
@@ -33,7 +24,7 @@ export const SprintResult: React.FC<Props> = ({ season, round }) => {
         },
         { accessor: "points", title: "Points" },
       ]}
-      records={result.data.sprint}
+      records={sprintResult?.sprint}
     />
   );
 };
