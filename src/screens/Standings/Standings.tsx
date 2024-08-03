@@ -2,9 +2,9 @@ import classes from "./Standings.module.css";
 
 import { Box, Select, Tabs } from "@mantine/core";
 import { DateTime } from "luxon";
-import { useField } from "@mantine/form";
 import { DriverStandings } from "@/components/DriverStandings";
 import { ConstructorStandings } from "@/components/ConstructorStandings";
+import { useNavigate, useParams } from "react-router-dom";
 
 const seasons = () => {
   const years = [];
@@ -15,9 +15,8 @@ const seasons = () => {
 };
 
 export function Standings() {
-  const year = useField({
-    initialValue: DateTime.now().year.toString(),
-  });
+  const { season } = useParams();
+  const navigate = useNavigate();
 
   return (
     <Tabs variant="pills" defaultValue="drivers" classNames={classes}>
@@ -26,17 +25,21 @@ export function Standings() {
           <Tabs.Tab value="drivers">Drivers</Tabs.Tab>
           <Tabs.Tab value="constructors">Constructors</Tabs.Tab>
         </Tabs.List>
-        <Select {...year.getInputProps()} data={seasons()} />
+        <Select
+          value={season}
+          onChange={(value) => value && navigate(`/standings/${value}`)}
+          data={seasons()}
+        />
       </Box>
 
       <Tabs.Panel value="drivers">
         <Box className={classes.tabContainer}>
-          <DriverStandings season={year.getValue()} />
+          <DriverStandings />
         </Box>
       </Tabs.Panel>
       <Tabs.Panel value="constructors">
         <Box className={classes.tabContainer}>
-          <ConstructorStandings season={year.getValue()} />
+          <ConstructorStandings />
         </Box>
       </Tabs.Panel>
     </Tabs>

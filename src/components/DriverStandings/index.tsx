@@ -1,26 +1,11 @@
-import { useDriversStandingsQuery } from "@/queries/StandingsQueries";
-import { Loader, Table } from "@mantine/core";
-import { useMemo } from "react";
+import { IStandingsLoader } from "@/utils/loaders";
+import { Table } from "@mantine/core";
+import { useLoaderData } from "react-router-dom";
 
-type Props = {
-  season: string;
-};
+export const DriverStandings: React.FC = () => {
+  const { driverStandings } = useLoaderData() as IStandingsLoader;
 
-export const DriverStandings: React.FC<Props> = ({ season }) => {
-  const seasonStandings = useDriversStandingsQuery(season);
-
-  const standings = useMemo(() => {
-    return seasonStandings.data?.data.MRData?.StandingsTable.StandingsLists &&
-      seasonStandings.data?.data.MRData?.StandingsTable.StandingsLists.length >
-        0
-      ? seasonStandings.data?.data.MRData?.StandingsTable.StandingsLists[0]
-          .DriverStandings
-      : undefined;
-  }, [seasonStandings.data]);
-
-  return seasonStandings.isLoading ? (
-    <Loader />
-  ) : !standings ? (
+  return !driverStandings ? (
     <div>
       <span>No data available</span>
     </div>
@@ -38,7 +23,7 @@ export const DriverStandings: React.FC<Props> = ({ season }) => {
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
-        {standings.map((driver) => (
+        {driverStandings.map((driver) => (
           <Table.Tr key={driver.position}>
             <Table.Th>{driver.position}</Table.Th>
             <Table.Td>

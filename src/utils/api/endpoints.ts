@@ -3,12 +3,15 @@ import { get } from "./axiosConfig";
 import { DriverStandings } from "@/types/dto/DriverStandingsDto";
 import { RaceSchedule } from "@/types/dto/RaceScheduleDto";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
+import { ConstructorStandings } from "@/types/dto/ConstructorStandingsDto";
 
 // Standings
 export const getDriverStandings = (
   season: string
 ): ErgastResponse<DriverStandings> => get(`/${season}/driverStandings.json`);
-export const getConstructorStandings = (season: string) =>
+export const getConstructorStandings = (
+  season: string
+): ErgastResponse<ConstructorStandings> =>
   get(`/${season}/constructorStandings.json`);
 
 // Schedule

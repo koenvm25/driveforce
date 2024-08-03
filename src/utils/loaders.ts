@@ -1,6 +1,8 @@
 import { mapToRaceTable } from "@/domain/RaceScheduleMapper";
 import {
   getCalendar,
+  getConstructorStandings,
+  getDriverStandings,
   getQualifyingResults,
   getRace,
   getRaceResults,
@@ -16,6 +18,8 @@ import {
   mapToSprintResult,
 } from "@/domain/ResultsMapper";
 import { RaceResult } from "@/types/Results";
+import { ConstructorStandingsEntity } from "@/types/dto/ConstructorStandingsDto";
+import { DriverStandingsEntity } from "@/types/dto/DriverStandingsDto";
 
 export interface ISeasonLoader {
   results: RaceResultsDto | undefined;
@@ -60,6 +64,25 @@ export async function roundLoader(season: string, round: string) {
     qualifyingResultDto?.data.MRData
   );
   return { race, raceResult, sprintResult, qualifyingResult };
+}
+
+export interface IStandingsLoader {
+  constructorStandings: ConstructorStandingsEntity[] | undefined;
+  driverStandings: DriverStandingsEntity[] | undefined;
+}
+export async function standingsLoader(season: string) {
+  const [driverStandings, constructorStandings] = await Promise.all([
+    getDriverStandings(season),
+    getConstructorStandings(season),
+  ]);
+  return {
+    constructorStandings:
+      constructorStandings.data.MRData?.StandingsTable.StandingsLists[0]
+        ?.ConstructorStandings,
+    driverStandings:
+      driverStandings.data.MRData?.StandingsTable.StandingsLists[0]
+        ?.DriverStandings,
+  };
 }
 
 export function sleeper(ms: number) {

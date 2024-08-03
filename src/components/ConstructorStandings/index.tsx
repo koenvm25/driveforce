@@ -1,26 +1,11 @@
-import { useConstructorStandingsQuery } from "@/queries/StandingsQueries";
-import { Loader, Table } from "@mantine/core";
-import { useMemo } from "react";
+import { IStandingsLoader } from "@/utils/loaders";
+import { Table } from "@mantine/core";
+import { useLoaderData } from "react-router-dom";
 
-type Props = {
-  season: string;
-};
+export const ConstructorStandings: React.FC = () => {
+  const { constructorStandings } = useLoaderData() as IStandingsLoader;
 
-export const ConstructorStandings: React.FC<Props> = ({ season }) => {
-  const seasonStandings = useConstructorStandingsQuery(season);
-
-  const standings = useMemo(() => {
-    return seasonStandings.data?.data.MRData?.StandingsTable.StandingsLists &&
-      seasonStandings.data?.data.MRData?.StandingsTable.StandingsLists.length >
-        0
-      ? seasonStandings.data?.data.MRData?.StandingsTable.StandingsLists[0]
-          .ConstructorStandings
-      : undefined;
-  }, [seasonStandings.data]);
-
-  return seasonStandings.isLoading ? (
-    <Loader />
-  ) : !standings ? (
+  return !constructorStandings ? (
     <span>No data available</span>
   ) : (
     <Table stickyHeader striped>
@@ -34,7 +19,7 @@ export const ConstructorStandings: React.FC<Props> = ({ season }) => {
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
-        {standings.map((constructor) => (
+        {constructorStandings.map((constructor) => (
           <Table.Tr key={constructor.position}>
             <Table.Th>{constructor.position}</Table.Th>
             <Table.Td>{constructor.Constructor.name}</Table.Td>
