@@ -6,6 +6,7 @@ import {
   Container,
   Group,
   Menu,
+  Title,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -44,7 +45,9 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        <h1>DriveForce</h1>
+        <NavLink to="/">
+          <Title>DriveForce</Title>
+        </NavLink>
         <Group gap={5} visibleFrom="xs">
           {links.map((link) => (
             <Link {...link} />

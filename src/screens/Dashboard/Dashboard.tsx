@@ -1,14 +1,9 @@
 import { NextEventBanner } from "@/components/NextEvent/NextEventBanner";
-import { getNextEvent } from "@/utils/scheduleHelpers";
-import { useCurrentSeasonScheduleQuery } from "@/queries/RaceScheduleQueries";
-import { useMemo } from "react";
+import { IDashboardLoader } from "@/utils/loaders";
+import { useLoaderData } from "react-router-dom";
 
 export const Dashboard: React.FC = () => {
-  const currentRaceSchedule = useCurrentSeasonScheduleQuery();
-  const nextEvent = useMemo(
-    () => getNextEvent(currentRaceSchedule.data?.races),
-    [currentRaceSchedule.data?.races]
-  );
+  const { nextEvent } = useLoaderData() as IDashboardLoader;
 
   if (!nextEvent) return null;
 

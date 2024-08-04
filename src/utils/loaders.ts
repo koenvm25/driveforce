@@ -2,6 +2,7 @@ import { mapToRaceTable } from "@/domain/RaceScheduleMapper";
 import {
   getCalendar,
   getConstructorStandings,
+  getCurrentCalendar,
   getDriverStandings,
   getQualifyingResults,
   getRace,
@@ -10,8 +11,8 @@ import {
   getSprintResults,
 } from "./api/endpoints";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
-import { Race, RaceTable } from "@/types/RaceSchedule";
-import { isEventInTheFuture } from "./scheduleHelpers";
+import { NextEvent, Race, RaceTable } from "@/types/RaceSchedule";
+import { getNextEvent, isEventInTheFuture } from "./scheduleHelpers";
 import {
   mapToQualifyingResult,
   mapToRaceResult,
@@ -83,6 +84,15 @@ export async function standingsLoader(season: string) {
       driverStandings.data.MRData?.StandingsTable.StandingsLists[0]
         ?.DriverStandings,
   };
+}
+
+export interface IDashboardLoader {
+  nextEvent: NextEvent | undefined;
+}
+export async function dashboardLoader(): Promise<IDashboardLoader> {
+  const schedule = await getCurrentCalendar();
+  const raceTable = mapToRaceTable(schedule.data.MRData);
+  return { nextEvent: getNextEvent(raceTable?.races) };
 }
 
 export function sleeper(ms: number) {

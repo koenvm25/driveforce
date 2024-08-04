@@ -5,7 +5,12 @@ import { Calendar } from "./screens/Calendar/Calendar";
 import { Round } from "./screens/Calendar/Round/Round";
 import { Standings } from "./screens/Standings/Standings";
 import { Title } from "@mantine/core";
-import { roundLoader, seasonLoader, standingsLoader } from "./utils/loaders";
+import {
+  dashboardLoader,
+  roundLoader,
+  seasonLoader,
+  standingsLoader,
+} from "./utils/loaders";
 
 export const Router: React.FC = () => {
   const router = createBrowserRouter([
@@ -15,6 +20,7 @@ export const Router: React.FC = () => {
         {
           path: "",
           element: <Dashboard />,
+          loader: () => dashboardLoader(),
         },
         {
           path: "calendar/:season",
