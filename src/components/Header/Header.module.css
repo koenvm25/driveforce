@@ -46,3 +46,8 @@
     var(--mantine-color-dark-4)
   );
 }
+
+.logo {
+  text-decoration: none;
+  color: light-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0));
+}

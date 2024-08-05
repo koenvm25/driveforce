@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./Header.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link as RouterLink } from "react-router-dom";
 
 const links: { link: string; label: string; icon?: IconProp }[] = [
   {
@@ -45,9 +45,9 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        <NavLink to="/">
+        <RouterLink to="/" className={classes.logo}>
           <Title>DriveForce</Title>
-        </NavLink>
+        </RouterLink>
         <Group gap={5} visibleFrom="xs">
           {links.map((link) => (
             <Link {...link} />
