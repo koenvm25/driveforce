@@ -45,12 +45,13 @@ export const Calendar: React.FC = () => {
                 }
               >
                 <Card shadow="md" padding="md">
-                  <Card.Section>
+                  <Card.Section style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <Image
                       src={`https://flagcdn.com/${countryCode?.toLowerCase()}.svg`}
                       h={200}
-                      fit="contain"
+                      // fit="contain"
                       alt={`flag of ${race.circuit.location.country}`}
+                      style={{border: '1px solid grey'}}
                     />
                   </Card.Section>
 
