@@ -16,6 +16,7 @@ export const DriverStandings: React.FC = () => {
           <Table.Th>Position</Table.Th>
           <Table.Th>Name</Table.Th>
           <Table.Th>Points</Table.Th>
+          <Table.Th visibleFrom="sm">Wins</Table.Th>
           <Table.Th visibleFrom="sm">Nationality</Table.Th>
           <Table.Th visibleFrom="xs" className="hidden sm:table-cell">
             Team
@@ -30,6 +31,9 @@ export const DriverStandings: React.FC = () => {
               {driver.Driver.givenName} {driver.Driver.familyName}
             </Table.Td>
             <Table.Td>{driver.points}</Table.Td>
+            <Table.Td visibleFrom="sm" className="hidden md:table-cell">
+              {driver.wins}
+            </Table.Td>
             <Table.Td visibleFrom="sm" className="hidden md:table-cell">
               {driver.Driver.nationality}
             </Table.Td>
