@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const baseURL = 'https://ergast.com/api/f1';
+export const baseURL = 'https://api.jolpi.ca/ergast/f1';
 const apiClient = axios.create({
   baseURL: baseURL,
 });
