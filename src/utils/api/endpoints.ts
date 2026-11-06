@@ -1,4 +1,4 @@
-import { ErgastResponse } from "@/types/dto/ErgastDto";
+import { ApiResult, ErgastResponse } from "@/types/dto/ErgastDto";
 import { get } from "./axiosConfig";
 import { DriverStandings } from "@/types/dto/DriverStandingsDto";
 import { RaceSchedule } from "@/types/dto/RaceScheduleDto";
@@ -27,11 +27,36 @@ export const getCurrentCalendar = (): ErgastResponse<RaceSchedule> =>
 // Results
 export const getCurrentSeasonResults = (): ErgastResponse<RaceResultsDto> =>
   get(`/current/results.json?limit=10000`);
-export const getSeasonResults = (
-  season: string,
-  limit: number = 1000
-): ErgastResponse<RaceResultsDto> =>
-  get(`/${season}/results.json?limit=${limit}`);
+const MAX_PAGE_SIZE = 100;
+export const getSeasonResults = async (
+  season: string
+): ErgastResponse<RaceResultsDto> => {
+  const url = `/${season}/results.json`;
+  const first = await get<ApiResult<RaceResultsDto>>(url, {
+    params: { limit: MAX_PAGE_SIZE, offset: 0 },
+  });
+  const firstData = first.data.MRData;
+  if (!firstData) return first;
+
+  const races = [...(firstData.RaceTable.Races ?? [])];
+  const total = Number(firstData.total);
+  for (let offset = MAX_PAGE_SIZE; offset < total; offset += MAX_PAGE_SIZE) {
+    const page = await get<ApiResult<RaceResultsDto>>(url, {
+      params: { limit: MAX_PAGE_SIZE, offset },
+    });
+    for (const race of page.data.MRData?.RaceTable.Races ?? []) {
+      const existing = races.find((r) => r.round === race.round);
+      if (existing) {
+        existing.Results = [...(existing.Results ?? []), ...(race.Results ?? [])];
+      } else {
+        races.push(race);
+      }
+    }
+  }
+
+  firstData.RaceTable.Races = races;
+  return first;
+};
 export const getRaceResults = (
   season: string,
   round: string
