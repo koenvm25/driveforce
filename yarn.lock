@@ -1404,7 +1404,6 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.6
     luxon: ^3.4.4
-    mantine-datatable: ^7.9.1
     postcss: ^8.4.38
     postcss-preset-mantine: ^1.15.0
     postcss-simple-vars: ^7.0.1
@@ -2093,18 +2092,6 @@ __metadata:
   version: 3.4.4
   resolution: "luxon@npm:3.4.4"
   checksum: 36c1f99c4796ee4bfddf7dc94fa87815add43ebc44c8934c924946260a58512f0fd2743a629302885df7f35ccbd2d13f178c15df046d0e3b6eb71db178f1c60c
-  languageName: node
-  linkType: hard
-
-"mantine-datatable@npm:^7.9.1":
-  version: 7.9.1
-  resolution: "mantine-datatable@npm:7.9.1"
-  peerDependencies:
-    "@mantine/core": ">=7.8"
-    "@mantine/hooks": ">=7.8"
-    clsx: ">=2"
-    react: ">=18.2"
-  checksum: 0e0c14c4806e10d7fccd900c5ac3608ffd4212a278ad8b411e649152f860609a86dca58f71124def7f3c4533633c046280d2324bb161e9a4350d22da9596a2d9
   languageName: node
   linkType: hard
 

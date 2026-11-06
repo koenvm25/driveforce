@@ -60,4 +60,4 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 
 - [ ] Update the design canvas to the real Ink & Ember colours and add the screens it lacks (driver profile, progress chart, champion badges, error screen)
 - [x] Add `.playwright-mcp/` to `.gitignore`
-- [ ] Remove the unused `mantine-datatable` dependency and its CSS import in `main.tsx`
+- [x] Remove the unused `mantine-datatable` dependency and its CSS import in `main.tsx`
