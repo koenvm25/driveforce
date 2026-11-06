@@ -1,56 +1,187 @@
-.tabsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.root {
   flex: 1;
-  gap: 1rem;
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: rem(32px);
 }
 
-.eventContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-gray-7));
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-left: 5%;
-  margin-right: 5%;
+.back {
+  align-self: flex-start;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+  text-decoration: none;
 
-  @media (min-width: 48em) {
-    margin-left: 10%;
-    margin-right: 10%;
+  &:hover {
+    color: var(--mantine-color-text);
   }
 }
 
-.date {
+.header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-9));
-  border-radius: 0.5rem;
-  padding: 1rem;
-  min-width: 6rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: rem(8px) rem(24px);
 }
 
-.resultContainer {
+.roundNumber {
+  font-family: var(--df-font-display);
+  font-weight: 700;
+  font-size: rem(88px);
+  line-height: 0.8;
+  color: var(--df-accent);
+
+  @media (min-width: 48em) {
+    font-size: rem(140px);
+  }
+}
+
+.title {
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin-top: rem(10px);
+  color: var(--mantine-color-dimmed);
+}
+
+.layout {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-left: 5%;
-  margin-right: 5%;
+  gap: rem(24px);
+}
+
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+  padding: rem(20px);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(20px);
 
   @media (min-width: 48em) {
-    margin-left: 10%;
-    margin-right: 10%;
+    padding: rem(24px) rem(28px);
   }
 }
 
-.events {
+.main {
+  flex: 2 1 rem(560px);
+}
+
+.aside {
+  flex: 1 1 rem(300px);
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: rem(24px);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(8px);
+}
+
+.pill {
+  min-height: rem(44px);
+  padding: 0 rem(20px);
+  border: 1px solid var(--df-line);
+  border-radius: rem(10px);
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+
+  &:hover {
+    color: var(--mantine-color-text);
+  }
+
+  &[data-active] {
+    background-color: var(--mantine-color-text);
+    border-color: var(--mantine-color-text);
+    font-weight: 600;
+    color: var(--mantine-color-body);
+  }
+}
+
+.cardTitle {
+  font-size: rem(24px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: rem(12px);
+}
+
+.session {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: rem(12px);
+  padding: rem(12px) 0;
+  border-top: 1px solid var(--df-line);
+
+  &[data-past] {
+    opacity: 0.55;
+  }
+}
+
+.sessionName {
+  font-weight: 500;
+}
+
+.sessionDate {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
+}
+
+.sessionTime {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(22px);
+  font-variant-numeric: tabular-nums;
+
+  &[data-next] {
+    color: var(--df-accent-text);
+  }
+}
+
+.winner {
+  display: flex;
+  align-items: center;
+  gap: rem(16px);
+}
+
+.winnerBar {
+  align-self: stretch;
+  width: rem(6px);
+  border-radius: rem(3px);
+}
+
+.winnerName {
+  font-size: rem(20px);
+  font-weight: 600;
+}
+
+.upcoming {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+  padding: rem(16px) 0;
+}
+
+.eyebrow {
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--df-accent-text);
 }

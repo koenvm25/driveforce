@@ -15,7 +15,7 @@ export interface RaceResult {
   qualifying: QResult[];
 }
 
-interface Result {
+export interface Result {
   number: string;
   position: string;
   points: string;
@@ -37,7 +37,7 @@ interface Result {
     | undefined;
 }
 
-interface QResult {
+export interface QResult {
   number: string;
   position: string;
   driver: Driver;

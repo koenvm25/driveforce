@@ -7,10 +7,9 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] Theme, fonts and header
 - [x] Home
 - [x] Calendar
-- [ ] Round detail
+- [x] Round detail
 - [ ] Standings
 - [ ] Mobile bottom tab bar (the header still uses a burger menu)
-- [ ] Restyle the remaining Mantine leftovers (`mantine-datatable` tables, tabs)
 
 ## Features
 
@@ -21,6 +20,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [ ] Penalty points tracker (the page is an empty placeholder today)
 - [ ] Qualifying and sprint results in the same table switcher as the race
 - [ ] Constructors standings with points bars
+- [ ] Previous/next round buttons on the round page
 
 ## Bugs
 
@@ -35,3 +35,4 @@ Tick a box when it's done. New items go at the bottom of their section.
 ## Chores
 
 - [ ] Add `.playwright-mcp/` to `.gitignore`
+- [ ] Remove the unused `mantine-datatable` dependency and its CSS import in `main.tsx`

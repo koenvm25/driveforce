@@ -1,39 +1,47 @@
+import { QResult } from "@/types/Results";
 import { IRoundLoader } from "@/utils/loaders";
-import { useViewportSize } from "@mantine/hooks";
-import { DataTable } from "mantine-datatable";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import {
+  Column,
+  DriverName,
+  Position,
+  ResultsTable,
+  Team,
+} from "./ResultsTable/ResultsTable";
+
+const columns: Column<QResult>[] = [
+  {
+    key: "position",
+    header: "Pos",
+    render: (result) => <Position value={result.position} />,
+  },
+  {
+    key: "driver",
+    header: "Driver",
+    render: (result) => <DriverName driver={result.driver} />,
+  },
+  {
+    key: "team",
+    header: "Team",
+    hideBelow: "xs",
+    render: (result) => (
+      <Team id={result.constructor.id} name={result.constructor.name} />
+    ),
+  },
+  { key: "q1", header: "Q1", hideBelow: "xs", align: "right", render: (result) => result.q1 || "–" },
+  { key: "q2", header: "Q2", hideBelow: "xs", align: "right", render: (result) => result.q2 || "–" },
+  { key: "q3", header: "Q3", align: "right", render: (result) => result.q3 || "–" },
+];
 
 export const QualifyingResult: React.FC = () => {
-  const { width } = useViewportSize();
   const { qualifyingResult } = useLoaderData() as IRoundLoader;
 
   return (
-    <DataTable
-      columns={[
-        { accessor: "position", title: "#" },
-        { accessor: "number", title: "Number", hidden: width < 900 },
-        { accessor: "driver.familyName", title: "Driver" },
-        { accessor: "constructor.name", title: "Car", hidden: width < 650 },
-        {
-          accessor: "q1",
-          title: "Q1",
-          hidden: width < 550,
-          render: (result) => result.q1 || "-",
-        },
-        {
-          accessor: "q2",
-          title: "Q2",
-          hidden: width < 450,
-          render: (result) => result.q2 || "-",
-        },
-        {
-          accessor: "q3",
-          title: "Q3",
-          render: (result) => result.q3 || "-",
-        },
-      ]}
-      records={qualifyingResult?.qualifying}
+    <ResultsTable
+      rows={qualifyingResult?.qualifying ?? []}
+      columns={columns}
+      getKey={(result) => result.driver.id}
     />
   );
 };

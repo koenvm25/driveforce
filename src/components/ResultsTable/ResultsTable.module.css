@@ -1,0 +1,113 @@
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.th {
+  padding: rem(12px) rem(8px);
+  text-align: left;
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mantine-color-dimmed);
+  white-space: nowrap;
+
+  &[data-align="right"] {
+    text-align: right;
+  }
+}
+
+.td {
+  padding: rem(14px) rem(8px);
+  font-size: var(--mantine-font-size-sm);
+  white-space: nowrap;
+
+  &[data-align="right"] {
+    text-align: right;
+  }
+}
+
+.row {
+  border-top: 1px solid var(--df-line);
+}
+
+.th[data-hide],
+.td[data-hide] {
+  display: none;
+}
+
+@media (min-width: 36em) {
+  .th[data-hide="xs"],
+  .td[data-hide="xs"] {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 48em) {
+  .th[data-hide="sm"],
+  .td[data-hide="sm"] {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 62em) {
+  .th[data-hide="md"],
+  .td[data-hide="md"] {
+    display: table-cell;
+  }
+}
+
+.position {
+  font-family: var(--df-font-display);
+  font-weight: 700;
+  font-size: rem(26px);
+
+  &[data-place="1"] {
+    color: var(--df-gold);
+  }
+  &[data-place="2"] {
+    color: var(--df-silver);
+  }
+  &[data-place="3"] {
+    color: var(--df-bronze);
+  }
+}
+
+.driver {
+  font-size: var(--mantine-font-size-md);
+  font-weight: 600;
+}
+
+.givenName {
+  display: none;
+
+  @media (min-width: 36em) {
+    display: inline;
+  }
+}
+
+.team {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(10px);
+  color: var(--mantine-color-dimmed);
+}
+
+.teamDot {
+  flex: none;
+  width: rem(8px);
+  height: rem(8px);
+  border-radius: 50%;
+}
+
+.points {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(22px);
+}

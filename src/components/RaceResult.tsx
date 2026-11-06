@@ -1,30 +1,59 @@
+import { Result } from "@/types/Results";
 import { IRoundLoader } from "@/utils/loaders";
-import { useViewportSize } from "@mantine/hooks";
-import { DataTable } from "mantine-datatable";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import {
+  Column,
+  DriverName,
+  Points,
+  Position,
+  ResultsTable,
+  Team,
+} from "./ResultsTable/ResultsTable";
+
+export const raceColumns: Column<Result>[] = [
+  {
+    key: "position",
+    header: "Pos",
+    render: (result) => <Position value={result.position} />,
+  },
+  {
+    key: "driver",
+    header: "Driver",
+    render: (result) => <DriverName driver={result.driver} />,
+  },
+  {
+    key: "team",
+    header: "Team",
+    hideBelow: "xs",
+    render: (result) => (
+      <Team id={result.constructor.id} name={result.constructor.name} />
+    ),
+  },
+  { key: "grid", header: "Grid", hideBelow: "md", render: (result) => result.grid },
+  { key: "laps", header: "Laps", hideBelow: "sm", render: (result) => result.laps },
+  {
+    key: "time",
+    header: "Time",
+    align: "right",
+    render: (result) => result.time || "DNF",
+  },
+  {
+    key: "points",
+    header: "Pts",
+    align: "right",
+    render: (result) => <Points value={result.points} />,
+  },
+];
 
 export const RaceResult: React.FC = () => {
-  const { width } = useViewportSize();
   const { raceResult } = useLoaderData() as IRoundLoader;
 
   return (
-    <DataTable
-      columns={[
-        { accessor: "position", title: "#" },
-        { accessor: "number", title: "Number", hidden: width < 900 },
-        { accessor: "driver.familyName", title: "Driver" },
-        { accessor: "constructor.name", title: "Car", hidden: width < 650 },
-        { accessor: "laps", title: "Laps", hidden: width < 500 },
-        {
-          accessor: "time",
-          title: "Time",
-          hidden: width < 400,
-          render: (result) => result.time || "DNF",
-        },
-        { accessor: "points", title: "Points" },
-      ]}
-      records={raceResult?.race}
+    <ResultsTable
+      rows={raceResult?.race ?? []}
+      columns={raceColumns}
+      getKey={(result) => result.driver.id}
     />
   );
 };

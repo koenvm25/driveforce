@@ -1,116 +1,160 @@
-import { NextEventBanner } from "@/components/NextEvent/NextEventBanner";
+import { Countdown } from "@/components/Countdown/Countdown";
 import { QualifyingResult } from "@/components/Qualifying";
 import { RaceResult } from "@/components/RaceResult";
 import { SprintResult } from "@/components/SprintResult";
-import { Event } from "@/types/RaceSchedule";
-import { getNextEvent, isEventInTheFuture } from "@/utils/scheduleHelpers";
-import { Box, Divider, Tabs, Text, Title } from "@mantine/core";
-import { useLoaderData } from "react-router-dom";
-import classes from "./Round.module.css";
 import { IRoundLoader } from "@/utils/loaders";
+import { getNextEvent, getWeekendSessions } from "@/utils/scheduleHelpers";
+import { getTeamColor } from "@/utils/teamColors";
+import { Box, Tabs, Text, Title } from "@mantine/core";
+import { DateTime } from "luxon";
+import { Link, useLoaderData } from "react-router-dom";
+import classes from "./Round.module.css";
 
 export const Round: React.FC = () => {
-  const { race } = useLoaderData() as IRoundLoader;
-  const resultsAreActive = race
-    ? isEventInTheFuture(race.events.race)
-    : undefined;
+  const { race, raceResult, sprintResult, qualifyingResult } =
+    useLoaderData() as IRoundLoader;
 
-  const nextEvent = race ? getNextEvent([race]) : undefined;
+  if (!race) return null;
+
+  const now = DateTime.now();
+  const nextEvent = getNextEvent([race]);
+  const sessions = getWeekendSessions(race);
+  const { locality, country } = race.circuit.location;
+  const winner = raceResult?.race[0];
+
+  const resultTabs: { value: string; label: string; content: React.ReactNode }[] = [];
+  if (raceResult) {
+    resultTabs.push({ value: "race", label: "Race", content: <RaceResult /> });
+  }
+  if (sprintResult) {
+    resultTabs.push({ value: "sprint", label: "Sprint", content: <SprintResult /> });
+  }
+  if (qualifyingResult) {
+    resultTabs.push({
+      value: "qualifying",
+      label: "Qualifying",
+      content: <QualifyingResult />,
+    });
+  }
+
+  const firstDay = sessions[0]?.dateTime ?? race.events.race.dateTime;
+  const lastDay = race.events.race.dateTime;
 
   return (
-    <Box flex={1}>
-      {race && (
-        <Box flex={1}>
-          {nextEvent ? (
-            <NextEventBanner nextEvent={nextEvent} />
+    <Box className={classes.root}>
+      <Link to={`/calendar/${race.season}`} className={classes.back}>
+        ← {race.season} calendar
+      </Link>
+
+      <Box className={classes.header}>
+        <Box className={classes.roundNumber}>{race.round.padStart(2, "0")}</Box>
+        <Box>
+          <Title order={1} className={classes.title}>
+            {race.name}
+          </Title>
+          <Text className={classes.subtitle}>
+            {race.circuit.name} · {locality}, {country} ·{" "}
+            {firstDay.hasSame(lastDay, "day")
+              ? lastDay.toFormat("LLL dd, yyyy")
+              : `${firstDay.toFormat("LLL dd")} – ${lastDay.toFormat("LLL dd, yyyy")}`}
+          </Text>
+        </Box>
+      </Box>
+
+      <Box className={classes.layout}>
+        <Box className={`${classes.card} ${classes.main}`}>
+          {resultTabs.length > 0 ? (
+            <Tabs defaultValue={resultTabs[0].value} variant="unstyled">
+              <Tabs.List className={classes.pills} mb="sm">
+                {resultTabs.map((tab) => (
+                  <Tabs.Tab key={tab.value} value={tab.value} className={classes.pill}>
+                    {tab.label}
+                  </Tabs.Tab>
+                ))}
+              </Tabs.List>
+              {resultTabs.map((tab) => (
+                <Tabs.Panel key={tab.value} value={tab.value}>
+                  {tab.content}
+                </Tabs.Panel>
+              ))}
+            </Tabs>
+          ) : nextEvent ? (
+            <Box className={classes.upcoming}>
+              <Text className={classes.eyebrow}>Up next</Text>
+              <Title order={2} className={classes.cardTitle}>
+                {nextEvent.name} starts in
+              </Title>
+              <Countdown dateTime={nextEvent.dateTime} />
+              <Text c="dimmed">Results appear here once the sessions are done.</Text>
+            </Box>
           ) : (
-            <Box ml="calc(10% + 2rem)">
-              <Title>{race.name}</Title>
-              <Title order={3}>{race.circuit.name}</Title>
+            <Text c="dimmed" py="xl">
+              No results available for this round.
+            </Text>
+          )}
+        </Box>
+
+        <Box className={classes.aside}>
+          <Box className={classes.card}>
+            <Box className={classes.cardHeader}>
+              <Title order={2} className={classes.cardTitle}>
+                Weekend
+              </Title>
+              <Text size="sm" c="dimmed">
+                {now.zoneName}
+              </Text>
+            </Box>
+            <Box>
+              {sessions.map((session) => (
+                <Box
+                  key={session.name}
+                  className={classes.session}
+                  data-past={(!!nextEvent && session.dateTime < now) || undefined}
+                >
+                  <Box>
+                    <Box className={classes.sessionName}>{session.name}</Box>
+                    <Box className={classes.sessionDate}>
+                      {session.dateTime.toFormat("ccc LLL dd")}
+                    </Box>
+                  </Box>
+                  <Box
+                    className={classes.sessionTime}
+                    data-next={
+                      (!!nextEvent && session.dateTime.equals(nextEvent.dateTime)) ||
+                      undefined
+                    }
+                  >
+                    {session.dateTime.toFormat("HH:mm")}
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+
+          {winner && (
+            <Box className={classes.card}>
+              <Title order={2} className={classes.cardTitle}>
+                Winner
+              </Title>
+              <Box className={classes.winner}>
+                <Box
+                  className={classes.winnerBar}
+                  style={{ backgroundColor: getTeamColor(winner.constructor.id) }}
+                />
+                <Box>
+                  <Box className={classes.winnerName}>
+                    {winner.driver.givenName} {winner.driver.familyName}
+                  </Box>
+                  <Text size="sm" c="dimmed">
+                    {winner.constructor.name}
+                    {winner.time ? ` · ${winner.time}` : ""}
+                  </Text>
+                </Box>
+              </Box>
             </Box>
           )}
-          <Tabs className={classes.tabsContainer} defaultValue="schedule">
-            <Tabs.List>
-              <Tabs.Tab value="schedule">Schedule</Tabs.Tab>
-              <Tabs.Tab value="results" disabled={!resultsAreActive}>
-                Results
-              </Tabs.Tab>
-            </Tabs.List>
-            <Tabs.Panel value="schedule" w="100%">
-              {race.events.isSprintWeekend ? (
-                <Box className={classes.events}>
-                  <EventDisplay event={race.events.race} />
-                  <EventDisplay event={race.events.qualifying} />
-                  <EventDisplay event={race.events.sprint} />
-                  <EventDisplay event={race.events.sprintShootout} />
-                  <EventDisplay event={race.events.firstPractice} />
-                </Box>
-              ) : (
-                <Box className={classes.events}>
-                  <EventDisplay event={race.events.race} />
-                  <EventDisplay event={race.events.qualifying} />
-                  <EventDisplay event={race.events.thirdPractice} />
-                  <EventDisplay event={race.events.secondPractice} />
-                  <EventDisplay event={race.events.firstPractice} />
-                </Box>
-              )}
-            </Tabs.Panel>
-            <Tabs.Panel value="results" w="100%">
-              <Results />
-            </Tabs.Panel>
-          </Tabs>
         </Box>
-      )}
-    </Box>
-  );
-};
-
-const EventDisplay: React.FC<{ event: Event | undefined }> = ({ event }) => {
-  if (!event) return undefined;
-  return (
-    <Box className={classes.eventContainer}>
-      <Box className={classes.date}>
-        <Title order={2}>{event.dateTime.day}</Title>
-        <Title order={4}>{event.dateTime.monthShort?.toUpperCase()}</Title>
-      </Box>
-      <Divider
-        orientation="vertical"
-        mr="lg"
-        ml="lg"
-        size="md"
-        color="light-dark(var(--mantine-color-gray-5), var(--mantine-color-gray-9))"
-      />
-      <Box className={classes.event}>
-        <Title order={1}>{event.name}</Title>
-        <Text size="xl">{event.dateTime.toFormat("HH:mm")}</Text>
       </Box>
     </Box>
-  );
-};
-
-const Results: React.FC = () => {
-  const { raceResult, sprintResult, qualifyingResult } =
-    useLoaderData() as IRoundLoader;
-  return (
-    <Tabs
-      defaultValue="race"
-      variant="pills"
-      className={classes.resultContainer}
-    >
-      <Tabs.List>
-        {raceResult && <Tabs.Tab value="race">Race</Tabs.Tab>}
-        {sprintResult && <Tabs.Tab value="sprint">Sprint</Tabs.Tab>}
-        {qualifyingResult && <Tabs.Tab value="qualifying">Qualifying</Tabs.Tab>}
-      </Tabs.List>
-      <Tabs.Panel value="race" w="100%">
-        <RaceResult />
-      </Tabs.Panel>
-      <Tabs.Panel value="sprint" w="100%">
-        <SprintResult />
-      </Tabs.Panel>
-      <Tabs.Panel value="qualifying" w="100%">
-        <QualifyingResult />
-      </Tabs.Panel>
-    </Tabs>
   );
 };
