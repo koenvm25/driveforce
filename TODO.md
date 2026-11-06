@@ -27,6 +27,21 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Show a title as clinched before the final round (uses the current points system: 25 per race and 8 per sprint for a driver, 43 and 15 for a team)
 - [ ] Team colours for historical teams (they fall back to grey)
 
+### Ideas (no API cost unless noted)
+
+- [ ] Add to calendar: download an `.ics` file with every session of a weekend, in the viewer's timezone
+- [ ] Title race view in the standings: mark drivers and teams who are mathematically out, and show how many points the others need (reuse the clinch logic in the standings loader)
+- [ ] Race table extras: fastest-lap marker and a "positions gained/lost vs grid" column
+- [ ] Past winners at this circuit on the round page (1 request)
+- [ ] Pit stops table on the round page (1 request)
+- [ ] Teammate head-to-head (qualifying and race wins) on driver profiles or in the Progress view
+- [ ] Team accent colour: pick a favourite team and the site accent takes its colour (pairs with the favourite driver item)
+- [ ] Predictions game: pick a podium before a race and get scored afterwards, stored in the browser
+- [ ] Global search to jump to a driver, race or season (a few requests)
+- [ ] Response cache in the browser (IndexedDB), possibly as an installable offline PWA, to reduce rate-limit pressure
+- [ ] Lap-by-lap race chart of position changes (about 1,400 lap rows, so 14 requests per race: only with the response cache above)
+- [ ] Live timing during a session (Jolpica has nothing live; OpenF1 does, but its live data is paid)
+
 ## Bugs
 
 - [x] Calendar only showed results for the first 5 races (the API caps `limit` at 100)
@@ -38,7 +53,6 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Header rendered the nav and theme toggle twice in the DOM (desktop and mobile variants)
 - [x] API rate limiting (429) broke pages: requests now retry with backoff, and failed loads show an error screen inside the page chrome
 - [x] Filled buttons had white text on the orange in dark mode (low contrast)
-
 - [x] Dev only: every loader ran twice, because `createBrowserRouter` was called inside the `Router` component and StrictMode renders it twice (router now lives at module scope)
 - [ ] Calendar and driver profile send about 6 requests within a second or two, which can brush the API's 4 requests/second limit on a cold load
 
