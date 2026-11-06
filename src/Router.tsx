@@ -13,7 +13,9 @@ import {
   roundLoader,
   seasonLoader,
   standingsLoader,
+  teamLoader,
 } from "./utils/loaders";
+import { TeamProfile } from "./screens/Team/TeamProfile";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,11 @@ const router = createBrowserRouter([
             path: "drivers/:driverId",
             element: <DriverProfile />,
             loader: ({ params }) => driverLoader(params.driverId!),
+          },
+          {
+            path: "teams/:teamId",
+            element: <TeamProfile />,
+            loader: ({ params }) => teamLoader(params.teamId!),
           },
           {
             path: "penalty-points",

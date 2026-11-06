@@ -95,7 +95,13 @@ export const Team: React.FC<{
       className={classes.teamDot}
       style={{ backgroundColor: getTeamColor(id) }}
     />
-    {name}
+    {id ? (
+      <Link to={`/teams/${id}`} className={classes.teamLink}>
+        {name}
+      </Link>
+    ) : (
+      name
+    )}
   </span>
 );
 

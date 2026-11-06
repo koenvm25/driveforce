@@ -1,3 +1,4 @@
+import { Constructor } from "./ConstructorStandingsDto";
 import { Driver } from "./DriverStandingsDto";
 
 export interface DriverTableDto {
@@ -5,6 +6,14 @@ export interface DriverTableDto {
   DriverTable: {
     driverId?: string;
     Drivers: Driver[];
+  };
+}
+
+export interface ConstructorTableDto {
+  total: string;
+  ConstructorTable: {
+    constructorId?: string;
+    Constructors: Constructor[];
   };
 }
 

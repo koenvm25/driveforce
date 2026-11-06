@@ -1,6 +1,10 @@
 import { mapToRaceTable } from "@/domain/RaceScheduleMapper";
 import {
   getCalendar,
+  getConstructor,
+  getConstructorSeasonResults,
+  getConstructorSeasonStanding,
+  getConstructorSeasons,
   getConstructorStandings,
   getCurrentCalendar,
   getDriver,
@@ -24,7 +28,10 @@ import {
   mapToSprintResult,
 } from "@/domain/ResultsMapper";
 import { RaceResult } from "@/types/Results";
-import { ConstructorStandingsEntity } from "@/types/dto/ConstructorStandingsDto";
+import {
+  Constructor,
+  ConstructorStandingsEntity,
+} from "@/types/dto/ConstructorStandingsDto";
 import { DriverStandingsEntity } from "@/types/dto/DriverStandingsDto";
 
 export interface ISeasonLoader {
@@ -100,6 +107,42 @@ export async function driverLoader(driverId: string): Promise<IDriverLoader> {
     seasons,
     latestSeason,
     latestSeasonRaces: resultsDto?.data.MRData?.RaceTable.Races ?? [],
+  };
+}
+
+export interface ITeamLoader {
+  team: Constructor | undefined;
+  seasons: string[];
+  latestSeason: string | undefined;
+  latestSeasonRaces: RacesEntityResults[];
+  standing: ConstructorStandingsEntity | undefined;
+}
+export async function teamLoader(constructorId: string): Promise<ITeamLoader> {
+  const [teamDto, seasonsDto] = await Promise.all([
+    getConstructor(constructorId),
+    getConstructorSeasons(constructorId),
+  ]);
+  const seasons = (seasonsDto.data.MRData?.SeasonTable.Seasons ?? []).map(
+    (entry) => entry.season,
+  );
+  const latestSeason = seasons[seasons.length - 1];
+  const [resultsDto, standingDto] = latestSeason
+    ? await Promise.all([
+        getConstructorSeasonResults(constructorId, latestSeason),
+        // no constructors championship before 1958
+        getConstructorSeasonStanding(constructorId, latestSeason).catch(
+          () => undefined,
+        ),
+      ])
+    : [undefined, undefined];
+  return {
+    team: teamDto.data.MRData?.ConstructorTable.Constructors[0],
+    seasons,
+    latestSeason,
+    latestSeasonRaces: resultsDto?.data.MRData?.RaceTable.Races ?? [],
+    standing:
+      standingDto?.data.MRData?.StandingsTable.StandingsLists[0]
+        ?.ConstructorStandings?.[0],
   };
 }
 

@@ -14,7 +14,8 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 ## Features
 
 - [x] Driver profile pages (linked from standings, results and home)
-- [ ] Team profile pages
+- [x] Team profile pages (linked from team names in every table; wins and poles are lazy, 2 requests)
+- [ ] Constructor championships count on team profiles (needs one standings request per season)
 - [ ] Championships count on driver profiles (needs one standings request per season)
 - [x] Season points chart with head-to-head compare (Standings, "Progress" view)
 - [x] Session times in the viewer's timezone on every screen
