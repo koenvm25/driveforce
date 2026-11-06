@@ -20,7 +20,7 @@ npx tsc --noEmit -p .    # type check, must stay clean
 npx prettier --write <files>   # format the files you touched
 ```
 
-Node 24 (see `mise.toml`). There is no test suite, so verification is the type check, lint and looking at the page (see below).
+Node 24 (pinned in `mise.toml`) and Yarn 3 (Berry, 3.6.4) with `nodeLinker: node-modules` (`.yarnrc.yml`), so installs go into `node_modules` as usual. There is no test suite, so verification is the type check, lint and looking at the page (see below).
 
 ## Working on a TODO item
 
@@ -29,7 +29,7 @@ Node 24 (see `mise.toml`). There is no test suite, so verification is the type c
 3. Verify it (type check, lint, and the browser checks below).
 4. Tick the item in `TODO.md` **in the same commit**, and add any new bugs or ideas you found as new unchecked items (put each under the right heading).
 5. One commit per item. Short lowercase imperative message, e.g. `add driver profile pages`. Do not push unless asked.
-6. Only stage the files you changed. The working tree usually has local files that are not ours (`yarn.lock`, `.yarn/`, `.yarnrc.yml`, `mise.toml`); leave them alone.
+6. Only stage the files you changed, so unrelated work in the tree doesn't end up in your commit.
 
 The user often already has the dev server running on port 5173. Reuse it; don't start a second one or restart it.
 
@@ -74,4 +74,4 @@ If a Playwright MCP is available, check every UI change at **1360 px and 390 px 
 - Comments only where the reason isn't obvious from the code (a constraint or a gotcha). Don't narrate what the code does.
 - Keep screens thin: data in loaders or hooks, markup in the screen, styling in its CSS module. Reuse `ResultsTable`, `Countdown` and the helpers in `src/utils/` before writing new ones.
 - Real links (`<Link>`, `<a>`) for navigation and real `<button>`s for actions, with a visible focus state and at least 44 px touch targets.
-- Don't add a dependency without a good reason, and tell the user when you do (`yarn.lock` is theirs to commit).
+- Don't add a dependency without a good reason, and tell the user when you do. Commit the updated `yarn.lock` together with `package.json`.
