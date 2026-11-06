@@ -99,6 +99,40 @@ export const Team: React.FC<{
   </span>
 );
 
+export const FastestLapMark: React.FC = () => (
+  <span className={classes.fastest} title="Fastest lap">
+    <FontAwesomeIcon icon={["fas", "stopwatch"]} />
+    <span className={classes.srOnly}>Fastest lap</span>
+  </span>
+);
+
+export const PositionsDelta: React.FC<{ grid: string; position: string }> = ({
+  grid,
+  position,
+}) => {
+  const start = Number(grid) === 0 ? undefined : Number(grid);
+  if (start === undefined) {
+    return (
+      <span className={classes.delta} data-trend="same" title="Pit lane start">
+        PL
+      </span>
+    );
+  }
+  const delta = start - Number(position);
+  if (delta === 0) {
+    return (
+      <span className={classes.delta} data-trend="same">
+        –
+      </span>
+    );
+  }
+  return (
+    <span className={classes.delta} data-trend={delta > 0 ? "gain" : "loss"}>
+      {delta > 0 ? "▲" : "▼"} {Math.abs(delta)}
+    </span>
+  );
+};
+
 export const Points: React.FC<{ value: string }> = ({ value }) => (
   <span className={classes.points}>{value}</span>
 );

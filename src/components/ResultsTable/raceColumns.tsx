@@ -1,5 +1,13 @@
 import { Result } from "@/types/Results";
-import { Column, DriverName, Points, Position, Team } from "./ResultsTable";
+import {
+  Column,
+  DriverName,
+  FastestLapMark,
+  Points,
+  PositionsDelta,
+  Position,
+  Team,
+} from "./ResultsTable";
 
 export const raceColumns: Column<Result>[] = [
   {
@@ -26,7 +34,12 @@ export const raceColumns: Column<Result>[] = [
     key: "grid",
     header: "Grid",
     hideBelow: "md",
-    render: (result) => result.grid,
+    render: (result) => (
+      <>
+        {result.grid}{" "}
+        <PositionsDelta grid={result.grid} position={result.position} />
+      </>
+    ),
   },
   {
     key: "laps",
@@ -38,7 +51,12 @@ export const raceColumns: Column<Result>[] = [
     key: "time",
     header: "Time",
     align: "right",
-    render: (result) => result.time || "DNF",
+    render: (result) => (
+      <>
+        {result.fastestLaps?.rank === "1" && <FastestLapMark />}
+        {result.time || "DNF"}
+      </>
+    ),
   },
   {
     key: "points",

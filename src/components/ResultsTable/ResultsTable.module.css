@@ -127,6 +127,39 @@
   font-size: rem(22px);
 }
 
+.fastest {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(6px);
+  margin-right: rem(10px);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  color: var(--df-fastest);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.delta {
+  font-weight: 600;
+
+  &[data-trend="gain"] {
+    color: var(--df-gain);
+  }
+  &[data-trend="loss"] {
+    color: var(--df-loss);
+  }
+  &[data-trend="same"] {
+    color: var(--mantine-color-dimmed);
+  }
+}
+
 .pointsBar {
   display: flex;
   align-items: center;

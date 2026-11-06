@@ -3,6 +3,9 @@
   --df-gold: #a87a00;
   --df-silver: #6c727f;
   --df-bronze: #a5582a;
+  --df-fastest: #7c3aed;
+  --df-gain: #1a7f4b;
+  --df-loss: #c0392b;
 
   --df-surface: #ffffff;
   --df-line: #e5ddd3;
@@ -27,6 +30,9 @@
   --df-gold: #f5c84b;
   --df-silver: #c4c9d2;
   --df-bronze: #d08a55;
+  --df-fastest: #b794f6;
+  --df-gain: #4ade80;
+  --df-loss: #f87171;
 
   --df-surface: #191614;
   --df-line: #2d2825;
