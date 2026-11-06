@@ -58,6 +58,8 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 
 - [x] Standings tables on mobile (390 px) push the points number out of view: the name column (champion badge, title status) grows and the table scrolls sideways
 
+- [x] Points chart legend did not show dashed lines, so a teammate's dashed line could not be told from a solid one (custom legend now draws each series' line style, as in the design)
+
 ## Chores
 
 - [x] Update the design canvas to the real Ink & Ember colours and add the screens it lacks (driver profile, progress chart, champion badges, error screen)

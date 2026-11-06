@@ -22,25 +22,22 @@ export const PointsChart: React.FC<Props> = ({ season, driverStandings }) => {
   const [selected, setSelected] = useState(() =>
     driverStandings
       .slice(0, DEFAULT_SELECTION)
-      .map((entry) => entry.Driver.driverId)
+      .map((entry) => entry.Driver.driverId),
   );
   const results = useSeasonResultsQuery(season);
   const sprints = useSeasonSprintResultsQuery(season);
 
   const rows = useMemo(
     () =>
-      mapToPointsProgress(
-        results.data?.data.MRData,
-        sprints.data?.data.MRData
-      ),
-    [results.data, sprints.data]
+      mapToPointsProgress(results.data?.data.MRData, sprints.data?.data.MRData),
+    [results.data, sprints.data],
   );
 
   const series = useMemo(() => {
     const perTeam = new Map<string, number>();
     return selected.flatMap((driverId): LineChartSeries[] => {
       const entry = driverStandings.find(
-        (candidate) => candidate.Driver.driverId === driverId
+        (candidate) => candidate.Driver.driverId === driverId,
       );
       if (!entry) return [];
       const teamId = entry.Constructors[0]?.constructorId ?? "";
@@ -94,19 +91,43 @@ export const PointsChart: React.FC<Props> = ({ season, driverStandings }) => {
             : "No results available for this season."}
         </Text>
       ) : (
-        <LineChart
-          h={420}
-          data={rows}
-          dataKey="round"
-          series={series}
-          curveType="linear"
-          strokeWidth={3}
-          withDots={false}
-          withLegend
-          gridAxis="xy"
-          yAxisProps={{ domain: [0, "auto"] }}
-          tooltipAnimationDuration={150}
-        />
+        <>
+          <LineChart
+            h={420}
+            data={rows}
+            dataKey="round"
+            series={series}
+            curveType="linear"
+            strokeWidth={3}
+            withDots={false}
+            gridAxis="xy"
+            yAxisProps={{ domain: [0, "auto"] }}
+            tooltipAnimationDuration={150}
+          />
+          <ul className={classes.legend}>
+            {series.map((item) => (
+              <li key={item.name} className={classes.legendItem}>
+                <svg
+                  width="28"
+                  height="4"
+                  viewBox="0 0 28 4"
+                  aria-hidden="true"
+                >
+                  <line
+                    x1="0"
+                    x2="28"
+                    y1="2"
+                    y2="2"
+                    stroke={item.color}
+                    strokeWidth="3"
+                    strokeDasharray={item.strokeDasharray}
+                  />
+                </svg>
+                {item.label}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );

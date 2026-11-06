@@ -11,6 +11,24 @@
   border-color: var(--df-line);
 }
 
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: rem(12px) rem(28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+}
+
 .loading {
   height: rem(420px);
   display: flex;
