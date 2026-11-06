@@ -35,7 +35,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Past winners at this circuit on the round page (1 lazy request; shows the last 5, expandable)
 - [x] Pit stops table on the round page (1 lazy request, only when the tab is opened)
 - [ ] Teammate head-to-head (qualifying and race wins) on driver profiles or in the Progress view
-- [ ] Team accent colour: pick a favourite team and the site accent takes its colour (pairs with the favourite driver item)
+- [x] Team accent colour: the site accent takes the colour of the favourite driver's team (switch on the home card; colours are adjusted per theme to keep text contrast)
 - [ ] Predictions game: pick a podium before a race and get scored afterwards, stored in the browser
 - [ ] Global search to jump to a driver, race or season (a few requests)
 - [ ] Response cache in the browser (IndexedDB), possibly as an installable offline PWA, to reduce rate-limit pressure

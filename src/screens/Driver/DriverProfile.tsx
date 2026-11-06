@@ -142,7 +142,10 @@ export const DriverProfile: React.FC = () => {
         className={classes.favourite}
         aria-pressed={isFavourite}
         onClick={() =>
-          setFavouriteId(isFavourite ? undefined : driver.driverId)
+          setFavouriteId(
+            isFavourite ? undefined : driver.driverId,
+            team?.constructorId,
+          )
         }
       >
         <FontAwesomeIcon icon={[isFavourite ? "fas" : "far", "star"]} />

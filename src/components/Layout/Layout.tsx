@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { Container } from "@mantine/core";
 import { Outlet, useNavigation } from "react-router-dom";
+import { AccentSync } from "../AccentSync";
 import { BottomNav } from "../BottomNav/BottomNav";
 import { Header } from "../Header/Header";
 import { nprogress } from "@mantine/nprogress";
@@ -19,6 +20,7 @@ export const Layout: React.FC = () => {
 
   return (
     <div>
+      <AccentSync />
       <Header />
       <Container
         size={1200}

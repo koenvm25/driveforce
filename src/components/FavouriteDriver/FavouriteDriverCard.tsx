@@ -1,8 +1,8 @@
 import { DriverStandingsEntity } from "@/types/dto/DriverStandingsDto";
 import { Result } from "@/types/Results";
-import { useFavouriteDriver } from "@/utils/favouriteDriver";
+import { useFavouriteDriver, useTeamAccent } from "@/utils/favouriteDriver";
 import { getTeamColor } from "@/utils/teamColors";
-import { Select, Text, Title } from "@mantine/core";
+import { Select, Switch, Text, Title } from "@mantine/core";
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./FavouriteDriverCard.module.css";
@@ -17,6 +17,7 @@ export const FavouriteDriverCard: React.FC<Props> = ({
   lastRaceResults,
 }) => {
   const [favouriteId, setFavouriteId] = useFavouriteDriver();
+  const [accentEnabled, setAccentEnabled] = useTeamAccent();
   const entry = standings.find((item) => item.Driver.driverId === favouriteId);
 
   if (!entry) {
@@ -35,7 +36,17 @@ export const FavouriteDriverCard: React.FC<Props> = ({
             label: `${item.Driver.givenName} ${item.Driver.familyName}`,
           }))}
           value={null}
-          onChange={(value) => value && setFavouriteId(value)}
+          onChange={(value) => {
+            const picked = standings.find(
+              (item) => item.Driver.driverId === value,
+            );
+            if (picked) {
+              setFavouriteId(
+                picked.Driver.driverId,
+                picked.Constructors[0]?.constructorId,
+              );
+            }
+          }}
           classNames={{ input: classes.select }}
           maw={360}
         />
@@ -94,6 +105,11 @@ export const FavouriteDriverCard: React.FC<Props> = ({
           </div>
         ))}
       </div>
+      <Switch
+        label="Use the team colour across the site"
+        checked={accentEnabled}
+        onChange={(event) => setAccentEnabled(event.currentTarget.checked)}
+      />
     </div>
   );
 };

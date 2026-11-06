@@ -64,5 +64,8 @@ const TEAM_COLORS: Record<string, string> = {
 
 const FALLBACK = "#8A8178";
 
+export const hasTeamColor = (constructorId: string | undefined) =>
+  !!constructorId && constructorId in TEAM_COLORS;
+
 export const getTeamColor = (constructorId: string | undefined) =>
   (constructorId && TEAM_COLORS[constructorId]) || FALLBACK;
