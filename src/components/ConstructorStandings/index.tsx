@@ -1,4 +1,5 @@
 import {
+  ChampionBadge,
   Column,
   PointsBar,
   Position,
@@ -13,10 +14,15 @@ import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const ConstructorStandings: React.FC = () => {
-  const { constructorStandings } = useLoaderData() as IStandingsLoader;
+  const { constructorStandings, seasonComplete } =
+    useLoaderData() as IStandingsLoader;
 
   if (!constructorStandings?.length) {
-    return <Text c="dimmed" py="xl" ta="center">No data available</Text>;
+    return (
+      <Text c="dimmed" py="xl" ta="center">
+        No data available
+      </Text>
+    );
   }
 
   const leaderPoints = Number(constructorStandings[0].points);
@@ -36,6 +42,7 @@ export const ConstructorStandings: React.FC = () => {
             id={entry.Constructor.constructorId}
             name={entry.Constructor.name}
           />
+          {seasonComplete && entry.position === "1" && <ChampionBadge />}
           <SubText>{entry.Constructor.nationality}</SubText>
         </>
       ),

@@ -19,6 +19,14 @@
   text-transform: uppercase;
 }
 
+.champions {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  font-weight: 600;
+  color: var(--df-gold);
+}
+
 .controls {
   display: flex;
   flex-wrap: wrap;

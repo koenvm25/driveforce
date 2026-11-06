@@ -23,6 +23,9 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] Qualifying and sprint results in the same table switcher as the race
 - [x] Constructors standings with points bars
 - [x] Previous/next round buttons on the round page
+- [x] Champion badges and a champions line on finished seasons in the standings
+- [ ] Show a title as clinched before the final round (needs remaining rounds and sprints from the calendar)
+- [ ] Team colours for historical teams (they fall back to grey)
 
 ## Bugs
 

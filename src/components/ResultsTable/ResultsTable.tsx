@@ -1,4 +1,5 @@
 import { getTeamColor } from "@/utils/teamColors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./ResultsTable.module.css";
@@ -119,6 +120,13 @@ export const PointsBar: React.FC<{
       />
     </span>
     <span className={classes.points}>{value}</span>
+  </span>
+);
+
+export const ChampionBadge: React.FC = () => (
+  <span className={classes.champion}>
+    <FontAwesomeIcon icon={["fas", "trophy"]} />
+    Champion
   </span>
 );
 

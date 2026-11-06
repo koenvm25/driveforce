@@ -1,4 +1,5 @@
 import {
+  ChampionBadge,
   Column,
   DriverName,
   PointsBar,
@@ -14,10 +15,15 @@ import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const DriverStandings: React.FC = () => {
-  const { driverStandings } = useLoaderData() as IStandingsLoader;
+  const { driverStandings, seasonComplete } =
+    useLoaderData() as IStandingsLoader;
 
   if (!driverStandings?.length) {
-    return <Text c="dimmed" py="xl" ta="center">No data available</Text>;
+    return (
+      <Text c="dimmed" py="xl" ta="center">
+        No data available
+      </Text>
+    );
   }
 
   const leaderPoints = Number(driverStandings[0].points);
@@ -33,6 +39,7 @@ export const DriverStandings: React.FC = () => {
       render: (entry) => (
         <>
           <DriverName driver={entry.Driver} id={entry.Driver.driverId} />
+          {seasonComplete && entry.position === "1" && <ChampionBadge />}
           <SubText>{entry.Driver.nationality}</SubText>
         </>
       ),

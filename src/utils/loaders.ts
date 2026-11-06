@@ -105,18 +105,28 @@ export async function driverLoader(driverId: string): Promise<IDriverLoader> {
 
 export interface IStandingsLoader {
   round: string | undefined;
+  seasonComplete: boolean;
   constructorStandings: ConstructorStandingsEntity[] | undefined;
   driverStandings: DriverStandingsEntity[] | undefined;
 }
 export async function standingsLoader(
   season: string
 ): Promise<IStandingsLoader> {
-  const [driverStandings, constructorStandings] = await Promise.all([
+  const isPastSeason = Number(season) < new Date().getFullYear();
+  const [driverStandings, constructorStandings, calendar] = await Promise.all([
     getDriverStandings(season),
     getConstructorStandings(season),
+    isPastSeason ? undefined : getCalendar(season).catch(() => undefined),
   ]);
+  const round =
+    driverStandings.data.MRData?.StandingsTable.StandingsLists[0]?.round;
+  const roundCount = calendar?.data.MRData?.RaceTable.Races.length;
+  const seasonComplete = isPastSeason
+    ? !!round
+    : !!round && !!roundCount && Number(round) >= roundCount;
   return {
-    round: driverStandings.data.MRData?.StandingsTable.StandingsLists[0]?.round,
+    round,
+    seasonComplete,
     constructorStandings:
       constructorStandings.data.MRData?.StandingsTable.StandingsLists[0]
         ?.ConstructorStandings,

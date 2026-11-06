@@ -153,6 +153,22 @@
   text-align: right;
 }
 
+.champion {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(6px);
+  margin-left: rem(10px);
+  padding: rem(2px) rem(8px);
+  border: 1px solid var(--df-gold);
+  border-radius: rem(999px);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--df-gold);
+  vertical-align: middle;
+}
+
 .sub {
   font-size: var(--mantine-font-size-xs);
   font-weight: 400;

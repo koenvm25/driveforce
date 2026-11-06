@@ -2,6 +2,7 @@ import { ConstructorStandings } from "@/components/ConstructorStandings";
 import { DriverStandings } from "@/components/DriverStandings";
 import { PointsChart } from "@/components/PointsChart/PointsChart";
 import { IStandingsLoader } from "@/utils/loaders";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, SegmentedControl, Select, Text, Title } from "@mantine/core";
 import { DateTime } from "luxon";
 import { useMemo, useState } from "react";
@@ -13,7 +14,10 @@ type Championship = "drivers" | "constructors" | "progress";
 export function Standings() {
   const { season } = useParams();
   const navigate = useNavigate();
-  const { round, driverStandings } = useLoaderData() as IStandingsLoader;
+  const { round, seasonComplete, driverStandings, constructorStandings } =
+    useLoaderData() as IStandingsLoader;
+  const driverChampion = driverStandings?.[0];
+  const constructorChampion = constructorStandings?.[0];
   const [championship, setChampionship] = useState<Championship>("drivers");
 
   const seasons = useMemo(() => {
@@ -33,7 +37,18 @@ export function Standings() {
           </Title>
           {round && (
             <Text mt="sm" c="dimmed">
-              After round {round}
+              {seasonComplete
+                ? `Final standings · ${round} rounds`
+                : `After round ${round}`}
+            </Text>
+          )}
+          {seasonComplete && (driverChampion || constructorChampion) && (
+            <Text mt={4} className={classes.champions}>
+              <FontAwesomeIcon icon={["fas", "trophy"]} />
+              {driverChampion &&
+                `${driverChampion.Driver.givenName} ${driverChampion.Driver.familyName}`}
+              {driverChampion && constructorChampion && " · "}
+              {constructorChampion && constructorChampion.Constructor.name}
             </Text>
           )}
         </Box>
@@ -47,7 +62,10 @@ export function Standings() {
             ]}
             value={championship}
             onChange={(value) => setChampionship(value as Championship)}
-            classNames={{ root: classes.switcher, label: classes.switcherLabel }}
+            classNames={{
+              root: classes.switcher,
+              label: classes.switcherLabel,
+            }}
           />
           <Select
             aria-label="Season"
