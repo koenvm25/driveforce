@@ -1,4 +1,5 @@
 import { Countdown } from "@/components/Countdown/Countdown";
+import { PitStops } from "@/components/PitStops";
 import { QualifyingResult } from "@/components/Qualifying";
 import { RaceResult } from "@/components/RaceResult";
 import { SprintResult } from "@/components/SprintResult";
@@ -63,6 +64,13 @@ export const Round: React.FC = () => {
       content: <QualifyingResult />,
     });
   }
+  if (raceResult) {
+    resultTabs.push({
+      value: "pitstops",
+      label: "Pit stops",
+      content: <PitStops />,
+    });
+  }
 
   const firstDay = sessions[0]?.dateTime ?? race.events.race.dateTime;
   const lastDay = race.events.race.dateTime;
@@ -113,7 +121,11 @@ export const Round: React.FC = () => {
       <Box className={classes.layout}>
         <Box className={`${classes.card} ${classes.main}`}>
           {resultTabs.length > 0 ? (
-            <Tabs defaultValue={resultTabs[0].value} variant="unstyled">
+            <Tabs
+              defaultValue={resultTabs[0].value}
+              variant="unstyled"
+              keepMounted={false}
+            >
               <Tabs.List className={classes.pills} mb="sm">
                 {resultTabs.map((tab) => (
                   <Tabs.Tab

@@ -99,10 +99,12 @@ export const Team: React.FC<{
   </span>
 );
 
-export const FastestLapMark: React.FC = () => (
-  <span className={classes.fastest} title="Fastest lap">
+export const FastestLapMark: React.FC<{ label?: string }> = ({
+  label = "Fastest lap",
+}) => (
+  <span className={classes.fastest} title={label}>
     <FontAwesomeIcon icon={["fas", "stopwatch"]} />
-    <span className={classes.srOnly}>Fastest lap</span>
+    <span className={classes.srOnly}>{label}</span>
   </span>
 );
 

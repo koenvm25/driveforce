@@ -5,9 +5,11 @@ import {
 } from "@/domain/ResultsMapper";
 import { RaceResult } from "@/types/Results";
 import { ErgastResponse } from "@/types/dto/ErgastDto";
+import { PitStopDto } from "@/types/dto/PitStopsDto";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
 import {
   getCircuitWinners,
+  getPitStops,
   getQualifyingResults,
   getRaceResults,
   getSeasonResults,
@@ -34,6 +36,19 @@ export const useSeasonSprintResultsQuery = (season: string, enabled = true) => {
     enabled,
     gcTime: toMillis({ minutes: 90 }),
     staleTime: toMillis({ minutes: 60 }),
+  });
+};
+
+export const usePitStopsQuery = (season: string, round: string) => {
+  return useQuery<PitStopDto[]>({
+    queryKey: ["pitStops", season, round],
+    queryFn: async () => {
+      const dto = await getPitStops(season, round);
+      return dto.data.MRData?.RaceTable.Races?.[0]?.PitStops ?? [];
+    },
+    gcTime: toMillis({ minutes: 90 }),
+    staleTime: toMillis({ minutes: 60 }),
+    retry: 1,
   });
 };
 

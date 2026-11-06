@@ -3,6 +3,7 @@ import { get } from "./axiosConfig";
 import { DriverStandings } from "@/types/dto/DriverStandingsDto";
 import { RaceSchedule } from "@/types/dto/RaceScheduleDto";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
+import { PitStopsDto } from "@/types/dto/PitStopsDto";
 import { ConstructorStandings } from "@/types/dto/ConstructorStandingsDto";
 import {
   DriverTableDto,
@@ -77,6 +78,11 @@ export const getRaceResults = (
   season: string,
   round: string,
 ): ErgastResponse<RaceResultsDto> => get(`/${season}/${round}/results.json`);
+export const getPitStops = (
+  season: string,
+  round: string,
+): ErgastResponse<PitStopsDto> =>
+  get(`/${season}/${round}/pitstops.json?limit=${MAX_PAGE_SIZE}`);
 export const getCircuitWinners = (
   circuitId: string,
 ): ErgastResponse<RaceResultsDto> =>
