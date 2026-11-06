@@ -51,17 +51,11 @@
 }
 
 .action {
-  margin-left: rem(8px);
   background-color: var(--df-surface);
   border-color: var(--df-line);
   color: var(--mantine-color-text);
 
-  @media (max-width: 47.99em) {
-    margin-left: 0;
+  @media (min-width: 48em) {
+    margin-left: rem(8px);
   }
-}
-
-.menuItem[data-active] {
-  color: var(--df-accent-text);
-  font-weight: 600;
 }

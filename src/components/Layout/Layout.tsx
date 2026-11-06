@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { Container } from "@mantine/core";
 import { Outlet, useNavigation } from "react-router-dom";
+import { BottomNav } from "../BottomNav/BottomNav";
 import { Header } from "../Header/Header";
 import { nprogress } from "@mantine/nprogress";
 
@@ -19,9 +20,16 @@ export const Layout: React.FC = () => {
   return (
     <div>
       <Header />
-      <Container size={1200} py={40} display="flex" style={{ flexDirection: "column" }}>
+      <Container
+        size={1200}
+        pt={40}
+        pb={{ base: 104, sm: 40 }}
+        display="flex"
+        style={{ flexDirection: "column" }}
+      >
         <Outlet />
       </Container>
+      <BottomNav />
     </div>
   );
 };

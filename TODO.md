@@ -9,7 +9,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] Calendar
 - [x] Round detail
 - [x] Standings
-- [ ] Mobile bottom tab bar (the header still uses a burger menu)
+- [x] Mobile bottom tab bar (replaces the burger menu)
 
 ## Features
 
@@ -30,7 +30,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] `isEventInTheFuture` returned `true` for events in the past (renamed to `hasEventPassed`)
 - [x] `getCurrentSeasonResults` asked for `limit=10000` (capped at 100, unused, removed)
 - [x] "Spring shootout" typo in `getNextEvent` (should be "Sprint shootout")
-- [ ] Header renders the nav and theme toggle twice in the DOM (desktop and mobile variants)
+- [x] Header rendered the nav and theme toggle twice in the DOM (desktop and mobile variants)
 
 ## Chores
 

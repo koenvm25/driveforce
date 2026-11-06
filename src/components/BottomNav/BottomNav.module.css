@@ -1,0 +1,41 @@
+.nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: var(--mantine-color-body);
+  border-top: 1px solid var(--df-line);
+
+  @media (min-width: 48em) {
+    display: none;
+  }
+}
+
+.item {
+  min-height: rem(64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(4px);
+  margin-top: -1px;
+  border-top: 2px solid transparent;
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+  text-decoration: none;
+
+  svg {
+    font-size: rem(18px);
+  }
+
+  &[data-active] {
+    border-top-color: var(--df-accent);
+    font-weight: 600;
+    color: var(--mantine-color-text);
+  }
+}
