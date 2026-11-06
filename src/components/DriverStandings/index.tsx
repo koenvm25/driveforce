@@ -7,6 +7,7 @@ import {
   ResultsTable,
   SubText,
   Team,
+  TitleStatus,
 } from "@/components/ResultsTable/ResultsTable";
 import { DriverStandingsEntity } from "@/types/dto/DriverStandingsDto";
 import { IStandingsLoader } from "@/utils/loaders";
@@ -15,7 +16,7 @@ import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const DriverStandings: React.FC = () => {
-  const { driverStandings, driverTitleDecided } =
+  const { driverStandings, driverTitleDecided, driverPointsLeft } =
     useLoaderData() as IStandingsLoader;
 
   if (!driverStandings?.length) {
@@ -40,7 +41,15 @@ export const DriverStandings: React.FC = () => {
         <>
           <DriverName driver={entry.Driver} id={entry.Driver.driverId} />
           {driverTitleDecided && entry.position === "1" && <ChampionBadge />}
-          <SubText>{entry.Driver.nationality}</SubText>
+          <SubText>
+            {entry.Driver.nationality}
+            <TitleStatus
+              points={entry.points}
+              leaderPoints={leaderPoints}
+              pointsLeft={driverPointsLeft}
+              decided={driverTitleDecided}
+            />
+          </SubText>
         </>
       ),
     },

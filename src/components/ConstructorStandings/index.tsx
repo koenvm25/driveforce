@@ -6,6 +6,7 @@ import {
   ResultsTable,
   SubText,
   Team,
+  TitleStatus,
 } from "@/components/ResultsTable/ResultsTable";
 import { ConstructorStandingsEntity } from "@/types/dto/ConstructorStandingsDto";
 import { IStandingsLoader } from "@/utils/loaders";
@@ -14,8 +15,11 @@ import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const ConstructorStandings: React.FC = () => {
-  const { constructorStandings, constructorTitleDecided } =
-    useLoaderData() as IStandingsLoader;
+  const {
+    constructorStandings,
+    constructorTitleDecided,
+    constructorPointsLeft,
+  } = useLoaderData() as IStandingsLoader;
 
   if (!constructorStandings?.length) {
     return (
@@ -45,7 +49,15 @@ export const ConstructorStandings: React.FC = () => {
           {constructorTitleDecided && entry.position === "1" && (
             <ChampionBadge />
           )}
-          <SubText>{entry.Constructor.nationality}</SubText>
+          <SubText>
+            {entry.Constructor.nationality}
+            <TitleStatus
+              points={entry.points}
+              leaderPoints={leaderPoints}
+              pointsLeft={constructorPointsLeft}
+              decided={constructorTitleDecided}
+            />
+          </SubText>
         </>
       ),
     },

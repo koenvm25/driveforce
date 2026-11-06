@@ -166,6 +166,24 @@ export const ChampionBadge: React.FC = () => (
   </span>
 );
 
+export const TitleStatus: React.FC<{
+  points: string;
+  leaderPoints: number;
+  pointsLeft: number | undefined;
+  decided: boolean;
+}> = ({ points, leaderPoints, pointsLeft, decided }) => {
+  const gap = leaderPoints - Number(points);
+  if (decided || pointsLeft === undefined || gap === 0) return null;
+  if (gap > pointsLeft) {
+    return <span className={classes.out}> · Out of the title</span>;
+  }
+  return (
+    <div>
+      {gap} behind, can reach {Number(points) + pointsLeft}
+    </div>
+  );
+};
+
 export const SubText: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => <div className={classes.sub}>{children}</div>;

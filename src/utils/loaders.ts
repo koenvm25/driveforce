@@ -114,6 +114,8 @@ export interface IStandingsLoader {
   seasonComplete: boolean;
   driverTitleDecided: boolean;
   constructorTitleDecided: boolean;
+  driverPointsLeft: number | undefined;
+  constructorPointsLeft: number | undefined;
   constructorStandings: ConstructorStandingsEntity[] | undefined;
   driverStandings: DriverStandingsEntity[] | undefined;
 }
@@ -146,34 +148,40 @@ export async function standingsLoader(
   const remainingSprints = remainingRaces.filter(
     (race) => !!race.Sprint,
   ).length;
+  const pointsLeft = (maxPerRace: number, maxPerSprint: number) =>
+    seasonComplete || !calendarRaces
+      ? undefined
+      : remainingRaces.length * maxPerRace + remainingSprints * maxPerSprint;
+  const driverPointsLeft = pointsLeft(MAX_RACE_POINTS, MAX_SPRINT_POINTS);
+  const constructorPointsLeft = pointsLeft(
+    MAX_TEAM_RACE_POINTS,
+    MAX_TEAM_SPRINT_POINTS,
+  );
   const isTitleDecided = (
     leader: { points: string } | undefined,
     second: { points: string } | undefined,
-    maxPerRace: number,
-    maxPerSprint: number,
+    maxRemaining: number | undefined,
   ) => {
     if (!leader) return false;
     if (seasonComplete) return true;
-    if (!second || !calendarRaces) return false;
-    const maxRemaining =
-      remainingRaces.length * maxPerRace + remainingSprints * maxPerSprint;
+    if (!second || maxRemaining === undefined) return false;
     return Number(leader.points) - Number(second.points) > maxRemaining;
   };
 
   return {
     round,
     seasonComplete,
+    driverPointsLeft,
+    constructorPointsLeft,
     driverTitleDecided: isTitleDecided(
       driverList?.[0],
       driverList?.[1],
-      MAX_RACE_POINTS,
-      MAX_SPRINT_POINTS,
+      driverPointsLeft,
     ),
     constructorTitleDecided: isTitleDecided(
       constructorList?.[0],
       constructorList?.[1],
-      MAX_TEAM_RACE_POINTS,
-      MAX_TEAM_SPRINT_POINTS,
+      constructorPointsLeft,
     ),
     constructorStandings: constructorList,
     driverStandings: driverList,

@@ -30,7 +30,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 ### Ideas (no API cost unless noted)
 
 - [x] Add to calendar: download an `.ics` file with every session of a weekend, in the viewer's timezone
-- [ ] Title race view in the standings: mark drivers and teams who are mathematically out, and show how many points the others need (reuse the clinch logic in the standings loader)
+- [x] Title race view in the standings: mark drivers and teams who are mathematically out, and show how many points the others need (reuse the clinch logic in the standings loader)
 - [x] Race table extras: fastest-lap marker and a "positions gained/lost vs grid" column (the delta sits in the Grid column; the marker shows on every screen size, the delta from 62em up)
 - [x] Past winners at this circuit on the round page (1 lazy request; shows the last 5, expandable)
 - [x] Pit stops table on the round page (1 lazy request, only when the tab is opened)
@@ -55,6 +55,8 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Filled buttons had white text on the orange in dark mode (low contrast)
 - [x] Dev only: every loader ran twice, because `createBrowserRouter` was called inside the `Router` component and StrictMode renders it twice (router now lives at module scope)
 - [x] Calendar and driver profile send about 6 requests within a second or two, which can brush the API's 4 requests/second limit on a cold load (the axios client now queues requests, max 3 per 1.1 s)
+
+- [ ] Standings tables on mobile (390 px) push the points number out of view: the name column (champion badge, title status) grows and the table scrolls sideways
 
 ## Chores
 
