@@ -2,6 +2,7 @@ import { Countdown } from "@/components/Countdown/Countdown";
 import { QualifyingResult } from "@/components/Qualifying";
 import { RaceResult } from "@/components/RaceResult";
 import { SprintResult } from "@/components/SprintResult";
+import { downloadWeekendCalendar } from "@/utils/calendarFile";
 import { IRoundLoader } from "@/utils/loaders";
 import { getNextEvent, getWeekendSessions } from "@/utils/scheduleHelpers";
 import { getTeamColor } from "@/utils/teamColors";
@@ -164,6 +165,14 @@ export const Round: React.FC = () => {
                 </Box>
               ))}
             </Box>
+            <button
+              type="button"
+              className={classes.addToCalendar}
+              onClick={() => downloadWeekendCalendar(race)}
+            >
+              <FontAwesomeIcon icon={["far", "calendar-plus"]} />
+              Add to calendar
+            </button>
           </Box>
 
           {winner && (

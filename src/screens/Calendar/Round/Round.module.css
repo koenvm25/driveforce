@@ -140,6 +140,33 @@
   }
 }
 
+.addToCalendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(10px);
+  width: 100%;
+  min-height: rem(44px);
+  margin-top: rem(16px);
+  padding: 0 rem(20px);
+  background: none;
+  border: 1px solid var(--df-line);
+  border-radius: rem(10px);
+  font: inherit;
+  font-weight: 500;
+  color: var(--mantine-color-text);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--df-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--df-accent);
+    outline-offset: 2px;
+  }
+}
+
 .cardTitle {
   font-size: rem(24px);
   font-weight: 600;
