@@ -56,7 +56,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Dev only: every loader ran twice, because `createBrowserRouter` was called inside the `Router` component and StrictMode renders it twice (router now lives at module scope)
 - [x] Calendar and driver profile send about 6 requests within a second or two, which can brush the API's 4 requests/second limit on a cold load (the axios client now queues requests, max 3 per 1.1 s)
 
-- [ ] Standings tables on mobile (390 px) push the points number out of view: the name column (champion badge, title status) grows and the table scrolls sideways
+- [x] Standings tables on mobile (390 px) push the points number out of view: the name column (champion badge, title status) grows and the table scrolls sideways
 
 ## Chores
 

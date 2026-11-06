@@ -12,6 +12,12 @@
 
 .th {
   padding: rem(12px) rem(8px);
+
+  @media (max-width: 36em) {
+    padding-left: rem(5px);
+    padding-right: rem(5px);
+  }
+
   text-align: left;
   font-size: var(--mantine-font-size-xs);
   font-weight: 600;
@@ -29,6 +35,11 @@
   padding: rem(14px) rem(8px);
   font-size: var(--mantine-font-size-sm);
   white-space: nowrap;
+
+  @media (max-width: 36em) {
+    padding-left: rem(5px);
+    padding-right: rem(5px);
+  }
 
   &[data-align="right"] {
     text-align: right;
@@ -165,6 +176,11 @@
   align-items: center;
   gap: rem(14px);
   min-width: rem(140px);
+
+  @media (max-width: 36em) {
+    gap: rem(10px);
+    min-width: rem(104px);
+  }
 }
 
 .pointsTrack {
@@ -192,6 +208,12 @@
   gap: rem(6px);
   margin-left: rem(10px);
   padding: rem(2px) rem(8px);
+
+  @media (max-width: 36em) {
+    display: flex;
+    width: fit-content;
+    margin: rem(4px) 0 rem(2px);
+  }
   border: 1px solid var(--df-gold);
   border-radius: rem(999px);
   font-size: var(--mantine-font-size-xs);
@@ -208,6 +230,11 @@
 }
 
 .sub {
+  @media (max-width: 36em) {
+    max-width: rem(140px);
+    white-space: normal;
+  }
+
   font-size: var(--mantine-font-size-xs);
   font-weight: 400;
   color: var(--mantine-color-dimmed);
