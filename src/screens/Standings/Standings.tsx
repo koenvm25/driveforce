@@ -14,10 +14,23 @@ type Championship = "drivers" | "constructors" | "progress";
 export function Standings() {
   const { season } = useParams();
   const navigate = useNavigate();
-  const { round, seasonComplete, driverStandings, constructorStandings } =
-    useLoaderData() as IStandingsLoader;
-  const driverChampion = driverStandings?.[0];
-  const constructorChampion = constructorStandings?.[0];
+  const {
+    round,
+    seasonComplete,
+    driverTitleDecided,
+    constructorTitleDecided,
+    driverStandings,
+    constructorStandings,
+  } = useLoaderData() as IStandingsLoader;
+  const driverChampion = driverStandings?.[0]?.Driver;
+  const champions = [
+    driverTitleDecided && driverChampion
+      ? `${driverChampion.givenName} ${driverChampion.familyName}`
+      : undefined,
+    constructorTitleDecided
+      ? constructorStandings?.[0]?.Constructor.name
+      : undefined,
+  ].filter(Boolean);
   const [championship, setChampionship] = useState<Championship>("drivers");
 
   const seasons = useMemo(() => {
@@ -42,13 +55,10 @@ export function Standings() {
                 : `After round ${round}`}
             </Text>
           )}
-          {seasonComplete && (driverChampion || constructorChampion) && (
+          {champions.length > 0 && (
             <Text mt={4} className={classes.champions}>
               <FontAwesomeIcon icon={["fas", "trophy"]} />
-              {driverChampion &&
-                `${driverChampion.Driver.givenName} ${driverChampion.Driver.familyName}`}
-              {driverChampion && constructorChampion && " · "}
-              {constructorChampion && constructorChampion.Constructor.name}
+              {champions.join(" · ")}
             </Text>
           )}
         </Box>

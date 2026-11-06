@@ -15,7 +15,7 @@ import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const DriverStandings: React.FC = () => {
-  const { driverStandings, seasonComplete } =
+  const { driverStandings, driverTitleDecided } =
     useLoaderData() as IStandingsLoader;
 
   if (!driverStandings?.length) {
@@ -39,7 +39,7 @@ export const DriverStandings: React.FC = () => {
       render: (entry) => (
         <>
           <DriverName driver={entry.Driver} id={entry.Driver.driverId} />
-          {seasonComplete && entry.position === "1" && <ChampionBadge />}
+          {driverTitleDecided && entry.position === "1" && <ChampionBadge />}
           <SubText>{entry.Driver.nationality}</SubText>
         </>
       ),

@@ -72,7 +72,7 @@ export async function roundLoader(season: string, round: string) {
   const raceResult = mapToRaceResult(raceResultsDto?.data.MRData);
   const sprintResult = mapToSprintResult(sprintResultsDto?.data.MRData);
   const qualifyingResult = mapToQualifyingResult(
-    qualifyingResultDto?.data.MRData
+    qualifyingResultDto?.data.MRData,
   );
   return { race, roundCount, raceResult, sprintResult, qualifyingResult };
 }
@@ -89,7 +89,7 @@ export async function driverLoader(driverId: string): Promise<IDriverLoader> {
     getDriverSeasons(driverId),
   ]);
   const seasons = (seasonsDto.data.MRData?.SeasonTable.Seasons ?? []).map(
-    (entry) => entry.season
+    (entry) => entry.season,
   );
   const latestSeason = seasons[seasons.length - 1];
   const resultsDto = latestSeason
@@ -103,14 +103,22 @@ export async function driverLoader(driverId: string): Promise<IDriverLoader> {
   };
 }
 
+// Points available to a driver (win) or a team (1-2 finish) in one race or sprint
+const MAX_RACE_POINTS = 25;
+const MAX_SPRINT_POINTS = 8;
+const MAX_TEAM_RACE_POINTS = 25 + 18;
+const MAX_TEAM_SPRINT_POINTS = 8 + 7;
+
 export interface IStandingsLoader {
   round: string | undefined;
   seasonComplete: boolean;
+  driverTitleDecided: boolean;
+  constructorTitleDecided: boolean;
   constructorStandings: ConstructorStandingsEntity[] | undefined;
   driverStandings: DriverStandingsEntity[] | undefined;
 }
 export async function standingsLoader(
-  season: string
+  season: string,
 ): Promise<IStandingsLoader> {
   const isPastSeason = Number(season) < new Date().getFullYear();
   const [driverStandings, constructorStandings, calendar] = await Promise.all([
@@ -120,19 +128,55 @@ export async function standingsLoader(
   ]);
   const round =
     driverStandings.data.MRData?.StandingsTable.StandingsLists[0]?.round;
-  const roundCount = calendar?.data.MRData?.RaceTable.Races.length;
+  const driverList =
+    driverStandings.data.MRData?.StandingsTable.StandingsLists[0]
+      ?.DriverStandings;
+  const constructorList =
+    constructorStandings.data.MRData?.StandingsTable.StandingsLists[0]
+      ?.ConstructorStandings;
+  const calendarRaces = calendar?.data.MRData?.RaceTable.Races;
+  const roundCount = calendarRaces?.length;
   const seasonComplete = isPastSeason
     ? !!round
     : !!round && !!roundCount && Number(round) >= roundCount;
+
+  const remainingRaces = (calendarRaces ?? []).filter(
+    (race) => Number(race.round) > Number(round),
+  );
+  const remainingSprints = remainingRaces.filter(
+    (race) => !!race.Sprint,
+  ).length;
+  const isTitleDecided = (
+    leader: { points: string } | undefined,
+    second: { points: string } | undefined,
+    maxPerRace: number,
+    maxPerSprint: number,
+  ) => {
+    if (!leader) return false;
+    if (seasonComplete) return true;
+    if (!second || !calendarRaces) return false;
+    const maxRemaining =
+      remainingRaces.length * maxPerRace + remainingSprints * maxPerSprint;
+    return Number(leader.points) - Number(second.points) > maxRemaining;
+  };
+
   return {
     round,
     seasonComplete,
-    constructorStandings:
-      constructorStandings.data.MRData?.StandingsTable.StandingsLists[0]
-        ?.ConstructorStandings,
-    driverStandings:
-      driverStandings.data.MRData?.StandingsTable.StandingsLists[0]
-        ?.DriverStandings,
+    driverTitleDecided: isTitleDecided(
+      driverList?.[0],
+      driverList?.[1],
+      MAX_RACE_POINTS,
+      MAX_SPRINT_POINTS,
+    ),
+    constructorTitleDecided: isTitleDecided(
+      constructorList?.[0],
+      constructorList?.[1],
+      MAX_TEAM_RACE_POINTS,
+      MAX_TEAM_SPRINT_POINTS,
+    ),
+    constructorStandings: constructorList,
+    driverStandings: driverList,
   };
 }
 

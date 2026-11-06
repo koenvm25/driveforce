@@ -14,7 +14,7 @@ import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const ConstructorStandings: React.FC = () => {
-  const { constructorStandings, seasonComplete } =
+  const { constructorStandings, constructorTitleDecided } =
     useLoaderData() as IStandingsLoader;
 
   if (!constructorStandings?.length) {
@@ -42,7 +42,9 @@ export const ConstructorStandings: React.FC = () => {
             id={entry.Constructor.constructorId}
             name={entry.Constructor.name}
           />
-          {seasonComplete && entry.position === "1" && <ChampionBadge />}
+          {constructorTitleDecided && entry.position === "1" && (
+            <ChampionBadge />
+          )}
           <SubText>{entry.Constructor.nationality}</SubText>
         </>
       ),
