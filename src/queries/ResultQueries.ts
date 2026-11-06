@@ -7,6 +7,7 @@ import { RaceResult } from "@/types/Results";
 import { ErgastResponse } from "@/types/dto/ErgastDto";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
 import {
+  getCircuitWinners,
   getQualifyingResults,
   getRaceResults,
   getSeasonResults,
@@ -36,7 +37,48 @@ export const useSeasonSprintResultsQuery = (season: string, enabled = true) => {
   });
 };
 
-export const useRaceResultQuery =(season: string, round: string) => {
+export interface PastWinner {
+  season: string;
+  round: string;
+  driverId: string;
+  driverName: string;
+  constructorId: string;
+  constructorName: string;
+}
+
+export const useCircuitWinnersQuery = (
+  circuitId: string,
+  beforeSeason: string,
+) => {
+  return useQuery<PastWinner[]>({
+    queryKey: ["circuitWinners", circuitId, beforeSeason],
+    queryFn: async () => {
+      const dto = await getCircuitWinners(circuitId);
+      return (dto.data.MRData?.RaceTable.Races ?? [])
+        .filter(
+          (race) =>
+            Number(race.season) < Number(beforeSeason) && race.Results?.[0],
+        )
+        .map((race) => {
+          const winner = race.Results![0];
+          return {
+            season: race.season,
+            round: race.round,
+            driverId: winner.Driver.driverId,
+            driverName: `${winner.Driver.givenName} ${winner.Driver.familyName}`,
+            constructorId: winner.Constructor.constructorId,
+            constructorName: winner.Constructor.name,
+          };
+        })
+        .reverse();
+    },
+    gcTime: toMillis({ minutes: 90 }),
+    staleTime: toMillis({ minutes: 60 }),
+    retry: 1,
+  });
+};
+
+export const useRaceResultQuery = (season: string, round: string) => {
   return useQuery<RaceResult | undefined>({
     queryKey: ["raceResult", season, round],
     queryFn: async () => {

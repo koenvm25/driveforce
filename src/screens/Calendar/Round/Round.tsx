@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Tabs, Text, Title } from "@mantine/core";
 import { DateTime } from "luxon";
 import { Link, useLoaderData } from "react-router-dom";
+import { PastWinners } from "./PastWinners";
 import classes from "./Round.module.css";
 
 const RoundStep: React.FC<{
@@ -40,12 +41,20 @@ export const Round: React.FC = () => {
   const { locality, country } = race.circuit.location;
   const winner = raceResult?.race[0];
 
-  const resultTabs: { value: string; label: string; content: React.ReactNode }[] = [];
+  const resultTabs: {
+    value: string;
+    label: string;
+    content: React.ReactNode;
+  }[] = [];
   if (raceResult) {
     resultTabs.push({ value: "race", label: "Race", content: <RaceResult /> });
   }
   if (sprintResult) {
-    resultTabs.push({ value: "sprint", label: "Sprint", content: <SprintResult /> });
+    resultTabs.push({
+      value: "sprint",
+      label: "Sprint",
+      content: <SprintResult />,
+    });
   }
   if (qualifyingResult) {
     resultTabs.push({
@@ -68,7 +77,11 @@ export const Round: React.FC = () => {
           <RoundStep
             label="Previous round"
             icon="chevron-left"
-            to={roundNumber > 1 ? `/calendar/${race.season}/${roundNumber - 1}` : undefined}
+            to={
+              roundNumber > 1
+                ? `/calendar/${race.season}/${roundNumber - 1}`
+                : undefined
+            }
           />
           <RoundStep
             label="Next round"
@@ -103,7 +116,11 @@ export const Round: React.FC = () => {
             <Tabs defaultValue={resultTabs[0].value} variant="unstyled">
               <Tabs.List className={classes.pills} mb="sm">
                 {resultTabs.map((tab) => (
-                  <Tabs.Tab key={tab.value} value={tab.value} className={classes.pill}>
+                  <Tabs.Tab
+                    key={tab.value}
+                    value={tab.value}
+                    className={classes.pill}
+                  >
                     {tab.label}
                   </Tabs.Tab>
                 ))}
@@ -121,7 +138,9 @@ export const Round: React.FC = () => {
                 {nextEvent.name} starts in
               </Title>
               <Countdown dateTime={nextEvent.dateTime} />
-              <Text c="dimmed">Results appear here once the sessions are done.</Text>
+              <Text c="dimmed">
+                Results appear here once the sessions are done.
+              </Text>
             </Box>
           ) : (
             <Text c="dimmed" py="xl">
@@ -145,7 +164,9 @@ export const Round: React.FC = () => {
                 <Box
                   key={session.name}
                   className={classes.session}
-                  data-past={(!!nextEvent && session.dateTime < now) || undefined}
+                  data-past={
+                    (!!nextEvent && session.dateTime < now) || undefined
+                  }
                 >
                   <Box>
                     <Box className={classes.sessionName}>{session.name}</Box>
@@ -156,7 +177,8 @@ export const Round: React.FC = () => {
                   <Box
                     className={classes.sessionTime}
                     data-next={
-                      (!!nextEvent && session.dateTime.equals(nextEvent.dateTime)) ||
+                      (!!nextEvent &&
+                        session.dateTime.equals(nextEvent.dateTime)) ||
                       undefined
                     }
                   >
@@ -167,13 +189,15 @@ export const Round: React.FC = () => {
             </Box>
             <button
               type="button"
-              className={classes.addToCalendar}
+              className={classes.outlineButton}
               onClick={() => downloadWeekendCalendar(race)}
             >
               <FontAwesomeIcon icon={["far", "calendar-plus"]} />
               Add to calendar
             </button>
           </Box>
+
+          <PastWinners circuitId={race.circuit.id} season={race.season} />
 
           {winner && (
             <Box className={classes.card}>
@@ -183,7 +207,9 @@ export const Round: React.FC = () => {
               <Box className={classes.winner}>
                 <Box
                   className={classes.winnerBar}
-                  style={{ backgroundColor: getTeamColor(winner.constructor.id) }}
+                  style={{
+                    backgroundColor: getTeamColor(winner.constructor.id),
+                  }}
                 />
                 <Box>
                   <Box className={classes.winnerName}>

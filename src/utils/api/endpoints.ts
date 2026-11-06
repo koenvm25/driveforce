@@ -12,10 +12,10 @@ import {
 
 // Standings
 export const getDriverStandings = (
-  season: string
+  season: string,
 ): ErgastResponse<DriverStandings> => get(`/${season}/driverStandings.json`);
 export const getConstructorStandings = (
-  season: string
+  season: string,
 ): ErgastResponse<ConstructorStandings> =>
   get(`/${season}/constructorStandings.json`);
 
@@ -24,7 +24,7 @@ export const getCalendar = (season: string): ErgastResponse<RaceSchedule> =>
   get(`${season}.json`);
 export const getRace = (
   season: string,
-  round: string
+  round: string,
 ): ErgastResponse<RaceSchedule> => get(`/${season}/${round}.json`);
 export const getCurrentCalendar = (): ErgastResponse<RaceSchedule> =>
   get("/current.json");
@@ -35,7 +35,7 @@ export const getLastRaceResults = (): ErgastResponse<RaceResultsDto> =>
 const MAX_PAGE_SIZE = 100;
 const getAllRaceResultPages = async (
   url: string,
-  rowsKey: "Results" | "SprintResults"
+  rowsKey: "Results" | "SprintResults",
 ): ErgastResponse<RaceResultsDto> => {
   const first = await get<ApiResult<RaceResultsDto>>(url, {
     params: { limit: MAX_PAGE_SIZE, offset: 0 },
@@ -52,7 +52,10 @@ const getAllRaceResultPages = async (
     for (const race of page.data.MRData?.RaceTable.Races ?? []) {
       const existing = races.find((r) => r.round === race.round);
       if (existing) {
-        existing[rowsKey] = [...(existing[rowsKey] ?? []), ...(race[rowsKey] ?? [])];
+        existing[rowsKey] = [
+          ...(existing[rowsKey] ?? []),
+          ...(race[rowsKey] ?? []),
+        ];
       } else {
         races.push(race);
       }
@@ -63,39 +66,43 @@ const getAllRaceResultPages = async (
   return first;
 };
 export const getSeasonResults = (
-  season: string
+  season: string,
 ): ErgastResponse<RaceResultsDto> =>
   getAllRaceResultPages(`/${season}/results.json`, "Results");
 export const getSeasonSprintResults = (
-  season: string
+  season: string,
 ): ErgastResponse<RaceResultsDto> =>
   getAllRaceResultPages(`/${season}/sprint.json`, "SprintResults");
 export const getRaceResults = (
   season: string,
-  round: string
+  round: string,
 ): ErgastResponse<RaceResultsDto> => get(`/${season}/${round}/results.json`);
+export const getCircuitWinners = (
+  circuitId: string,
+): ErgastResponse<RaceResultsDto> =>
+  get(`/circuits/${circuitId}/results/1.json?limit=${MAX_PAGE_SIZE}`);
 export const getQualifyingResults = (season: string, round: string) =>
   get(`/${season}/${round}/qualifying.json`);
 export const getSprintResults = (
   season: string,
-  round: string
+  round: string,
 ): ErgastResponse<RaceResultsDto> => get(`/${season}/${round}/sprint.json`);
 
 // Driver profile
 export const getDriver = (driverId: string): ErgastResponse<DriverTableDto> =>
   get(`/drivers/${driverId}.json`);
 export const getDriverSeasons = (
-  driverId: string
+  driverId: string,
 ): ErgastResponse<SeasonTableDto> =>
   get(`/drivers/${driverId}/seasons.json?limit=100`);
 export const getDriverSeasonResults = (
   driverId: string,
-  season: string
+  season: string,
 ): ErgastResponse<RaceResultsDto> =>
   get(`/${season}/drivers/${driverId}/results.json?limit=100`);
 export const getDriverTotal = (
   driverId: string,
-  path: "results" | "results/1" | "qualifying/1"
+  path: "results" | "results/1" | "qualifying/1",
 ): ErgastResponse<TotalDto> => get(`/drivers/${driverId}/${path}.json?limit=1`);
 
 // Contestants

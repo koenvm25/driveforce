@@ -32,7 +32,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Add to calendar: download an `.ics` file with every session of a weekend, in the viewer's timezone
 - [ ] Title race view in the standings: mark drivers and teams who are mathematically out, and show how many points the others need (reuse the clinch logic in the standings loader)
 - [x] Race table extras: fastest-lap marker and a "positions gained/lost vs grid" column (the delta sits in the Grid column; the marker shows on every screen size, the delta from 62em up)
-- [ ] Past winners at this circuit on the round page (1 request)
+- [x] Past winners at this circuit on the round page (1 lazy request; shows the last 5, expandable)
 - [ ] Pit stops table on the round page (1 request)
 - [ ] Teammate head-to-head (qualifying and race wins) on driver profiles or in the Progress view
 - [ ] Team accent colour: pick a favourite team and the site accent takes its colour (pairs with the favourite driver item)
