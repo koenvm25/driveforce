@@ -6,7 +6,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 
 - [x] Theme, fonts and header
 - [x] Home
-- [ ] Calendar
+- [x] Calendar
 - [ ] Round detail
 - [ ] Standings
 - [ ] Mobile bottom tab bar (the header still uses a burger menu)

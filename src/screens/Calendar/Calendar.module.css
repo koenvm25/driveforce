@@ -1,53 +1,183 @@
 .root {
   flex: 1;
-  padding-right: 5%;
-  padding-left: 5%;
   display: flex;
   flex-direction: column;
-  gap: rem(16px);
+  gap: rem(32px);
+}
 
-  @media (min-width: 48em) {
-    padding-right: 10%;
-    padding-left: 10%;
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: rem(20px);
+}
+
+.title {
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: rem(12px);
+}
+
+.filter {
+  --sc-color: var(--mantine-color-text);
+  --sc-label-color: var(--mantine-color-body);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+}
+
+.filterLabel {
+  min-height: rem(36px);
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.seasonInput {
+  min-height: rem(44px);
+  background-color: var(--df-surface);
+  border-color: var(--df-line);
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, rem(320px)), 1fr));
+  gap: rem(20px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(20px);
+  color: var(--mantine-color-text);
+  text-decoration: none;
+  transition: border-color 120ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--df-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--df-accent);
+    outline-offset: 2px;
   }
 }
 
-.selector {
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: rem(24px) rem(24px) 0;
+}
+
+.round {
+  font-family: var(--df-font-display);
+  font-weight: 700;
+  font-size: rem(88px);
+  line-height: 0.85;
+  color: var(--df-line);
+  font-variant-numeric: tabular-nums;
+}
+
+.country {
   display: flex;
   align-items: center;
+  gap: rem(8px);
+  padding: rem(6px) rem(10px);
+  border: 1px solid var(--df-line);
+  border-radius: rem(8px);
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--mantine-color-dimmed);
+}
+
+.flag {
+  width: rem(20px);
+  height: rem(14px);
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: rem(4px);
+  padding: rem(20px) rem(24px) rem(24px);
+}
+
+.raceName {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(30px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.meta {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
 }
 
 .podium {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--df-line);
 }
 
-.one {
-  flex: 1;
-  margin: 5px;
-  padding: 2px;
-  justify-content: center;
-  display: flex;
-  border-radius: 5px;
-  background-color: gold;
+.podiumCell {
+  padding: rem(14px) 0;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+
+  & + & {
+    border-left: 1px solid var(--df-line);
+  }
 }
-.two {
-  flex: 1;
-  margin: 5px;
-  padding: 2px;
-  justify-content: center;
-  display: flex;
-  border-radius: 5px;
-  background-color: silver;
+
+.podiumLabel {
+  font-size: rem(11px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--mantine-color-dimmed);
+
+  &[data-place="1"] {
+    color: var(--df-gold);
+  }
+  &[data-place="2"] {
+    color: var(--df-silver);
+  }
+  &[data-place="3"] {
+    color: var(--df-bronze);
+  }
 }
-.three {
-  flex: 1;
-  margin: 5px;
-  padding: 2px;
-  justify-content: center;
-  display: flex;
-  border-radius: 5px;
-  background-color: #cd7f32;
+
+.podiumCode {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(26px);
+  line-height: 1.1;
+
+  &[data-empty] {
+    color: var(--mantine-color-dimmed);
+  }
+}
+
+.empty {
+  padding: rem(48px) 0;
+  text-align: center;
+  color: var(--mantine-color-dimmed);
 }
