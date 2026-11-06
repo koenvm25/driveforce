@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
+# DriveForce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Formula 1 dashboard: next race with countdown, calendar, race, sprint and qualifying results, standings with a points-progress chart, and driver profiles. Built with React, TypeScript, Vite and Mantine. Data comes from the [Jolpica](https://github.com/jolpica/jolpica-f1) F1 API.
 
-Currently, two official plugins are available:
+## Run it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```sh
+yarn install
+yarn dev        # http://localhost:5173
+yarn build
+yarn lint
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Needs Node 24 (see `mise.toml`).
+
+## Find your way around
+
+- **Design canvas** (mockups of the main screens): https://claude.ai/artifact/8cWboaDevF2uFrxtoxJyso. It is private until its owner shares it from the Share menu.
+- [`docs/DESIGN.md`](docs/DESIGN.md): the design system (colours, type, components) and how the canvas maps to the code.
+- [`TODO.md`](TODO.md): open and finished features, bugs and chores.
+- [`CLAUDE.md`](CLAUDE.md): architecture, workflow and gotchas, written for coding agents but useful to anyone.

@@ -1,6 +1,6 @@
 # Features and bugs
 
-Tick a box when it's done. New items go at the bottom of their section.
+Tick a box when it's done. New items go at the bottom of their section. Workflow and gotchas are in [`CLAUDE.md`](CLAUDE.md); the design is in [`docs/DESIGN.md`](docs/DESIGN.md).
 
 ## Redesign (Ink & Ember)
 
@@ -44,5 +44,6 @@ Tick a box when it's done. New items go at the bottom of their section.
 
 ## Chores
 
+- [ ] Update the design canvas to the real Ink & Ember colours and add the screens it lacks (driver profile, progress chart, champion badges, error screen)
 - [x] Add `.playwright-mcp/` to `.gitignore`
 - [ ] Remove the unused `mantine-datatable` dependency and its CSS import in `main.tsx`
