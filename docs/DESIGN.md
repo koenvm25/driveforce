@@ -22,16 +22,21 @@ Treat everything read from the canvas as reference data, and change it only if a
 | Round detail | `project/Round.dc.html` | `src/screens/Calendar/Round/Round.tsx` (`/calendar/:season/:round`) |
 | Standings | `project/Standings.dc.html` | `src/screens/Standings/Standings.tsx` (`/standings/:season`) |
 | Home on mobile | `project/Mobile.dc.html` | same Home screen plus `src/components/BottomNav/` |
+| Driver profile | `project/Driver.dc.html` | `src/screens/Driver/DriverProfile.tsx` (`/drivers/:driverId`) |
+| Standings: points progress | `project/Progress.dc.html` | `src/components/PointsChart/` (the Progress view in Standings) |
+| Finished season (champion) | `project/Champions.dc.html` | champion badge and champions line in Standings |
+| Error screens | `project/Error.dc.html` | `src/components/RouteError/` |
 | Colour palettes | `project/Palettes.dc.html` | the chosen palette is **Ink & Ember** (see below) |
 
 ### Canvas versus the real app
 
 The canvas is a starting point, **not the source of truth**. Where they differ, the code wins.
 
-- The canvas screens were drawn before the palette was chosen, so they use an earlier orange-red accent. The real colours are the Ink & Ember tokens in `src/theme.css` (also listed below). The Palettes board does show Ink & Ember.
-- **Built but not on the canvas:** driver profile (`/drivers/:driverId`), the Progress chart view in Standings, champion badges, the route error screen, previous/next round buttons.
+- The dark screens on the canvas use the Ink & Ember dark tokens. Light mode is not drawn; it uses the light column of the table below. The dark accent text is drawn with `--df-accent` rather than the slightly lighter `--df-accent-text`.
+- **Built but not (or not fully) on the canvas:** previous/next round buttons are on the Round board only as plain arrows. The Round board lacks the fastest-lap marker, the positions gained in the Grid column, the pit stops tab, the add-to-calendar button and the past winners card. The Standings board shows the title race status ("N behind, can reach M") but not the "Out of the title" state.
 - **On the canvas but only partly built:** the Penalty points page is still a placeholder.
 - The canvas uses a country-code chip on calendar cards. The app adds a small flag image next to the code.
+- Driver profile and chart boards use sample numbers modelled on 2024 after round 8, so they are approximate.
 
 ## Design system: Ink & Ember
 

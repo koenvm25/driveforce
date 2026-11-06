@@ -60,6 +60,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 
 ## Chores
 
-- [ ] Update the design canvas to the real Ink & Ember colours and add the screens it lacks (driver profile, progress chart, champion badges, error screen)
+- [x] Update the design canvas to the real Ink & Ember colours and add the screens it lacks (driver profile, progress chart, champion badges, error screen)
+- [ ] Bring the Round board on the design canvas up to date (fastest-lap marker, grid delta, pit stops tab, add to calendar, past winners) and draw a light mode
 - [x] Add `.playwright-mcp/` to `.gitignore`
 - [x] Remove the unused `mantine-datatable` dependency and its CSS import in `main.tsx`
