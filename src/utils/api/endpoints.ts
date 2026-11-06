@@ -28,10 +28,10 @@ export const getCurrentCalendar = (): ErgastResponse<RaceSchedule> =>
 export const getLastRaceResults = (): ErgastResponse<RaceResultsDto> =>
   get("/current/last/results.json");
 const MAX_PAGE_SIZE = 100;
-export const getSeasonResults = async (
-  season: string
+const getAllRaceResultPages = async (
+  url: string,
+  rowsKey: "Results" | "SprintResults"
 ): ErgastResponse<RaceResultsDto> => {
-  const url = `/${season}/results.json`;
   const first = await get<ApiResult<RaceResultsDto>>(url, {
     params: { limit: MAX_PAGE_SIZE, offset: 0 },
   });
@@ -47,7 +47,7 @@ export const getSeasonResults = async (
     for (const race of page.data.MRData?.RaceTable.Races ?? []) {
       const existing = races.find((r) => r.round === race.round);
       if (existing) {
-        existing.Results = [...(existing.Results ?? []), ...(race.Results ?? [])];
+        existing[rowsKey] = [...(existing[rowsKey] ?? []), ...(race[rowsKey] ?? [])];
       } else {
         races.push(race);
       }
@@ -57,6 +57,14 @@ export const getSeasonResults = async (
   firstData.RaceTable.Races = races;
   return first;
 };
+export const getSeasonResults = (
+  season: string
+): ErgastResponse<RaceResultsDto> =>
+  getAllRaceResultPages(`/${season}/results.json`, "Results");
+export const getSeasonSprintResults = (
+  season: string
+): ErgastResponse<RaceResultsDto> =>
+  getAllRaceResultPages(`/${season}/sprint.json`, "SprintResults");
 export const getRaceResults = (
   season: string,
   round: string

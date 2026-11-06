@@ -1,5 +1,6 @@
 import "@mantine/core/styles.layer.css";
 import "@mantine/nprogress/styles.layer.css";
+import "@mantine/charts/styles.layer.css";
 import "mantine-datatable/styles.layer.css";
 import "./theme.css";
 

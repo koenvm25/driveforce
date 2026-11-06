@@ -14,11 +14,11 @@ Tick a box when it's done. New items go at the bottom of their section.
 ## Features
 
 - [ ] Driver and team profile pages
-- [ ] Season points chart with head-to-head compare
-- [ ] Session times in the viewer's timezone on every screen (Home done)
+- [x] Season points chart with head-to-head compare (Standings, "Progress" view)
+- [x] Session times in the viewer's timezone on every screen
 - [ ] Favourite driver pinned on the home page
-- [ ] Penalty points tracker (the page is an empty placeholder today)
-- [ ] Qualifying and sprint results in the same table switcher as the race
+- [ ] Penalty points tracker (the page is an empty placeholder; the Jolpica API has no penalty points data, so a data source is needed first)
+- [x] Qualifying and sprint results in the same table switcher as the race
 - [x] Constructors standings with points bars
 - [x] Previous/next round buttons on the round page
 

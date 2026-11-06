@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24px);
+  padding: rem(16px) 0 rem(12px);
+}
+
+.input {
+  min-height: rem(44px);
+  background-color: var(--mantine-color-body);
+  border-color: var(--df-line);
+}
+
+.loading {
+  height: rem(420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

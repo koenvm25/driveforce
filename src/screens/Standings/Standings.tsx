@@ -1,5 +1,6 @@
 import { ConstructorStandings } from "@/components/ConstructorStandings";
 import { DriverStandings } from "@/components/DriverStandings";
+import { PointsChart } from "@/components/PointsChart/PointsChart";
 import { IStandingsLoader } from "@/utils/loaders";
 import { Box, SegmentedControl, Select, Text, Title } from "@mantine/core";
 import { DateTime } from "luxon";
@@ -7,12 +8,12 @@ import { useMemo, useState } from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import classes from "./Standings.module.css";
 
-type Championship = "drivers" | "constructors";
+type Championship = "drivers" | "constructors" | "progress";
 
 export function Standings() {
   const { season } = useParams();
   const navigate = useNavigate();
-  const { round } = useLoaderData() as IStandingsLoader;
+  const { round, driverStandings } = useLoaderData() as IStandingsLoader;
   const [championship, setChampionship] = useState<Championship>("drivers");
 
   const seasons = useMemo(() => {
@@ -42,6 +43,7 @@ export function Standings() {
             data={[
               { value: "drivers", label: "Drivers" },
               { value: "constructors", label: "Constructors" },
+              { value: "progress", label: "Progress" },
             ]}
             value={championship}
             onChange={(value) => setChampionship(value as Championship)}
@@ -60,11 +62,20 @@ export function Standings() {
       </Box>
 
       <Box className={classes.card}>
-        {championship === "drivers" ? (
-          <DriverStandings />
-        ) : (
-          <ConstructorStandings />
-        )}
+        {championship === "drivers" && <DriverStandings />}
+        {championship === "constructors" && <ConstructorStandings />}
+        {championship === "progress" &&
+          (driverStandings?.length && season ? (
+            <PointsChart
+              key={season}
+              season={season}
+              driverStandings={driverStandings}
+            />
+          ) : (
+            <Text c="dimmed" py="xl" ta="center">
+              No data available
+            </Text>
+          ))}
       </Box>
     </Box>
   );

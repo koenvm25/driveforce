@@ -10,21 +10,33 @@ import {
   getQualifyingResults,
   getRaceResults,
   getSeasonResults,
+  getSeasonSprintResults,
   getSprintResults,
 } from "@/utils/api/endpoints";
 import { toMillis } from "@/utils/dateTimeHelpers";
 import { useQuery } from "@tanstack/react-query";
 
-export const useSeasonResultsQuery = (season: string) => {
-  return useQuery<ErgastResponse<RaceResultsDto>>({
+export const useSeasonResultsQuery = (season: string, enabled = true) => {
+  return useQuery<Awaited<ErgastResponse<RaceResultsDto>>>({
     queryKey: ["seasonResults", season],
     queryFn: async () => getSeasonResults(season),
+    enabled,
     gcTime: toMillis({ minutes: 90 }),
     staleTime: toMillis({ minutes: 60 }),
   });
 };
 
-export const useRaceResultQuery = (season: string, round: string) => {
+export const useSeasonSprintResultsQuery = (season: string, enabled = true) => {
+  return useQuery<Awaited<ErgastResponse<RaceResultsDto>>>({
+    queryKey: ["seasonSprintResults", season],
+    queryFn: async () => getSeasonSprintResults(season),
+    enabled,
+    gcTime: toMillis({ minutes: 90 }),
+    staleTime: toMillis({ minutes: 60 }),
+  });
+};
+
+export const useRaceResultQuery =(season: string, round: string) => {
   return useQuery<RaceResult | undefined>({
     queryKey: ["raceResult", season, round],
     queryFn: async () => {
