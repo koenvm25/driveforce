@@ -1,4 +1,3 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   ActionIcon,
@@ -6,115 +5,85 @@ import {
   Container,
   Group,
   Menu,
-  Title,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./Header.module.css";
-import { NavLink, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, NavLink, useLocation } from "react-router-dom";
 
-const links: { link: string; label: string; icon?: IconProp }[] = [
-  {
-    link: `/calendar/${new Date().getFullYear()}`,
-    label: "Calendar",
-    icon: ["far", "calendar"],
-  },
-  {
-    link: `/standings/${new Date().getFullYear()}`,
-    label: "Standings",
-    icon: ["fas", "ranking-star"],
-  },
-  { link: "/penalty-points", label: "Penalty points" },
+const year = new Date().getFullYear();
+
+const links: { link: string; match: string; label: string }[] = [
+  { link: "/", match: "/", label: "Home" },
+  { link: `/calendar/${year}`, match: "/calendar", label: "Calendar" },
+  { link: `/standings/${year}`, match: "/standings", label: "Standings" },
+  { link: "/penalty-points", match: "/penalty-points", label: "Penalty points" },
 ];
+
+const isActive = (pathname: string, match: string) =>
+  match === "/" ? pathname === "/" : pathname.startsWith(match);
 
 export function Header() {
   const { toggleColorScheme, colorScheme } = useMantineColorScheme();
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { toggle, close }] = useDisclosure(false);
+  const { pathname } = useLocation();
 
-  const Link: React.FC<{ label: string; link: string }> = ({ label, link }) => (
-    <NavLink
-      key={link}
-      to={link}
-      className={classes.link}
-      data-active={link === window.location.pathname || undefined}
+  const themeToggle = (
+    <ActionIcon
+      size={44}
+      variant="default"
+      onClick={toggleColorScheme}
+      aria-label={`Switch to ${colorScheme === "dark" ? "light" : "dark"} theme`}
+      className={classes.action}
     >
-      {label}
-    </NavLink>
+      <FontAwesomeIcon icon={["fas", colorScheme === "dark" ? "sun" : "moon"]} />
+    </ActionIcon>
   );
 
   return (
     <header className={classes.header}>
-      <Container size="md" className={classes.inner}>
+      <Container size={1200} className={classes.inner}>
         <RouterLink to="/" className={classes.logo}>
-          <Title>DriveForce</Title>
+          <span className={classes.logoBar} />
+          DriveForce
         </RouterLink>
-        <Group gap={5} visibleFrom="xs">
-          {links.map((link) => (
-            <Link {...link} />
+
+        <Group gap={4} visibleFrom="sm">
+          {links.map(({ link, match, label }) => (
+            <NavLink
+              key={link}
+              to={link}
+              className={classes.link}
+              data-active={isActive(pathname, match) || undefined}
+            >
+              {label}
+            </NavLink>
           ))}
-          <ActionIcon
-            size="lg"
-            onClick={toggleColorScheme}
-            className={classes.action}
-          >
-            <FontAwesomeIcon
-              icon={["fas", colorScheme === "dark" ? "sun" : "moon"]}
-              color={colorScheme === "dark" ? "white" : "black"}
-            />
-          </ActionIcon>
+          {themeToggle}
         </Group>
 
-        <Menu opened={opened}>
-          <Menu.Target>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              size="sm"
-              hiddenFrom="xs"
-            />
-          </Menu.Target>
-
-          <Menu.Dropdown>
-            <>
-              {links.map((link) => (
+        <Group gap="xs" hiddenFrom="sm">
+          {themeToggle}
+          <Menu opened={opened} onChange={toggle} position="bottom-end">
+            <Menu.Target>
+              <Burger opened={opened} size="sm" aria-label="Open menu" />
+            </Menu.Target>
+            <Menu.Dropdown>
+              {links.map(({ link, match, label }) => (
                 <Menu.Item
-                  rightSection={
-                    link.icon ? (
-                      <FontAwesomeIcon
-                        icon={link.icon}
-                        style={{ width: "rem(14)", height: "rem(14)" }}
-                      />
-                    ) : undefined
-                  }
-                  key={link.link}
+                  key={link}
+                  component={RouterLink}
+                  to={link}
+                  onClick={close}
+                  data-active={isActive(pathname, match) || undefined}
+                  className={classes.menuItem}
                 >
-                  <Link {...link} />
+                  {label}
                 </Menu.Item>
               ))}
-
-              <Menu.Divider />
-
-              <Menu.Item
-                onClick={toggleColorScheme}
-                rightSection={
-                  colorScheme === "dark" ? (
-                    <FontAwesomeIcon
-                      icon={["fas", "sun"]}
-                      style={{ width: "rem(14)", height: "rem(14)" }}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={["fas", "moon"]}
-                      style={{ width: "rem(14)", height: "rem(14)" }}
-                    />
-                  )
-                }
-              >
-                {colorScheme === "dark" ? "Light Mode" : "Dark Mode"}
-              </Menu.Item>
-            </>
-          </Menu.Dropdown>
-        </Menu>
+            </Menu.Dropdown>
+          </Menu>
+        </Group>
       </Container>
     </header>
   );

@@ -1,53 +1,67 @@
 .header {
   height: rem(72px);
-  margin-bottom: rem(16px);
+  border-bottom: 1px solid var(--df-line);
   background-color: var(--mantine-color-body);
 }
 
 .inner {
-  height: rem(72px);
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  text-decoration: none;
+  color: var(--mantine-color-text);
+  font-family: var(--df-font-display);
+  font-weight: 700;
+  font-size: rem(28px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.logoBar {
+  display: block;
+  width: rem(6px);
+  height: rem(26px);
+  background-color: var(--df-accent);
+}
+
 .link {
   display: block;
-  line-height: 1;
-  border-radius: var(--mantine-radius-sm);
+  padding: rem(10px) rem(16px);
+  border-bottom: 2px solid transparent;
   text-decoration: none;
-  color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+  color: var(--mantine-color-dimmed);
   font-size: var(--mantine-font-size-sm);
   font-weight: 500;
 
-  @media (min-width: 36em) {
-    padding: rem(8px) rem(12px);
+  &:hover {
+    color: var(--mantine-color-text);
   }
 
   &[data-active] {
-    color: light-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0));
+    color: var(--mantine-color-text);
+    border-bottom-color: var(--df-accent);
   }
 }
 
-.link:hover {
-  background-color: light-dark(
-    var(--mantine-color-gray-2),
-    var(--mantine-color-dark-4)
-  );
-}
-
 .action {
-  background-color: transparent;
+  margin-left: rem(8px);
+  background-color: var(--df-surface);
+  border-color: var(--df-line);
+  color: var(--mantine-color-text);
+
+  @media (max-width: 47.99em) {
+    margin-left: 0;
+  }
 }
 
-.action:hover {
-  background-color: light-dark(
-    var(--mantine-color-gray-2),
-    var(--mantine-color-dark-4)
-  );
-}
-
-.logo {
-  text-decoration: none;
-  color: light-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0));
+.menuItem[data-active] {
+  color: var(--df-accent-text);
+  font-weight: 600;
 }

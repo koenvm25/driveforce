@@ -1,0 +1,31 @@
+:root {
+  --df-font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --df-gold: #f5c84b;
+  --df-silver: #c4c9d2;
+  --df-bronze: #d08a55;
+
+  --df-surface: #ffffff;
+  --df-line: #e5ddd3;
+  --df-bar: #ddd2c6;
+  --df-accent: #c9410b;
+  --df-accent-text: #b03a0a;
+  --df-on-accent: #ffffff;
+
+  --mantine-color-body: #faf6f1;
+  --mantine-color-text: #1b1613;
+  --mantine-color-dimmed: #5e554d;
+}
+
+/* postcss-preset-mantine rewrites light-dark() on :root into a selector that never matches */
+:root[data-mantine-color-scheme="dark"] {
+  --df-surface: #191614;
+  --df-line: #2d2825;
+  --df-bar: #3a332f;
+  --df-accent: #ff7a45;
+  --df-accent-text: #ff8a5a;
+  --df-on-accent: #0f0d0c;
+
+  --mantine-color-body: #0f0d0c;
+  --mantine-color-text: #f7f2ed;
+  --mantine-color-dimmed: #a8a099;
+}
