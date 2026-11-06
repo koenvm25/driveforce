@@ -27,8 +27,6 @@ export const getCurrentCalendar = (): ErgastResponse<RaceSchedule> =>
 // Results
 export const getLastRaceResults = (): ErgastResponse<RaceResultsDto> =>
   get("/current/last/results.json");
-export const getCurrentSeasonResults = (): ErgastResponse<RaceResultsDto> =>
-  get(`/current/results.json?limit=10000`);
 const MAX_PAGE_SIZE = 100;
 export const getSeasonResults = async (
   season: string

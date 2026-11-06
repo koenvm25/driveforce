@@ -13,7 +13,7 @@ import {
 } from "./api/endpoints";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
 import { NextEvent, Race, RaceTable } from "@/types/RaceSchedule";
-import { getNextEvent, isEventInTheFuture } from "./scheduleHelpers";
+import { getNextEvent, hasEventPassed } from "./scheduleHelpers";
 import {
   mapToQualifyingResult,
   mapToRaceResult,
@@ -50,13 +50,13 @@ export async function roundLoader(season: string, round: string) {
     ?.races[0];
   const [raceResultsDto, sprintResultsDto, qualifyingResultDto] =
     await Promise.all([
-      isEventInTheFuture(race?.events.race)
+      hasEventPassed(race?.events.race)
         ? getRaceResults(season, round)
         : undefined,
-      race?.events.isSprintWeekend && isEventInTheFuture(race?.events.sprint)
+      race?.events.isSprintWeekend && hasEventPassed(race?.events.sprint)
         ? getSprintResults(season, round)
         : undefined,
-      isEventInTheFuture(race?.events.qualifying)
+      hasEventPassed(race?.events.qualifying)
         ? getQualifyingResults(season, round)
         : undefined,
     ]);

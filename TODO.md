@@ -27,12 +27,12 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] Calendar only showed results for the first 5 races (the API caps `limit` at 100)
 - [x] Missing React `key` warning in the header
 - [x] Race results failed to load when a fastest lap had no average speed
-- [ ] `isEventInTheFuture` returns `true` for events in the past
-- [ ] `getCurrentSeasonResults` still asks for `limit=10000` (capped at 100, currently unused)
-- [ ] "Spring shootout" typo in `getNextEvent` (should be "Sprint shootout")
+- [x] `isEventInTheFuture` returned `true` for events in the past (renamed to `hasEventPassed`)
+- [x] `getCurrentSeasonResults` asked for `limit=10000` (capped at 100, unused, removed)
+- [x] "Spring shootout" typo in `getNextEvent` (should be "Sprint shootout")
 - [ ] Header renders the nav and theme toggle twice in the DOM (desktop and mobile variants)
 
 ## Chores
 
-- [ ] Add `.playwright-mcp/` to `.gitignore`
+- [x] Add `.playwright-mcp/` to `.gitignore`
 - [ ] Remove the unused `mantine-datatable` dependency and its CSS import in `main.tsx`

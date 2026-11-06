@@ -1,7 +1,7 @@
 import { Event, NextEvent, Race } from "@/types/RaceSchedule";
 import { DateTime } from "luxon";
 
-export const isEventInTheFuture = (event?: Event) => {
+export const hasEventPassed = (event?: Event) => {
   if (!event) return false;
   return event.dateTime < DateTime.now();
 };
@@ -88,7 +88,7 @@ export const getNextEvent =(races?: Race[]): NextEvent | undefined => {
       ) {
         return {
           dateTime: race.events.sprintShootout.dateTime,
-          name: "Spring shootout",
+          name: "Sprint shootout",
           circuit: race.circuit.name,
           race: race.name,
           round: race.round,
