@@ -1,5 +1,6 @@
 import { getTeamColor } from "@/utils/teamColors";
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./ResultsTable.module.css";
 
 export interface Column<T> {
@@ -66,12 +67,22 @@ export const Position: React.FC<{ value: string }> = ({ value }) => (
 
 export const DriverName: React.FC<{
   driver: { givenName: string; familyName: string };
-}> = ({ driver }) => (
-  <span className={classes.driver}>
-    <span className={classes.givenName}>{driver.givenName} </span>
-    {driver.familyName}
-  </span>
-);
+  id?: string;
+}> = ({ driver, id }) => {
+  const name = (
+    <>
+      <span className={classes.givenName}>{driver.givenName} </span>
+      {driver.familyName}
+    </>
+  );
+  return id ? (
+    <Link to={`/drivers/${id}`} className={classes.driver}>
+      {name}
+    </Link>
+  ) : (
+    <span className={classes.driver}>{name}</span>
+  );
+};
 
 export const Team: React.FC<{
   id: string | undefined;

@@ -115,10 +115,15 @@ export const Dashboard: React.FC = () => {
                       {result.position}
                     </Box>
                     <Box className={classes.podiumName}>
-                      <span className={classes.givenName}>
-                        {result.driver.givenName}{" "}
-                      </span>
-                      {result.driver.familyName}
+                      <Link
+                        to={`/drivers/${result.driver.id}`}
+                        className={classes.nameLink}
+                      >
+                        <span className={classes.givenName}>
+                          {result.driver.givenName}{" "}
+                        </span>
+                        {result.driver.familyName}
+                      </Link>
                     </Box>
                     <Box className={classes.team}>
                       <span
@@ -151,10 +156,15 @@ export const Dashboard: React.FC = () => {
               <Box key={entry.Driver.driverId} className={classes.standingRow}>
                 <Box className={classes.standingPosition}>{entry.position}</Box>
                 <Box className={classes.standingName}>
-                  <span className={classes.givenName}>
-                    {entry.Driver.givenName}{" "}
-                  </span>
-                  {entry.Driver.familyName}
+                  <Link
+                    to={`/drivers/${entry.Driver.driverId}`}
+                    className={classes.nameLink}
+                  >
+                    <span className={classes.givenName}>
+                      {entry.Driver.givenName}{" "}
+                    </span>
+                    {entry.Driver.familyName}
+                  </Link>
                 </Box>
                 <Box className={classes.standingBar}>
                   <Box

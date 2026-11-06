@@ -32,7 +32,7 @@ export const DriverStandings: React.FC = () => {
       header: "Driver",
       render: (entry) => (
         <>
-          <DriverName driver={entry.Driver} />
+          <DriverName driver={entry.Driver} id={entry.Driver.driverId} />
           <SubText>{entry.Driver.nationality}</SubText>
         </>
       ),

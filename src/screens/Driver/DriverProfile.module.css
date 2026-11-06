@@ -1,0 +1,164 @@
+.root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: rem(32px);
+}
+
+.back {
+  align-self: flex-start;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  color: var(--mantine-color-dimmed);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--mantine-color-text);
+  }
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: rem(8px) rem(24px);
+}
+
+.number {
+  font-family: var(--df-font-display);
+  font-weight: 700;
+  font-size: rem(88px);
+  line-height: 0.8;
+  color: var(--df-accent);
+
+  @media (min-width: 48em) {
+    font-size: rem(140px);
+  }
+}
+
+.title {
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin-top: rem(10px);
+  color: var(--mantine-color-dimmed);
+}
+
+.teamDot {
+  display: inline-block;
+  width: rem(8px);
+  height: rem(8px);
+  margin-right: rem(8px);
+  border-radius: 50%;
+}
+
+.external {
+  color: var(--df-accent-text);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, rem(140px)), 1fr));
+  gap: rem(16px);
+}
+
+.tile {
+  padding: rem(16px) rem(20px);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(16px);
+}
+
+.tileValue {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(48px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tileLabel {
+  margin-top: rem(6px);
+  font-size: var(--mantine-font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mantine-color-dimmed);
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: rem(24px);
+}
+
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+  padding: rem(20px);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(20px);
+
+  @media (min-width: 48em) {
+    padding: rem(24px) rem(28px);
+  }
+}
+
+.results {
+  flex: 2 1 rem(480px);
+}
+
+.seasons {
+  flex: 1 1 rem(260px);
+}
+
+.cardTitle {
+  font-size: rem(24px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.raceLink {
+  color: var(--mantine-color-text);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--df-accent-text);
+    text-decoration: underline;
+  }
+}
+
+.seasonList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(8px);
+}
+
+.seasonChip {
+  min-height: rem(44px);
+  display: flex;
+  align-items: center;
+  padding: 0 rem(14px);
+  border: 1px solid var(--df-line);
+  border-radius: rem(10px);
+  font-size: var(--mantine-font-size-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--mantine-color-text);
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--df-accent);
+  }
+}

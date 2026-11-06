@@ -5,8 +5,10 @@ import { Calendar } from "./screens/Calendar/Calendar";
 import { Round } from "./screens/Calendar/Round/Round";
 import { Standings } from "./screens/Standings/Standings";
 import { Title } from "@mantine/core";
+import { DriverProfile } from "./screens/Driver/DriverProfile";
 import {
   dashboardLoader,
+  driverLoader,
   roundLoader,
   seasonLoader,
   standingsLoader,
@@ -36,6 +38,11 @@ export const Router: React.FC = () => {
           path: "standings/:season",
           element: <Standings />,
           loader: ({ params }) => standingsLoader(params.season!),
+        },
+        {
+          path: "drivers/:driverId",
+          element: <DriverProfile />,
+          loader: ({ params }) => driverLoader(params.driverId!),
         },
         {
           path: "penalty-points",

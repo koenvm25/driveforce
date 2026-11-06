@@ -4,6 +4,11 @@ import { DriverStandings } from "@/types/dto/DriverStandingsDto";
 import { RaceSchedule } from "@/types/dto/RaceScheduleDto";
 import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
 import { ConstructorStandings } from "@/types/dto/ConstructorStandingsDto";
+import {
+  DriverTableDto,
+  SeasonTableDto,
+  TotalDto,
+} from "@/types/dto/DriverDto";
 
 // Standings
 export const getDriverStandings = (
@@ -75,6 +80,23 @@ export const getSprintResults = (
   season: string,
   round: string
 ): ErgastResponse<RaceResultsDto> => get(`/${season}/${round}/sprint.json`);
+
+// Driver profile
+export const getDriver = (driverId: string): ErgastResponse<DriverTableDto> =>
+  get(`/drivers/${driverId}.json`);
+export const getDriverSeasons = (
+  driverId: string
+): ErgastResponse<SeasonTableDto> =>
+  get(`/drivers/${driverId}/seasons.json?limit=100`);
+export const getDriverSeasonResults = (
+  driverId: string,
+  season: string
+): ErgastResponse<RaceResultsDto> =>
+  get(`/${season}/drivers/${driverId}/results.json?limit=100`);
+export const getDriverTotal = (
+  driverId: string,
+  path: "results" | "results/1" | "qualifying/1"
+): ErgastResponse<TotalDto> => get(`/drivers/${driverId}/${path}.json?limit=1`);
 
 // Contestants
 export const getDrivers = (season: number) => get(`/${season}/drivers.json`);

@@ -19,7 +19,9 @@ const columns: Column<QResult>[] = [
   {
     key: "driver",
     header: "Driver",
-    render: (result) => <DriverName driver={result.driver} />,
+    render: (result) => (
+      <DriverName driver={result.driver} id={result.driver.id} />
+    ),
   },
   {
     key: "team",

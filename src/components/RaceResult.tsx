@@ -20,7 +20,9 @@ export const raceColumns: Column<Result>[] = [
   {
     key: "driver",
     header: "Driver",
-    render: (result) => <DriverName driver={result.driver} />,
+    render: (result) => (
+      <DriverName driver={result.driver} id={result.driver.id} />
+    ),
   },
   {
     key: "team",

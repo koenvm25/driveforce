@@ -13,7 +13,9 @@ Tick a box when it's done. New items go at the bottom of their section.
 
 ## Features
 
-- [ ] Driver and team profile pages
+- [x] Driver profile pages (linked from standings, results and home)
+- [ ] Team profile pages
+- [ ] Championships count on driver profiles (needs one standings request per season)
 - [x] Season points chart with head-to-head compare (Standings, "Progress" view)
 - [x] Session times in the viewer's timezone on every screen
 - [ ] Favourite driver pinned on the home page

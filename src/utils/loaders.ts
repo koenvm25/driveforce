@@ -3,6 +3,9 @@ import {
   getCalendar,
   getConstructorStandings,
   getCurrentCalendar,
+  getDriver,
+  getDriverSeasonResults,
+  getDriverSeasons,
   getDriverStandings,
   getLastRaceResults,
   getQualifyingResults,
@@ -11,7 +14,8 @@ import {
   getSeasonResults,
   getSprintResults,
 } from "./api/endpoints";
-import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
+import { RaceResultsDto, RacesEntityResults } from "@/types/dto/RaceResultsDto";
+import { Driver } from "@/types/dto/DriverStandingsDto";
 import { NextEvent, Race, RaceTable } from "@/types/RaceSchedule";
 import { getNextEvent, hasEventPassed } from "./scheduleHelpers";
 import {
@@ -71,6 +75,32 @@ export async function roundLoader(season: string, round: string) {
     qualifyingResultDto?.data.MRData
   );
   return { race, roundCount, raceResult, sprintResult, qualifyingResult };
+}
+
+export interface IDriverLoader {
+  driver: Driver | undefined;
+  seasons: string[];
+  latestSeason: string | undefined;
+  latestSeasonRaces: RacesEntityResults[];
+}
+export async function driverLoader(driverId: string): Promise<IDriverLoader> {
+  const [driverDto, seasonsDto] = await Promise.all([
+    getDriver(driverId),
+    getDriverSeasons(driverId),
+  ]);
+  const seasons = (seasonsDto.data.MRData?.SeasonTable.Seasons ?? []).map(
+    (entry) => entry.season
+  );
+  const latestSeason = seasons[seasons.length - 1];
+  const resultsDto = latestSeason
+    ? await getDriverSeasonResults(driverId, latestSeason)
+    : undefined;
+  return {
+    driver: driverDto.data.MRData?.DriverTable.Drivers[0],
+    seasons,
+    latestSeason,
+    latestSeasonRaces: resultsDto?.data.MRData?.RaceTable.Races ?? [],
+  };
 }
 
 export interface IStandingsLoader {
