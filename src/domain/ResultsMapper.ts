@@ -52,10 +52,12 @@ export const mapToRaceResult = (
                 rank: result.FastestLap.rank,
                 lap: result.FastestLap.lap,
                 time: result.FastestLap.Time.time,
-                averageSeed: {
-                  unit: result.FastestLap.AverageSpeed.units,
-                  speed: result.FastestLap.AverageSpeed.speed,
-                },
+                averageSeed: result.FastestLap.AverageSpeed
+                  ? {
+                      unit: result.FastestLap.AverageSpeed.units,
+                      speed: result.FastestLap.AverageSpeed.speed,
+                    }
+                  : undefined,
               }
             : undefined,
         };

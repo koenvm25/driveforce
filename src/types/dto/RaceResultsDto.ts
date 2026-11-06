@@ -81,7 +81,7 @@ export interface FastestLap {
   rank: string;
   lap: string;
   Time: Time1;
-  AverageSpeed: AverageSpeed;
+  AverageSpeed?: AverageSpeed;
 }
 export interface Time1 {
   time: string;
