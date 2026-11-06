@@ -1,4 +1,5 @@
 import { Countdown } from "@/components/Countdown/Countdown";
+import { FavouriteDriverCard } from "@/components/FavouriteDriver/FavouriteDriverCard";
 import { IDashboardLoader } from "@/utils/loaders";
 import { getWeekendSessions } from "@/utils/scheduleHelpers";
 import { getTeamColor } from "@/utils/teamColors";
@@ -7,7 +8,11 @@ import { DateTime } from "luxon";
 import { Link, useLoaderData } from "react-router-dom";
 import classes from "./Dashboard.module.css";
 
-const PODIUM_COLORS = ["var(--df-gold)", "var(--df-silver)", "var(--df-bronze)"];
+const PODIUM_COLORS = [
+  "var(--df-gold)",
+  "var(--df-silver)",
+  "var(--df-bronze)",
+];
 const PODIUM_ORDER = [1, 0, 2];
 const PODIUM_HEIGHTS = ["100%", "78%", "66%"];
 
@@ -39,7 +44,8 @@ export const Dashboard: React.FC = () => {
               </Title>
               <Text mt="md" size="lg" c="dimmed">
                 {nextEvent.circuit}
-                {race && ` · ${race.circuit.location.locality}, ${race.circuit.location.country}`}
+                {race &&
+                  ` · ${race.circuit.location.locality}, ${race.circuit.location.country}`}
               </Text>
             </Box>
             <Text className={classes.countdownLabel}>
@@ -74,12 +80,25 @@ export const Dashboard: React.FC = () => {
                 <Box className={classes.sessionName}>{session.name}</Box>
                 <Box
                   className={classes.sessionTime}
-                  data-next={session.dateTime.equals(nextEvent.dateTime) || undefined}
+                  data-next={
+                    session.dateTime.equals(nextEvent.dateTime) || undefined
+                  }
                 >
                   {session.dateTime.toFormat("HH:mm")}
                 </Box>
               </Box>
             ))}
+          </Box>
+        </Box>
+      )}
+
+      {driverStandings && driverStandings.length > 0 && (
+        <Box className={classes.grid}>
+          <Box style={{ flex: "1 1 100%", minWidth: 0 }}>
+            <FavouriteDriverCard
+              standings={driverStandings}
+              lastRaceResults={lastRace?.race ?? []}
+            />
           </Box>
         </Box>
       )}
@@ -128,7 +147,9 @@ export const Dashboard: React.FC = () => {
                     <Box className={classes.team}>
                       <span
                         className={classes.teamDot}
-                        style={{ backgroundColor: getTeamColor(result.constructor.id) }}
+                        style={{
+                          backgroundColor: getTeamColor(result.constructor.id),
+                        }}
                       />
                       {result.constructor.name}
                     </Box>
@@ -145,10 +166,7 @@ export const Dashboard: React.FC = () => {
               <Title order={2} className={classes.cardTitle}>
                 Drivers' championship
               </Title>
-              <Link
-                to={`/standings/${now.year}`}
-                className={classes.cardLink}
-              >
+              <Link to={`/standings/${now.year}`} className={classes.cardLink}>
                 Full standings →
               </Link>
             </Box>
@@ -171,7 +189,9 @@ export const Dashboard: React.FC = () => {
                     className={classes.standingFill}
                     style={{
                       width: `${(Number(entry.points) / leaderPoints) * 100}%`,
-                      backgroundColor: getTeamColor(entry.Constructors[0]?.constructorId),
+                      backgroundColor: getTeamColor(
+                        entry.Constructors[0]?.constructorId,
+                      ),
                     }}
                   />
                 </Box>

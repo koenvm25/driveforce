@@ -5,7 +5,9 @@ import {
   ResultsTable,
 } from "@/components/ResultsTable/ResultsTable";
 import { useDriverCareerTotalsQuery } from "@/queries/DriverQueries";
+import { useFavouriteDriver } from "@/utils/favouriteDriver";
 import { IDriverLoader } from "@/utils/loaders";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getTeamColor } from "@/utils/teamColors";
 import { Box, Text, Title } from "@mantine/core";
 import { DateTime } from "luxon";
@@ -25,6 +27,8 @@ export const DriverProfile: React.FC = () => {
   const { driver, seasons, latestSeason, latestSeasonRaces } =
     useLoaderData() as IDriverLoader;
   const totals = useDriverCareerTotalsQuery(driverId ?? "");
+  const [favouriteId, setFavouriteId] = useFavouriteDriver();
+  const isFavourite = !!driver && favouriteId === driver.driverId;
 
   if (!driver) {
     return (
@@ -132,6 +136,18 @@ export const DriverProfile: React.FC = () => {
           </Text>
         </Box>
       </Box>
+
+      <button
+        type="button"
+        className={classes.favourite}
+        aria-pressed={isFavourite}
+        onClick={() =>
+          setFavouriteId(isFavourite ? undefined : driver.driverId)
+        }
+      >
+        <FontAwesomeIcon icon={[isFavourite ? "fas" : "far", "star"]} />
+        {isFavourite ? "Your driver" : "Make this my driver"}
+      </button>
 
       <Box className={classes.tiles}>
         {tiles.map((tile) => (

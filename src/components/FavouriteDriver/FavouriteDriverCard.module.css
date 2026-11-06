@@ -1,0 +1,118 @@
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(20px);
+  padding: rem(24px);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(20px);
+
+  @media (min-width: 48em) {
+    padding: rem(32px);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: rem(12px);
+}
+
+.title {
+  font-size: rem(26px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.change {
+  min-height: rem(44px);
+  padding: 0 rem(8px);
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  color: var(--df-accent-text);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--df-accent);
+    outline-offset: 2px;
+  }
+}
+
+.select {
+  min-height: rem(44px);
+  background-color: var(--mantine-color-body);
+  border-color: var(--df-line);
+}
+
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: rem(4px) rem(16px);
+}
+
+.name {
+  font-family: var(--df-font-display);
+  font-weight: 700;
+  font-size: rem(48px);
+  line-height: 1;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--df-accent-text);
+  }
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  color: var(--mantine-color-dimmed);
+}
+
+.teamDot {
+  width: rem(8px);
+  height: rem(8px);
+  border-radius: 50%;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(120px), 1fr));
+  gap: rem(12px);
+}
+
+.tile {
+  padding: rem(14px) rem(16px);
+  background-color: var(--mantine-color-body);
+  border: 1px solid var(--df-line);
+  border-radius: rem(14px);
+}
+
+.tileValue {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(40px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tileLabel {
+  margin-top: rem(6px);
+  font-size: var(--mantine-font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mantine-color-dimmed);
+}

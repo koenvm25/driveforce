@@ -47,6 +47,36 @@
   color: var(--mantine-color-dimmed);
 }
 
+.favourite {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: rem(10px);
+  min-height: rem(44px);
+  padding: 0 rem(20px);
+  background: none;
+  border: 1px solid var(--df-line);
+  border-radius: rem(10px);
+  font: inherit;
+  font-weight: 500;
+  color: var(--mantine-color-text);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--df-accent);
+  }
+
+  &[aria-pressed="true"] {
+    border-color: var(--df-gold);
+    color: var(--df-gold);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--df-accent);
+    outline-offset: 2px;
+  }
+}
+
 .teamDot {
   display: inline-block;
   width: rem(8px);

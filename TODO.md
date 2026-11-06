@@ -18,7 +18,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [ ] Championships count on driver profiles (needs one standings request per season)
 - [x] Season points chart with head-to-head compare (Standings, "Progress" view)
 - [x] Session times in the viewer's timezone on every screen
-- [ ] Favourite driver pinned on the home page
+- [x] Favourite driver pinned on the home page (stored in localStorage; pick it on the home card or with the button on a driver profile)
 - [ ] Penalty points tracker (the page is an empty placeholder; the Jolpica API has no penalty points data, so a data source is needed first)
 - [x] Qualifying and sprint results in the same table switcher as the race
 - [x] Constructors standings with points bars
