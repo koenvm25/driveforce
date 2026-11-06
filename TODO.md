@@ -36,7 +36,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] API rate limiting (429) broke pages: requests now retry with backoff, and failed loads show an error screen inside the page chrome
 - [x] Filled buttons had white text on the orange in dark mode (low contrast)
 
-- [ ] Dev only: every loader runs twice, because `createBrowserRouter` is called inside the `Router` component and StrictMode renders it twice (move it to module scope)
+- [x] Dev only: every loader ran twice, because `createBrowserRouter` was called inside the `Router` component and StrictMode renders it twice (router now lives at module scope)
 - [ ] Calendar and driver profile send about 6 requests within a second or two, which can brush the API's 4 requests/second limit on a cold load
 
 ## Chores

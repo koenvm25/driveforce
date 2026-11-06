@@ -15,49 +15,46 @@ import {
   standingsLoader,
 } from "./utils/loaders";
 
-export const Router: React.FC = () => {
-  const router = createBrowserRouter([
-    {
-      element: <Layout />,
-      children: [
-        {
-          errorElement: <RouteError />,
-          children: [
-            {
-              path: "",
-              element: <Dashboard />,
-              loader: () => dashboardLoader(),
-            },
-            {
-              path: "calendar/:season",
-              element: <Calendar />,
-              loader: ({ params }) => seasonLoader(params.season!),
-            },
-            {
-              path: "calendar/:season/:round",
-              element: <Round />,
-              loader: ({ params }) =>
-                roundLoader(params.season!, params.round!),
-            },
-            {
-              path: "standings/:season",
-              element: <Standings />,
-              loader: ({ params }) => standingsLoader(params.season!),
-            },
-            {
-              path: "drivers/:driverId",
-              element: <DriverProfile />,
-              loader: ({ params }) => driverLoader(params.driverId!),
-            },
-            {
-              path: "penalty-points",
-              element: <Title>Penalty points</Title>,
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        errorElement: <RouteError />,
+        children: [
+          {
+            path: "",
+            element: <Dashboard />,
+            loader: () => dashboardLoader(),
+          },
+          {
+            path: "calendar/:season",
+            element: <Calendar />,
+            loader: ({ params }) => seasonLoader(params.season!),
+          },
+          {
+            path: "calendar/:season/:round",
+            element: <Round />,
+            loader: ({ params }) => roundLoader(params.season!, params.round!),
+          },
+          {
+            path: "standings/:season",
+            element: <Standings />,
+            loader: ({ params }) => standingsLoader(params.season!),
+          },
+          {
+            path: "drivers/:driverId",
+            element: <DriverProfile />,
+            loader: ({ params }) => driverLoader(params.driverId!),
+          },
+          {
+            path: "penalty-points",
+            element: <Title>Penalty points</Title>,
+          },
+        ],
+      },
+    ],
+  },
+]);
 
-  return <RouterProvider router={router} />;
-};
+export const Router: React.FC = () => <RouterProvider router={router} />;
