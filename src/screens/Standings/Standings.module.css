@@ -1,25 +1,59 @@
 .root {
   flex: 1;
-  padding-right: 5%;
-  padding-left: 5%;
   display: flex;
-  gap: 1rem;
   flex-direction: column;
-
-  @media (min-width: 48em) {
-    padding-right: 10%;
-    padding-left: 10%;
-  }
+  gap: rem(32px);
 }
 
-.tabContainer {
+.header {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: rem(20px);
+}
+
+.title {
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: rem(12px);
+}
+
+.switcher {
+  --sc-color: var(--mantine-color-text);
+  --sc-label-color: var(--mantine-color-body);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+}
+
+.switcherLabel {
+  min-height: rem(36px);
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.seasonInput {
+  min-height: rem(44px);
+  background-color: var(--df-surface);
+  border-color: var(--df-line);
+  font-weight: 600;
+}
+
+.card {
+  padding: rem(4px) rem(16px) rem(8px);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(20px);
 
   @media (min-width: 48em) {
-    flex-direction: row;
-    align-items: center;
+    padding: rem(8px) rem(28px) rem(12px);
   }
 }

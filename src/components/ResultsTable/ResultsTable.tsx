@@ -1,4 +1,3 @@
-import { Driver } from "@/types/Driver";
 import { getTeamColor } from "@/utils/teamColors";
 import React from "react";
 import classes from "./ResultsTable.module.css";
@@ -65,15 +64,21 @@ export const Position: React.FC<{ value: string }> = ({ value }) => (
   </span>
 );
 
-export const DriverName: React.FC<{ driver: Driver }> = ({ driver }) => (
+export const DriverName: React.FC<{
+  driver: { givenName: string; familyName: string };
+}> = ({ driver }) => (
   <span className={classes.driver}>
     <span className={classes.givenName}>{driver.givenName} </span>
     {driver.familyName}
   </span>
 );
 
-export const Team: React.FC<{ id: string; name: string }> = ({ id, name }) => (
-  <span className={classes.team}>
+export const Team: React.FC<{
+  id: string | undefined;
+  name: string;
+  strong?: boolean;
+}> = ({ id, name, strong }) => (
+  <span className={classes.team} data-strong={strong || undefined}>
     <span
       className={classes.teamDot}
       style={{ backgroundColor: getTeamColor(id) }}
@@ -85,3 +90,27 @@ export const Team: React.FC<{ id: string; name: string }> = ({ id, name }) => (
 export const Points: React.FC<{ value: string }> = ({ value }) => (
   <span className={classes.points}>{value}</span>
 );
+
+export const PointsBar: React.FC<{
+  value: string;
+  max: number;
+  color: string;
+}> = ({ value, max, color }) => (
+  <span className={classes.pointsBar}>
+    <span className={classes.pointsTrack}>
+      <span
+        className={classes.pointsFill}
+        style={{
+          display: "block",
+          width: `${max > 0 ? (Number(value) / max) * 100 : 0}%`,
+          backgroundColor: color,
+        }}
+      />
+    </span>
+    <span className={classes.points}>{value}</span>
+  </span>
+);
+
+export const SubText: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => <div className={classes.sub}>{children}</div>;

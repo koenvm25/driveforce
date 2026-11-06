@@ -8,7 +8,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] Home
 - [x] Calendar
 - [x] Round detail
-- [ ] Standings
+- [x] Standings
 - [ ] Mobile bottom tab bar (the header still uses a burger menu)
 
 ## Features
@@ -19,7 +19,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [ ] Favourite driver pinned on the home page
 - [ ] Penalty points tracker (the page is an empty placeholder today)
 - [ ] Qualifying and sprint results in the same table switcher as the race
-- [ ] Constructors standings with points bars
+- [x] Constructors standings with points bars
 - [ ] Previous/next round buttons on the round page
 
 ## Bugs

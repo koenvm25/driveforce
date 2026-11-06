@@ -1,38 +1,70 @@
+import {
+  Column,
+  PointsBar,
+  Position,
+  ResultsTable,
+  SubText,
+  Team,
+} from "@/components/ResultsTable/ResultsTable";
+import { ConstructorStandingsEntity } from "@/types/dto/ConstructorStandingsDto";
 import { IStandingsLoader } from "@/utils/loaders";
-import { Table } from "@mantine/core";
+import { getTeamColor } from "@/utils/teamColors";
+import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const ConstructorStandings: React.FC = () => {
   const { constructorStandings } = useLoaderData() as IStandingsLoader;
 
-  return !constructorStandings ? (
-    <span>No data available</span>
-  ) : (
-    <Table stickyHeader striped>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Position</Table.Th>
-          <Table.Th>Name</Table.Th>
-          <Table.Th>Points</Table.Th>
-          <Table.Th className="hidden md:table-cell">Nationality</Table.Th>
-          <Table.Th className="hidden sm:table-cell">Wins</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>
-        {constructorStandings.map((constructor) => (
-          <Table.Tr key={constructor.position}>
-            <Table.Th>{constructor.position}</Table.Th>
-            <Table.Td>{constructor.Constructor.name}</Table.Td>
-            <Table.Td>{constructor.points}</Table.Td>
-            <Table.Td className="hidden md:table-cell">
-              {constructor.Constructor.nationality}
-            </Table.Td>
-            <Table.Td className="hidden sm:table-cell">
-              {constructor.wins}
-            </Table.Td>
-          </Table.Tr>
-        ))}
-      </Table.Tbody>
-    </Table>
+  if (!constructorStandings?.length) {
+    return <Text c="dimmed" py="xl" ta="center">No data available</Text>;
+  }
+
+  const leaderPoints = Number(constructorStandings[0].points);
+  const columns: Column<ConstructorStandingsEntity>[] = [
+    {
+      key: "position",
+      header: "Pos",
+      render: (entry) => <Position value={entry.position} />,
+    },
+    {
+      key: "team",
+      header: "Team",
+      render: (entry) => (
+        <>
+          <Team
+            strong
+            id={entry.Constructor.constructorId}
+            name={entry.Constructor.name}
+          />
+          <SubText>{entry.Constructor.nationality}</SubText>
+        </>
+      ),
+    },
+    {
+      key: "wins",
+      header: "Wins",
+      hideBelow: "xs",
+      align: "right",
+      render: (entry) => entry.wins,
+    },
+    {
+      key: "points",
+      header: "Points",
+      render: (entry) => (
+        <PointsBar
+          value={entry.points}
+          max={leaderPoints}
+          color={getTeamColor(entry.Constructor.constructorId)}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <ResultsTable
+      rows={constructorStandings}
+      columns={columns}
+      getKey={(entry) => entry.Constructor.constructorId}
+    />
   );
 };

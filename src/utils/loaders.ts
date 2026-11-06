@@ -69,15 +69,19 @@ export async function roundLoader(season: string, round: string) {
 }
 
 export interface IStandingsLoader {
+  round: string | undefined;
   constructorStandings: ConstructorStandingsEntity[] | undefined;
   driverStandings: DriverStandingsEntity[] | undefined;
 }
-export async function standingsLoader(season: string) {
+export async function standingsLoader(
+  season: string
+): Promise<IStandingsLoader> {
   const [driverStandings, constructorStandings] = await Promise.all([
     getDriverStandings(season),
     getConstructorStandings(season),
   ]);
   return {
+    round: driverStandings.data.MRData?.StandingsTable.StandingsLists[0]?.round,
     constructorStandings:
       constructorStandings.data.MRData?.StandingsTable.StandingsLists[0]
         ?.ConstructorStandings,

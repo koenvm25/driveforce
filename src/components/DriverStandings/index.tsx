@@ -1,48 +1,78 @@
+import {
+  Column,
+  DriverName,
+  PointsBar,
+  Position,
+  ResultsTable,
+  SubText,
+  Team,
+} from "@/components/ResultsTable/ResultsTable";
+import { DriverStandingsEntity } from "@/types/dto/DriverStandingsDto";
 import { IStandingsLoader } from "@/utils/loaders";
-import { Table } from "@mantine/core";
+import { getTeamColor } from "@/utils/teamColors";
+import { Text } from "@mantine/core";
 import { useLoaderData } from "react-router-dom";
 
 export const DriverStandings: React.FC = () => {
   const { driverStandings } = useLoaderData() as IStandingsLoader;
 
-  return !driverStandings ? (
-    <div>
-      <span>No data available</span>
-    </div>
-  ) : (
-    <Table stickyHeader striped>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Position</Table.Th>
-          <Table.Th>Name</Table.Th>
-          <Table.Th>Points</Table.Th>
-          <Table.Th visibleFrom="sm">Wins</Table.Th>
-          <Table.Th visibleFrom="sm">Nationality</Table.Th>
-          <Table.Th visibleFrom="xs" className="hidden sm:table-cell">
-            Team
-          </Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>
-        {driverStandings.map((driver) => (
-          <Table.Tr key={driver.position}>
-            <Table.Th>{driver.position}</Table.Th>
-            <Table.Td>
-              {driver.Driver.givenName} {driver.Driver.familyName}
-            </Table.Td>
-            <Table.Td>{driver.points}</Table.Td>
-            <Table.Td visibleFrom="sm" className="hidden md:table-cell">
-              {driver.wins}
-            </Table.Td>
-            <Table.Td visibleFrom="sm" className="hidden md:table-cell">
-              {driver.Driver.nationality}
-            </Table.Td>
-            <Table.Td visibleFrom="xs" className="hidden sm:table-cell">
-              {driver.Constructors[0].name}
-            </Table.Td>
-          </Table.Tr>
-        ))}
-      </Table.Tbody>
-    </Table>
+  if (!driverStandings?.length) {
+    return <Text c="dimmed" py="xl" ta="center">No data available</Text>;
+  }
+
+  const leaderPoints = Number(driverStandings[0].points);
+  const columns: Column<DriverStandingsEntity>[] = [
+    {
+      key: "position",
+      header: "Pos",
+      render: (entry) => <Position value={entry.position} />,
+    },
+    {
+      key: "driver",
+      header: "Driver",
+      render: (entry) => (
+        <>
+          <DriverName driver={entry.Driver} />
+          <SubText>{entry.Driver.nationality}</SubText>
+        </>
+      ),
+    },
+    {
+      key: "team",
+      header: "Team",
+      hideBelow: "xs",
+      render: (entry) => (
+        <Team
+          id={entry.Constructors[0]?.constructorId}
+          name={entry.Constructors.map((team) => team.name).join(" / ")}
+        />
+      ),
+    },
+    {
+      key: "wins",
+      header: "Wins",
+      hideBelow: "xs",
+      align: "right",
+      render: (entry) => entry.wins,
+    },
+    {
+      key: "points",
+      header: "Points",
+      render: (entry) => (
+        <PointsBar
+          value={entry.points}
+          max={leaderPoints}
+          color={getTeamColor(entry.Constructors[0]?.constructorId)}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <ResultsTable
+      rows={driverStandings}
+      columns={columns}
+      getKey={(entry) => entry.Driver.driverId}
+    />
   );
 };

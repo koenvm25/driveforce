@@ -1,5 +1,7 @@
 .scroll {
   overflow-x: auto;
+  /* the app root is a Mantine ScrollArea (display: table) that would otherwise grow to the table's width */
+  contain: inline-size;
 }
 
 .table {
@@ -97,6 +99,12 @@
   align-items: center;
   gap: rem(10px);
   color: var(--mantine-color-dimmed);
+
+  &[data-strong] {
+    font-size: var(--mantine-font-size-md);
+    font-weight: 600;
+    color: var(--mantine-color-text);
+  }
 }
 
 .teamDot {
@@ -110,4 +118,36 @@
   font-family: var(--df-font-display);
   font-weight: 600;
   font-size: rem(22px);
+}
+
+.pointsBar {
+  display: flex;
+  align-items: center;
+  gap: rem(14px);
+  min-width: rem(140px);
+}
+
+.pointsTrack {
+  flex: 1;
+  height: rem(8px);
+  overflow: hidden;
+  background-color: var(--mantine-color-body);
+  border-radius: rem(4px);
+}
+
+.pointsFill {
+  height: 100%;
+  border-radius: rem(4px);
+}
+
+.pointsBar .points {
+  min-width: rem(44px);
+  font-size: rem(24px);
+  text-align: right;
+}
+
+.sub {
+  font-size: var(--mantine-font-size-xs);
+  font-weight: 400;
+  color: var(--mantine-color-dimmed);
 }
