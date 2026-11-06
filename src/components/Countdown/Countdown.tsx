@@ -9,8 +9,12 @@ export const Countdown: React.FC<{ dateTime: DateTime }> = ({ dateTime }) => {
     <Box className={classes.countdown}>
       {(Object.keys(countdown) as Array<keyof typeof countdown>).map((key) => (
         <Box key={key} className={classes.numberContainer}>
-          <Title className={classes.number}>{countdown[key]}</Title>
-          <Title className={classes.day}>{key.charAt(0).toUpperCase() + key.slice(1)}</Title>
+          <Title className={classes.number}>
+            {String(countdown[key]).padStart(2, "0")}
+          </Title>
+          <Title order={6} className={classes.day}>
+            {key.charAt(0).toUpperCase() + key.slice(1)}
+          </Title>
         </Box>
       ))}
     </Box>

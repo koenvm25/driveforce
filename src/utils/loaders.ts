@@ -4,6 +4,7 @@ import {
   getConstructorStandings,
   getCurrentCalendar,
   getDriverStandings,
+  getLastRaceResults,
   getQualifyingResults,
   getRace,
   getRaceResults,
@@ -88,11 +89,26 @@ export async function standingsLoader(season: string) {
 
 export interface IDashboardLoader {
   nextEvent: NextEvent | undefined;
+  race: Race | undefined;
+  lastRace: RaceResult | undefined;
+  driverStandings: DriverStandingsEntity[] | undefined;
 }
 export async function dashboardLoader(): Promise<IDashboardLoader> {
-  const schedule = await getCurrentCalendar();
+  const [schedule, lastRaceResults, driverStandings] = await Promise.all([
+    getCurrentCalendar(),
+    getLastRaceResults().catch(() => undefined),
+    getDriverStandings("current").catch(() => undefined),
+  ]);
   const raceTable = mapToRaceTable(schedule.data.MRData);
-  return { nextEvent: getNextEvent(raceTable?.races) };
+  const nextEvent = getNextEvent(raceTable?.races);
+  return {
+    nextEvent,
+    race: raceTable?.races.find((race) => race.round === nextEvent?.round),
+    lastRace: mapToRaceResult(lastRaceResults?.data.MRData),
+    driverStandings:
+      driverStandings?.data.MRData?.StandingsTable.StandingsLists[0]
+        ?.DriverStandings,
+  };
 }
 
 export function sleeper(ms: number) {

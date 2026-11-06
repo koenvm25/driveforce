@@ -1,8 +1,8 @@
 :root {
   --df-font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --df-gold: #f5c84b;
-  --df-silver: #c4c9d2;
-  --df-bronze: #d08a55;
+  --df-gold: #a87a00;
+  --df-silver: #6c727f;
+  --df-bronze: #a5582a;
 
   --df-surface: #ffffff;
   --df-line: #e5ddd3;
@@ -18,6 +18,10 @@
 
 /* postcss-preset-mantine rewrites light-dark() on :root into a selector that never matches */
 :root[data-mantine-color-scheme="dark"] {
+  --df-gold: #f5c84b;
+  --df-silver: #c4c9d2;
+  --df-bronze: #d08a55;
+
   --df-surface: #191614;
   --df-line: #2d2825;
   --df-bar: #3a332f;
