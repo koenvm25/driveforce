@@ -25,7 +25,7 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Previous/next round buttons on the round page
 - [x] Champion badges and a champions line on finished seasons in the standings
 - [x] Show a title as clinched before the final round (uses the current points system: 25 per race and 8 per sprint for a driver, 43 and 15 for a team)
-- [ ] Team colours for historical teams (they fall back to grey)
+- [x] Team colours for historical teams (they fall back to grey)
 
 ### Ideas (no API cost unless noted)
 
