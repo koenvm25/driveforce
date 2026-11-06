@@ -5,8 +5,41 @@
   gap: rem(32px);
 }
 
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12px);
+}
+
+.stepper {
+  display: flex;
+  gap: rem(10px);
+}
+
+.step {
+  width: rem(44px);
+  height: rem(44px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(12px);
+  color: var(--mantine-color-text);
+  text-decoration: none;
+
+  &:is(a):hover {
+    border-color: var(--df-accent);
+  }
+
+  &[aria-disabled] {
+    color: var(--mantine-color-dimmed);
+    opacity: 0.45;
+  }
+}
+
 .back {
-  align-self: flex-start;
   font-size: var(--mantine-font-size-sm);
   font-weight: 500;
   color: var(--mantine-color-dimmed);

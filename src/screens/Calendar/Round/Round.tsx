@@ -5,18 +5,35 @@ import { SprintResult } from "@/components/SprintResult";
 import { IRoundLoader } from "@/utils/loaders";
 import { getNextEvent, getWeekendSessions } from "@/utils/scheduleHelpers";
 import { getTeamColor } from "@/utils/teamColors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Tabs, Text, Title } from "@mantine/core";
 import { DateTime } from "luxon";
 import { Link, useLoaderData } from "react-router-dom";
 import classes from "./Round.module.css";
 
+const RoundStep: React.FC<{
+  label: string;
+  icon: "chevron-left" | "chevron-right";
+  to: string | undefined;
+}> = ({ label, icon, to }) =>
+  to ? (
+    <Link to={to} className={classes.step} aria-label={label}>
+      <FontAwesomeIcon icon={["fas", icon]} />
+    </Link>
+  ) : (
+    <span className={classes.step} aria-label={label} aria-disabled="true">
+      <FontAwesomeIcon icon={["fas", icon]} />
+    </span>
+  );
+
 export const Round: React.FC = () => {
-  const { race, raceResult, sprintResult, qualifyingResult } =
+  const { race, roundCount, raceResult, sprintResult, qualifyingResult } =
     useLoaderData() as IRoundLoader;
 
   if (!race) return null;
 
   const now = DateTime.now();
+  const roundNumber = Number(race.round);
   const nextEvent = getNextEvent([race]);
   const sessions = getWeekendSessions(race);
   const { locality, country } = race.circuit.location;
@@ -42,9 +59,27 @@ export const Round: React.FC = () => {
 
   return (
     <Box className={classes.root}>
-      <Link to={`/calendar/${race.season}`} className={classes.back}>
-        ← {race.season} calendar
-      </Link>
+      <Box className={classes.topBar}>
+        <Link to={`/calendar/${race.season}`} className={classes.back}>
+          ← {race.season} calendar
+        </Link>
+        <Box className={classes.stepper}>
+          <RoundStep
+            label="Previous round"
+            icon="chevron-left"
+            to={roundNumber > 1 ? `/calendar/${race.season}/${roundNumber - 1}` : undefined}
+          />
+          <RoundStep
+            label="Next round"
+            icon="chevron-right"
+            to={
+              roundCount && roundNumber < roundCount
+                ? `/calendar/${race.season}/${roundNumber + 1}`
+                : undefined
+            }
+          />
+        </Box>
+      </Box>
 
       <Box className={classes.header}>
         <Box className={classes.roundNumber}>{race.round.padStart(2, "0")}</Box>

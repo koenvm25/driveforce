@@ -41,13 +41,18 @@ export async function seasonLoader(season: string): Promise<ISeasonLoader> {
 
 export interface IRoundLoader {
   race: Race | undefined;
+  roundCount: number | undefined;
   raceResult: RaceResult | undefined;
   sprintResult: RaceResult | undefined;
   qualifyingResult: RaceResult | undefined;
 }
 export async function roundLoader(season: string, round: string) {
-  const race = mapToRaceTable((await getRace(season, round)).data.MRData)
-    ?.races[0];
+  const [raceDto, calendarDto] = await Promise.all([
+    getRace(season, round),
+    getCalendar(season).catch(() => undefined),
+  ]);
+  const race = mapToRaceTable(raceDto.data.MRData)?.races[0];
+  const roundCount = calendarDto?.data.MRData?.RaceTable.Races.length;
   const [raceResultsDto, sprintResultsDto, qualifyingResultDto] =
     await Promise.all([
       hasEventPassed(race?.events.race)
@@ -65,7 +70,7 @@ export async function roundLoader(season: string, round: string) {
   const qualifyingResult = mapToQualifyingResult(
     qualifyingResultDto?.data.MRData
   );
-  return { race, raceResult, sprintResult, qualifyingResult };
+  return { race, roundCount, raceResult, sprintResult, qualifyingResult };
 }
 
 export interface IStandingsLoader {

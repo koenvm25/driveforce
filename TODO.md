@@ -20,7 +20,7 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [ ] Penalty points tracker (the page is an empty placeholder today)
 - [ ] Qualifying and sprint results in the same table switcher as the race
 - [x] Constructors standings with points bars
-- [ ] Previous/next round buttons on the round page
+- [x] Previous/next round buttons on the round page
 
 ## Bugs
 
