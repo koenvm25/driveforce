@@ -33,6 +33,8 @@ Tick a box when it's done. New items go at the bottom of their section.
 - [x] `getCurrentSeasonResults` asked for `limit=10000` (capped at 100, unused, removed)
 - [x] "Spring shootout" typo in `getNextEvent` (should be "Sprint shootout")
 - [x] Header rendered the nav and theme toggle twice in the DOM (desktop and mobile variants)
+- [x] API rate limiting (429) broke pages: requests now retry with backoff, and failed loads show an error screen inside the page chrome
+- [x] Filled buttons had white text on the orange in dark mode (low contrast)
 
 ## Chores
 

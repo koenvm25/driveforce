@@ -16,6 +16,12 @@
   --mantine-color-dimmed: #5e554d;
 }
 
+/* Mantine computes button text contrast once, for the light-mode shade, so dark mode needs its own */
+.mantine-Button-root:not([data-variant]),
+.mantine-Button-root[data-variant="filled"] {
+  color: var(--df-on-accent);
+}
+
 /* postcss-preset-mantine rewrites light-dark() on :root into a selector that never matches */
 :root[data-mantine-color-scheme="dark"] {
   --df-gold: #f5c84b;

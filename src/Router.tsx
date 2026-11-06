@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
+import { RouteError } from "./components/RouteError/RouteError";
 import { Dashboard } from "./screens/Dashboard/Dashboard";
 import { Calendar } from "./screens/Calendar/Calendar";
 import { Round } from "./screens/Calendar/Round/Round";
@@ -20,33 +21,39 @@ export const Router: React.FC = () => {
       element: <Layout />,
       children: [
         {
-          path: "",
-          element: <Dashboard />,
-          loader: () => dashboardLoader(),
-        },
-        {
-          path: "calendar/:season",
-          element: <Calendar />,
-          loader: ({ params }) => seasonLoader(params.season!),
-        },
-        {
-          path: "calendar/:season/:round",
-          element: <Round />,
-          loader: ({ params }) => roundLoader(params.season!, params.round!),
-        },
-        {
-          path: "standings/:season",
-          element: <Standings />,
-          loader: ({ params }) => standingsLoader(params.season!),
-        },
-        {
-          path: "drivers/:driverId",
-          element: <DriverProfile />,
-          loader: ({ params }) => driverLoader(params.driverId!),
-        },
-        {
-          path: "penalty-points",
-          element: <Title>Penalty points</Title>,
+          errorElement: <RouteError />,
+          children: [
+            {
+              path: "",
+              element: <Dashboard />,
+              loader: () => dashboardLoader(),
+            },
+            {
+              path: "calendar/:season",
+              element: <Calendar />,
+              loader: ({ params }) => seasonLoader(params.season!),
+            },
+            {
+              path: "calendar/:season/:round",
+              element: <Round />,
+              loader: ({ params }) =>
+                roundLoader(params.season!, params.round!),
+            },
+            {
+              path: "standings/:season",
+              element: <Standings />,
+              loader: ({ params }) => standingsLoader(params.season!),
+            },
+            {
+              path: "drivers/:driverId",
+              element: <DriverProfile />,
+              loader: ({ params }) => driverLoader(params.driverId!),
+            },
+            {
+              path: "penalty-points",
+              element: <Title>Penalty points</Title>,
+            },
+          ],
         },
       ],
     },
