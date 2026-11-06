@@ -24,7 +24,7 @@ Node 24 (see `mise.toml`). There is no test suite, so verification is the type c
 
 ## Working on a TODO item
 
-1. Pick an unchecked item in `TODO.md`. Do one item at a time.
+1. Pick an unchecked item in `TODO.md`. Do one item at a time. The `/next-todo` skill (`.claude/skills/next-todo/`) ranks the open items, lets the user choose, and then does the chosen one.
 2. Implement it, following the conventions below.
 3. Verify it (type check, lint, and the browser checks below).
 4. Tick the item in `TODO.md` **in the same commit**, and add any new bugs or ideas you found as new unchecked items (put each under the right heading).
