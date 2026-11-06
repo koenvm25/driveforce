@@ -1,5 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ActionIcon, Container, Group, useMantineColorScheme } from "@mantine/core";
+import {
+  ActionIcon,
+  Container,
+  Group,
+  useMantineColorScheme,
+} from "@mantine/core";
 import classes from "./Header.module.css";
 import { Link as RouterLink, NavLink, useLocation } from "react-router-dom";
 import { isActiveLink, navLinks } from "./navLinks";

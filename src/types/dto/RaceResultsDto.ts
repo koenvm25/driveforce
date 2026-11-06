@@ -20,7 +20,7 @@ export interface RacesEntityResults {
   date: string;
   time: string;
   Results?: ResultsEntity[] | null;
-  SprintResults?: ResultsEntity[] | null
+  SprintResults?: ResultsEntity[] | null;
   QualifyingResults?: QualifyingResultsEntity[] | null;
 }
 export interface Circuit {

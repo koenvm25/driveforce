@@ -28,5 +28,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </QueryClientProvider>
       </ScrollArea>
     </MantineProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

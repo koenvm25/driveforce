@@ -1,11 +1,12 @@
-import {RaceResult} from '@/types/Results';
-import {RaceResultsDto} from '@/types/dto/RaceResultsDto';
-import {DateTime} from 'luxon';
+import { RaceResult } from "@/types/Results";
+import { RaceResultsDto } from "@/types/dto/RaceResultsDto";
+import { DateTime } from "luxon";
 
 export const mapToRaceResult = (
   raceResults: RaceResultsDto | undefined,
 ): RaceResult | undefined => {
-  if (!raceResults?.RaceTable.Races || raceResults.RaceTable.Races.length < 1) return;
+  if (!raceResults?.RaceTable.Races || raceResults.RaceTable.Races.length < 1)
+    return;
 
   const race = raceResults.RaceTable.Races[0];
   if (!race.Results) return;
@@ -16,7 +17,7 @@ export const mapToRaceResult = (
       round: race.round,
       url: raceResults.url,
       raceName: race.raceName,
-      dateTime: DateTime.fromISO(race.date + 'T' + race.time),
+      dateTime: DateTime.fromISO(race.date + "T" + race.time),
       circuit: {
         id: race.Circuit.circuitId,
         url: race.Circuit.url,
@@ -74,7 +75,8 @@ export const mapToRaceResult = (
 export const mapToSprintResult = (
   raceResults: RaceResultsDto | undefined,
 ): RaceResult | undefined => {
-  if (!raceResults?.RaceTable.Races || raceResults.RaceTable.Races.length < 1) return;
+  if (!raceResults?.RaceTable.Races || raceResults.RaceTable.Races.length < 1)
+    return;
 
   const race = raceResults.RaceTable.Races[0];
   if (!race.SprintResults) return;
@@ -85,7 +87,7 @@ export const mapToSprintResult = (
       round: race.round,
       url: raceResults.url,
       raceName: race.raceName,
-      dateTime: DateTime.fromISO(race.date + 'T' + race.time),
+      dateTime: DateTime.fromISO(race.date + "T" + race.time),
       circuit: {
         id: race.Circuit.circuitId,
         url: race.Circuit.url,
@@ -136,7 +138,8 @@ export const mapToSprintResult = (
 export const mapToQualifyingResult = (
   raceResults: RaceResultsDto | undefined,
 ): RaceResult | undefined => {
-  if (!raceResults?.RaceTable.Races || raceResults.RaceTable.Races.length < 1) return;
+  if (!raceResults?.RaceTable.Races || raceResults.RaceTable.Races.length < 1)
+    return;
 
   try {
     const race = raceResults.RaceTable.Races[0];
@@ -147,7 +150,7 @@ export const mapToQualifyingResult = (
       round: race.round,
       url: raceResults.url,
       raceName: race.raceName,
-      dateTime: DateTime.fromISO(race.date + 'T' + race.time),
+      dateTime: DateTime.fromISO(race.date + "T" + race.time),
       circuit: {
         id: race.Circuit.circuitId,
         url: race.Circuit.url,
@@ -176,8 +179,8 @@ export const mapToQualifyingResult = (
           nationality: result.Constructor.nationality,
         },
         q1: result.Q1,
-        q2: result.Q2 ?? '',
-        q3: result.Q3 ?? '',
+        q2: result.Q2 ?? "",
+        q3: result.Q3 ?? "",
       })),
     };
   } catch (error) {

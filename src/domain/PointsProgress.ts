@@ -8,10 +8,10 @@ export interface PointsProgressRow {
 
 export const mapToPointsProgress = (
   results: RaceResultsDto | undefined,
-  sprints: RaceResultsDto | undefined
+  sprints: RaceResultsDto | undefined,
 ): PointsProgressRow[] => {
   const races = [...(results?.RaceTable.Races ?? [])].sort(
-    (a, b) => Number(a.round) - Number(b.round)
+    (a, b) => Number(a.round) - Number(b.round),
   );
 
   const sprintPoints = new Map<string, Map<string, number>>();
@@ -22,8 +22,8 @@ export const mapToPointsProgress = (
         (race.SprintResults ?? []).map((result) => [
           result.Driver.driverId,
           Number(result.points),
-        ])
-      )
+        ]),
+      ),
     );
   }
 

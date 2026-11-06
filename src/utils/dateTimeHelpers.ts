@@ -1,4 +1,4 @@
-import {DateTime, Duration, DurationLikeObject, DurationUnits} from 'luxon';
+import { DateTime, Duration, DurationLikeObject, DurationUnits } from "luxon";
 
 export const toMillis = (duration: DurationLikeObject): number => {
   return Duration.fromObject(duration).toMillis();

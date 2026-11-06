@@ -9,7 +9,7 @@ export const useCountdown = (targetDate: DateTime) => {
       "hours",
       "minutes",
       "seconds",
-    ])
+    ]),
   );
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const useCountdown = (targetDate: DateTime) => {
           "hours",
           "minutes",
           "seconds",
-        ])
+        ]),
       );
     }, 1000);
 

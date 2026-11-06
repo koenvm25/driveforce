@@ -1,7 +1,7 @@
-import {DateTime} from 'luxon';
-import {Circuit} from './Circuit';
-import {Driver} from './Driver';
-import {Constructor} from './Constructor';
+import { DateTime } from "luxon";
+import { Circuit } from "./Circuit";
+import { Driver } from "./Driver";
+import { Constructor } from "./Constructor";
 
 export interface RaceResult {
   round: string;

@@ -31,9 +31,26 @@ const columns: Column<QResult>[] = [
       <Team id={result.constructor.id} name={result.constructor.name} />
     ),
   },
-  { key: "q1", header: "Q1", hideBelow: "xs", align: "right", render: (result) => result.q1 || "–" },
-  { key: "q2", header: "Q2", hideBelow: "xs", align: "right", render: (result) => result.q2 || "–" },
-  { key: "q3", header: "Q3", align: "right", render: (result) => result.q3 || "–" },
+  {
+    key: "q1",
+    header: "Q1",
+    hideBelow: "xs",
+    align: "right",
+    render: (result) => result.q1 || "–",
+  },
+  {
+    key: "q2",
+    header: "Q2",
+    hideBelow: "xs",
+    align: "right",
+    render: (result) => result.q2 || "–",
+  },
+  {
+    key: "q3",
+    header: "Q3",
+    align: "right",
+    render: (result) => result.q3 || "–",
+  },
 ];
 
 export const QualifyingResult: React.FC = () => {

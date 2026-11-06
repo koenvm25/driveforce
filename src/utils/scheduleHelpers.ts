@@ -11,7 +11,7 @@ export const getWeekendSessions = (race: Race): Event[] =>
     .filter((value): value is Event => typeof value === "object")
     .sort((a, b) => a.dateTime.toMillis() - b.dateTime.toMillis());
 
-export const getNextEvent =(races?: Race[]): NextEvent | undefined => {
+export const getNextEvent = (races?: Race[]): NextEvent | undefined => {
   if (!races) return;
 
   const now = DateTime.now();

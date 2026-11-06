@@ -7,7 +7,7 @@ import {
 import { DateTime } from "luxon";
 
 export const mapToRaceTable = (
-  raceScheduleDto: RaceSchedule | undefined
+  raceScheduleDto: RaceSchedule | undefined,
 ): RaceTable | undefined => {
   if (!raceScheduleDto) return undefined;
   const races: Race[] = raceScheduleDto.RaceTable.Races.map((race) => {
@@ -45,7 +45,7 @@ const mapToEvents = (raceEntity: RacesEntity): Race["events"] => {
         qualifying: mapToEvent(raceEntity.Qualifying, "Qualifying"),
         sprintShootout: mapToEvent(
           raceEntity.SecondPractice,
-          "Sprint Shootout"
+          "Sprint Shootout",
         ),
         sprint: mapToEvent(raceEntity.Sprint, "Sprint"),
         race: {
@@ -58,7 +58,7 @@ const mapToEvents = (raceEntity: RacesEntity): Race["events"] => {
         firstPractice: mapToEvent(raceEntity.FirstPractice, "First Practice"),
         secondPractice: mapToEvent(
           raceEntity.SecondPractice,
-          "Second Practice"
+          "Second Practice",
         ),
         thirdPractice: mapToEvent(raceEntity.ThirdPractice, "Third Practice"),
         qualifying: mapToEvent(raceEntity.Qualifying, "Qualifying"),
@@ -71,7 +71,7 @@ const mapToEvents = (raceEntity: RacesEntity): Race["events"] => {
 
 const mapToEvent = (
   event: EventDto | undefined,
-  name: string
+  name: string,
 ): Event | undefined => {
   if (!event) return;
 

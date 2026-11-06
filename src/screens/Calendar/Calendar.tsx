@@ -34,14 +34,14 @@ export const Calendar: React.FC = () => {
         (results?.RaceTable.Races ?? []).map((race) => [
           race.round,
           (race.Results ?? []).slice(0, 3),
-        ])
+        ]),
       ),
-    [results]
+    [results],
   );
 
   const races = calendar?.races ?? [];
   const completedCount = races.filter((race) =>
-    podiumByRound.has(race.round)
+    podiumByRound.has(race.round),
   ).length;
   const visibleRaces = races.filter((race) => {
     if (filter === "all") return true;
@@ -123,10 +123,16 @@ export const Calendar: React.FC = () => {
                     const code = podium[index]?.Driver.code;
                     return (
                       <Box key={index} className={classes.podiumCell}>
-                        <Box className={classes.podiumLabel} data-place={index + 1}>
+                        <Box
+                          className={classes.podiumLabel}
+                          data-place={index + 1}
+                        >
                           P{index + 1}
                         </Box>
-                        <Box className={classes.podiumCode} data-empty={!code || undefined}>
+                        <Box
+                          className={classes.podiumCode}
+                          data-empty={!code || undefined}
+                        >
                           {code ?? "–"}
                         </Box>
                       </Box>
