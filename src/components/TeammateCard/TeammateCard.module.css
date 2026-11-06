@@ -1,0 +1,86 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+  padding: rem(20px);
+  background-color: var(--df-surface);
+  border: 1px solid var(--df-line);
+  border-radius: rem(20px);
+
+  @media (min-width: 48em) {
+    padding: rem(24px) rem(28px);
+  }
+}
+
+.title {
+  font-size: rem(24px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.teammate {
+  color: var(--df-accent-text);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16px);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: rem(48px) 1fr rem(48px);
+  align-items: center;
+  gap: rem(12px);
+
+  & > :last-child {
+    text-align: right;
+  }
+}
+
+.value {
+  font-family: var(--df-font-display);
+  font-weight: 600;
+  font-size: rem(32px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--mantine-color-dimmed);
+
+  &[data-lead="true"] {
+    color: var(--mantine-color-text);
+  }
+}
+
+.label {
+  margin-bottom: rem(6px);
+  text-align: center;
+  font-size: var(--mantine-font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mantine-color-dimmed);
+}
+
+.bar {
+  display: flex;
+  height: rem(8px);
+  overflow: hidden;
+  border-radius: rem(4px);
+  background-color: var(--df-line);
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+}
+
+.note {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
+}

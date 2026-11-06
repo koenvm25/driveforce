@@ -35,7 +35,8 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Race table extras: fastest-lap marker and a "positions gained/lost vs grid" column (the delta sits in the Grid column; the marker shows on every screen size, the delta from 62em up)
 - [x] Past winners at this circuit on the round page (1 lazy request; shows the last 5, expandable)
 - [x] Pit stops table on the round page (1 lazy request, only when the tab is opened)
-- [ ] Teammate head-to-head (qualifying and race wins) on driver profiles or in the Progress view
+- [x] Teammate head-to-head (qualifying and race wins) on driver profiles (latest season, 2 lazy requests; the teammate with the most shared races). Not yet in the Progress view
+- [ ] Teammate head-to-head for earlier seasons (a season picker on the driver profile)
 - [x] Team accent colour: the site accent takes the colour of the favourite driver's team (switch on the home card; colours are adjusted per theme to keep text contrast)
 - [ ] Predictions game: pick a podium before a race and get scored afterwards, stored in the browser
 - [ ] Global search to jump to a driver, race or season (a few requests)

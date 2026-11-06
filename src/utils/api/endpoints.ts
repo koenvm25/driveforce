@@ -126,6 +126,11 @@ export const getConstructorSeasonResults = (
   season: string,
 ): ErgastResponse<RaceResultsDto> =>
   get(`/${season}/constructors/${constructorId}/results.json?limit=100`);
+export const getConstructorSeasonQualifying = (
+  constructorId: string,
+  season: string,
+): ErgastResponse<RaceResultsDto> =>
+  get(`/${season}/constructors/${constructorId}/qualifying.json?limit=100`);
 export const getConstructorSeasonStanding = (
   constructorId: string,
   season: string,

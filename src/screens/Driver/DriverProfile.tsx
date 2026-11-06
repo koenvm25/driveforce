@@ -4,7 +4,11 @@ import {
   Position,
   ResultsTable,
 } from "@/components/ResultsTable/ResultsTable";
-import { useDriverCareerTotalsQuery } from "@/queries/DriverQueries";
+import { TeammateCard } from "@/components/TeammateCard/TeammateCard";
+import {
+  useDriverCareerTotalsQuery,
+  useTeammateComparisonQuery,
+} from "@/queries/DriverQueries";
 import { useFavouriteDriver } from "@/utils/favouriteDriver";
 import { IDriverLoader } from "@/utils/loaders";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,6 +31,15 @@ export const DriverProfile: React.FC = () => {
   const { driver, seasons, latestSeason, latestSeasonRaces } =
     useLoaderData() as IDriverLoader;
   const totals = useDriverCareerTotalsQuery(driverId ?? "");
+  const currentTeam = latestSeasonRaces
+    .flatMap((race) => race.Results ?? [])
+    .map((result) => result.Constructor)
+    .pop();
+  const teammate = useTeammateComparisonQuery(
+    driverId ?? "",
+    currentTeam?.constructorId,
+    latestSeason,
+  );
   const [favouriteId, setFavouriteId] = useFavouriteDriver();
   const isFavourite = !!driver && favouriteId === driver.driverId;
 
@@ -57,10 +70,7 @@ export const DriverProfile: React.FC = () => {
         ]
       : [];
   });
-  const team = latestSeasonRaces
-    .flatMap((race) => race.Results ?? [])
-    .map((result) => result.Constructor)
-    .pop();
+  const team = currentTeam;
 
   const columns: Column<ResultRow>[] = [
     { key: "round", header: "Rnd", render: (row) => `R${row.round}` },
@@ -160,6 +170,13 @@ export const DriverProfile: React.FC = () => {
           </Box>
         ))}
       </Box>
+
+      <TeammateCard
+        comparison={teammate.data}
+        loading={teammate.isLoading}
+        season={latestSeason}
+        color={getTeamColor(team?.constructorId)}
+      />
 
       <Box className={classes.layout}>
         <Box className={`${classes.card} ${classes.results}`}>

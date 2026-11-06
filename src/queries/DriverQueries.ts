@@ -1,6 +1,41 @@
-import { getConstructorTotal, getDriverTotal } from "@/utils/api/endpoints";
+import {
+  compareWithTeammate,
+  TeammateComparison,
+} from "@/domain/TeammateComparison";
+import {
+  getConstructorSeasonQualifying,
+  getConstructorSeasonResults,
+  getConstructorTotal,
+  getDriverTotal,
+} from "@/utils/api/endpoints";
 import { toMillis } from "@/utils/dateTimeHelpers";
 import { useQuery } from "@tanstack/react-query";
+
+export const useTeammateComparisonQuery = (
+  driverId: string,
+  constructorId: string | undefined,
+  season: string | undefined,
+) => {
+  return useQuery<TeammateComparison | undefined>({
+    queryKey: ["teammateComparison", driverId, constructorId, season],
+    enabled: !!constructorId && !!season,
+    queryFn: async () => {
+      const races = await getConstructorSeasonResults(constructorId!, season!);
+      const qualifying = await getConstructorSeasonQualifying(
+        constructorId!,
+        season!,
+      );
+      return compareWithTeammate(
+        races.data.MRData?.RaceTable.Races ?? [],
+        qualifying.data.MRData?.RaceTable.Races ?? [],
+        driverId,
+      );
+    },
+    gcTime: toMillis({ minutes: 90 }),
+    staleTime: toMillis({ minutes: 60 }),
+    retry: 1,
+  });
+};
 
 export interface TeamTotals {
   wins: number;
