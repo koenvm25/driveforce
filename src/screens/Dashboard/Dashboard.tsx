@@ -30,7 +30,11 @@ export const Dashboard: React.FC = () => {
     <Box>
       {nextEvent && (
         <Box className={classes.grid}>
-          <Box className={`${classes.card} ${classes.hero}`}>
+          <Box
+            component={Link}
+            to={`/calendar/${nextEvent.season}/${nextEvent.round}`}
+            className={`${classes.card} ${classes.hero}`}
+          >
             <Text className={classes.eyebrow}>
               <span>Next race</span>
               <span className={classes.eyebrowMuted}>·</span>

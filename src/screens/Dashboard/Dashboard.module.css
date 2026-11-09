@@ -23,6 +23,17 @@
 .hero {
   flex: 1.4 1 rem(520px);
   gap: rem(28px);
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--df-accent-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--df-accent-text);
+    outline-offset: 2px;
+  }
 
   @media (min-width: 48em) {
     padding: rem(40px);
