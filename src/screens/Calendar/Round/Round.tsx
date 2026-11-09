@@ -10,7 +10,7 @@ import { getTeamColor } from "@/utils/teamColors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Tabs, Text, Title } from "@mantine/core";
 import { DateTime } from "luxon";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 import { PastWinners } from "./PastWinners";
 import classes from "./Round.module.css";
 
@@ -32,6 +32,8 @@ const RoundStep: React.FC<{
 export const Round: React.FC = () => {
   const { race, roundCount, raceResult, sprintResult, qualifyingResult } =
     useLoaderData() as IRoundLoader;
+  const location = useLocation();
+  const cameFromHome = location.state?.from === "home";
 
   if (!race) return null;
 
@@ -78,9 +80,15 @@ export const Round: React.FC = () => {
   return (
     <Box className={classes.root}>
       <Box className={classes.topBar}>
-        <Link to={`/calendar/${race.season}`} className={classes.back}>
-          ← {race.season} calendar
-        </Link>
+        {cameFromHome ? (
+          <Link to="/" className={classes.back}>
+            ← Home
+          </Link>
+        ) : (
+          <Link to={`/calendar/${race.season}`} className={classes.back}>
+            ← {race.season} calendar
+          </Link>
+        )}
         <Box className={classes.stepper}>
           <RoundStep
             label="Previous round"

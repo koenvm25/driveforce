@@ -33,6 +33,7 @@ export const Dashboard: React.FC = () => {
           <Box
             component={Link}
             to={`/calendar/${nextEvent.season}/${nextEvent.round}`}
+            state={{ from: "home" }}
             className={`${classes.card} ${classes.hero}`}
           >
             <Text className={classes.eyebrow}>
@@ -116,6 +117,7 @@ export const Dashboard: React.FC = () => {
               </Title>
               <Link
                 to={`/calendar/${lastRace.season}/${lastRace.round}`}
+                state={{ from: "home" }}
                 className={classes.cardLink}
               >
                 Full results →
