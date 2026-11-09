@@ -20,6 +20,8 @@ Tick a box when it's done. New items go at the bottom of their section. Workflow
 - [x] Season points chart with head-to-head compare (Standings, "Progress" view)
 - [x] Session times in the viewer's timezone on every screen
 - [x] Favourite driver pinned on the home page (stored in localStorage; pick it on the home card or with the button on a driver profile)
+- [ ] Make the next race countdown on the home screen a link to that race's round page
+- [ ] Verify qualifying results show on the round page as soon as they're available (the loader already fetches them once the qualifying start time has passed, so check that it works the moment results are published, not only after the race)
 - [ ] Penalty points tracker (the page is an empty placeholder; the Jolpica API has no penalty points data, so a data source is needed first)
 - [x] Qualifying and sprint results in the same table switcher as the race
 - [x] Constructors standings with points bars
